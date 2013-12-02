@@ -602,13 +602,13 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
           case 4: // PROFILE_IDS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list134 = iprot.readListBegin();
-                struct.profileIds = new ArrayList<String>(_list134.size);
-                for (int _i135 = 0; _i135 < _list134.size; ++_i135)
+                org.apache.thrift.protocol.TList _list142 = iprot.readListBegin();
+                struct.profileIds = new ArrayList<String>(_list142.size);
+                for (int _i143 = 0; _i143 < _list142.size; ++_i143)
                 {
-                  String _elem136; // required
-                  _elem136 = iprot.readString();
-                  struct.profileIds.add(_elem136);
+                  String _elem144; // required
+                  _elem144 = iprot.readString();
+                  struct.profileIds.add(_elem144);
                 }
                 iprot.readListEnd();
               }
@@ -651,9 +651,9 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
         oprot.writeFieldBegin(PROFILE_IDS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.profileIds.size()));
-          for (String _iter137 : struct.profileIds)
+          for (String _iter145 : struct.profileIds)
           {
-            oprot.writeString(_iter137);
+            oprot.writeString(_iter145);
           }
           oprot.writeListEnd();
         }
@@ -702,9 +702,9 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       if (struct.isSetProfileIds()) {
         {
           oprot.writeI32(struct.profileIds.size());
-          for (String _iter138 : struct.profileIds)
+          for (String _iter146 : struct.profileIds)
           {
-            oprot.writeString(_iter138);
+            oprot.writeString(_iter146);
           }
         }
       }
@@ -730,13 +730,13 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       }
       if (incoming.get(3)) {
         {
-          org.apache.thrift.protocol.TList _list139 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-          struct.profileIds = new ArrayList<String>(_list139.size);
-          for (int _i140 = 0; _i140 < _list139.size; ++_i140)
+          org.apache.thrift.protocol.TList _list147 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.profileIds = new ArrayList<String>(_list147.size);
+          for (int _i148 = 0; _i148 < _list147.size; ++_i148)
           {
-            String _elem141; // required
-            _elem141 = iprot.readString();
-            struct.profileIds.add(_elem141);
+            String _elem149; // required
+            _elem149 = iprot.readString();
+            struct.profileIds.add(_elem149);
           }
         }
         struct.setProfileIdsIsSet(true);

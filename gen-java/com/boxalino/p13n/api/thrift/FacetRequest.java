@@ -34,11 +34,13 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("FacetRequest");
 
   private static final org.apache.thrift.protocol.TField FIELD_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("fieldName", org.apache.thrift.protocol.TType.STRING, (short)1);
-  private static final org.apache.thrift.protocol.TField MAX_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("maxCount", org.apache.thrift.protocol.TType.I32, (short)2);
-  private static final org.apache.thrift.protocol.TField MIN_POPULATION_FIELD_DESC = new org.apache.thrift.protocol.TField("minPopulation", org.apache.thrift.protocol.TType.I32, (short)3);
-  private static final org.apache.thrift.protocol.TField DATE_RANGE_GAP_FIELD_DESC = new org.apache.thrift.protocol.TField("dateRangeGap", org.apache.thrift.protocol.TType.I32, (short)4);
-  private static final org.apache.thrift.protocol.TField SORT_ORDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sortOrder", org.apache.thrift.protocol.TType.I32, (short)5);
-  private static final org.apache.thrift.protocol.TField SORT_ASCENDING_FIELD_DESC = new org.apache.thrift.protocol.TField("sortAscending", org.apache.thrift.protocol.TType.BOOL, (short)6);
+  private static final org.apache.thrift.protocol.TField NUMERICAL_FIELD_DESC = new org.apache.thrift.protocol.TField("numerical", org.apache.thrift.protocol.TType.BOOL, (short)2);
+  private static final org.apache.thrift.protocol.TField RANGE_FIELD_DESC = new org.apache.thrift.protocol.TField("range", org.apache.thrift.protocol.TType.BOOL, (short)3);
+  private static final org.apache.thrift.protocol.TField MAX_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("maxCount", org.apache.thrift.protocol.TType.I32, (short)4);
+  private static final org.apache.thrift.protocol.TField MIN_POPULATION_FIELD_DESC = new org.apache.thrift.protocol.TField("minPopulation", org.apache.thrift.protocol.TType.I32, (short)5);
+  private static final org.apache.thrift.protocol.TField DATE_RANGE_GAP_FIELD_DESC = new org.apache.thrift.protocol.TField("dateRangeGap", org.apache.thrift.protocol.TType.I32, (short)6);
+  private static final org.apache.thrift.protocol.TField SORT_ORDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sortOrder", org.apache.thrift.protocol.TType.I32, (short)7);
+  private static final org.apache.thrift.protocol.TField SORT_ASCENDING_FIELD_DESC = new org.apache.thrift.protocol.TField("sortAscending", org.apache.thrift.protocol.TType.BOOL, (short)8);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -47,6 +49,8 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
   }
 
   public String fieldName; // required
+  public boolean numerical; // required
+  public boolean range; // required
   public int maxCount; // required
   public int minPopulation; // required
   /**
@@ -64,19 +68,21 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     FIELD_NAME((short)1, "fieldName"),
-    MAX_COUNT((short)2, "maxCount"),
-    MIN_POPULATION((short)3, "minPopulation"),
+    NUMERICAL((short)2, "numerical"),
+    RANGE((short)3, "range"),
+    MAX_COUNT((short)4, "maxCount"),
+    MIN_POPULATION((short)5, "minPopulation"),
     /**
      * 
      * @see DateRangeGap
      */
-    DATE_RANGE_GAP((short)4, "dateRangeGap"),
+    DATE_RANGE_GAP((short)6, "dateRangeGap"),
     /**
      * 
      * @see FacetSortOrder
      */
-    SORT_ORDER((short)5, "sortOrder"),
-    SORT_ASCENDING((short)6, "sortAscending");
+    SORT_ORDER((short)7, "sortOrder"),
+    SORT_ASCENDING((short)8, "sortAscending");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -93,15 +99,19 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       switch(fieldId) {
         case 1: // FIELD_NAME
           return FIELD_NAME;
-        case 2: // MAX_COUNT
+        case 2: // NUMERICAL
+          return NUMERICAL;
+        case 3: // RANGE
+          return RANGE;
+        case 4: // MAX_COUNT
           return MAX_COUNT;
-        case 3: // MIN_POPULATION
+        case 5: // MIN_POPULATION
           return MIN_POPULATION;
-        case 4: // DATE_RANGE_GAP
+        case 6: // DATE_RANGE_GAP
           return DATE_RANGE_GAP;
-        case 5: // SORT_ORDER
+        case 7: // SORT_ORDER
           return SORT_ORDER;
-        case 6: // SORT_ASCENDING
+        case 8: // SORT_ASCENDING
           return SORT_ASCENDING;
         default:
           return null;
@@ -143,15 +153,21 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
   }
 
   // isset id assignments
-  private static final int __MAXCOUNT_ISSET_ID = 0;
-  private static final int __MINPOPULATION_ISSET_ID = 1;
-  private static final int __SORTASCENDING_ISSET_ID = 2;
+  private static final int __NUMERICAL_ISSET_ID = 0;
+  private static final int __RANGE_ISSET_ID = 1;
+  private static final int __MAXCOUNT_ISSET_ID = 2;
+  private static final int __MINPOPULATION_ISSET_ID = 3;
+  private static final int __SORTASCENDING_ISSET_ID = 4;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.FIELD_NAME, new org.apache.thrift.meta_data.FieldMetaData("fieldName", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.NUMERICAL, new org.apache.thrift.meta_data.FieldMetaData("numerical", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+    tmpMap.put(_Fields.RANGE, new org.apache.thrift.meta_data.FieldMetaData("range", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     tmpMap.put(_Fields.MAX_COUNT, new org.apache.thrift.meta_data.FieldMetaData("maxCount", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.MIN_POPULATION, new org.apache.thrift.meta_data.FieldMetaData("minPopulation", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -167,10 +183,16 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
   }
 
   public FacetRequest() {
+    this.maxCount = -1;
+
+    this.minPopulation = 1;
+
   }
 
   public FacetRequest(
     String fieldName,
+    boolean numerical,
+    boolean range,
     int maxCount,
     int minPopulation,
     DateRangeGap dateRangeGap,
@@ -179,6 +201,10 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
   {
     this();
     this.fieldName = fieldName;
+    this.numerical = numerical;
+    setNumericalIsSet(true);
+    this.range = range;
+    setRangeIsSet(true);
     this.maxCount = maxCount;
     setMaxCountIsSet(true);
     this.minPopulation = minPopulation;
@@ -197,6 +223,8 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     if (other.isSetFieldName()) {
       this.fieldName = other.fieldName;
     }
+    this.numerical = other.numerical;
+    this.range = other.range;
     this.maxCount = other.maxCount;
     this.minPopulation = other.minPopulation;
     if (other.isSetDateRangeGap()) {
@@ -215,10 +243,14 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
   @Override
   public void clear() {
     this.fieldName = null;
-    setMaxCountIsSet(false);
-    this.maxCount = 0;
-    setMinPopulationIsSet(false);
-    this.minPopulation = 0;
+    setNumericalIsSet(false);
+    this.numerical = false;
+    setRangeIsSet(false);
+    this.range = false;
+    this.maxCount = -1;
+
+    this.minPopulation = 1;
+
     this.dateRangeGap = null;
     this.sortOrder = null;
     setSortAscendingIsSet(false);
@@ -247,6 +279,52 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     if (!value) {
       this.fieldName = null;
     }
+  }
+
+  public boolean isNumerical() {
+    return this.numerical;
+  }
+
+  public FacetRequest setNumerical(boolean numerical) {
+    this.numerical = numerical;
+    setNumericalIsSet(true);
+    return this;
+  }
+
+  public void unsetNumerical() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __NUMERICAL_ISSET_ID);
+  }
+
+  /** Returns true if field numerical is set (has been assigned a value) and false otherwise */
+  public boolean isSetNumerical() {
+    return EncodingUtils.testBit(__isset_bitfield, __NUMERICAL_ISSET_ID);
+  }
+
+  public void setNumericalIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __NUMERICAL_ISSET_ID, value);
+  }
+
+  public boolean isRange() {
+    return this.range;
+  }
+
+  public FacetRequest setRange(boolean range) {
+    this.range = range;
+    setRangeIsSet(true);
+    return this;
+  }
+
+  public void unsetRange() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __RANGE_ISSET_ID);
+  }
+
+  /** Returns true if field range is set (has been assigned a value) and false otherwise */
+  public boolean isSetRange() {
+    return EncodingUtils.testBit(__isset_bitfield, __RANGE_ISSET_ID);
+  }
+
+  public void setRangeIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __RANGE_ISSET_ID, value);
   }
 
   public int getMaxCount() {
@@ -392,6 +470,22 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       }
       break;
 
+    case NUMERICAL:
+      if (value == null) {
+        unsetNumerical();
+      } else {
+        setNumerical((Boolean)value);
+      }
+      break;
+
+    case RANGE:
+      if (value == null) {
+        unsetRange();
+      } else {
+        setRange((Boolean)value);
+      }
+      break;
+
     case MAX_COUNT:
       if (value == null) {
         unsetMaxCount();
@@ -440,6 +534,12 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     case FIELD_NAME:
       return getFieldName();
 
+    case NUMERICAL:
+      return Boolean.valueOf(isNumerical());
+
+    case RANGE:
+      return Boolean.valueOf(isRange());
+
     case MAX_COUNT:
       return Integer.valueOf(getMaxCount());
 
@@ -468,6 +568,10 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     switch (field) {
     case FIELD_NAME:
       return isSetFieldName();
+    case NUMERICAL:
+      return isSetNumerical();
+    case RANGE:
+      return isSetRange();
     case MAX_COUNT:
       return isSetMaxCount();
     case MIN_POPULATION:
@@ -501,6 +605,24 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       if (!(this_present_fieldName && that_present_fieldName))
         return false;
       if (!this.fieldName.equals(that.fieldName))
+        return false;
+    }
+
+    boolean this_present_numerical = true;
+    boolean that_present_numerical = true;
+    if (this_present_numerical || that_present_numerical) {
+      if (!(this_present_numerical && that_present_numerical))
+        return false;
+      if (this.numerical != that.numerical)
+        return false;
+    }
+
+    boolean this_present_range = true;
+    boolean that_present_range = true;
+    if (this_present_range || that_present_range) {
+      if (!(this_present_range && that_present_range))
+        return false;
+      if (this.range != that.range)
         return false;
     }
 
@@ -571,6 +693,26 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     }
     if (isSetFieldName()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fieldName, typedOther.fieldName);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetNumerical()).compareTo(typedOther.isSetNumerical());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetNumerical()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.numerical, typedOther.numerical);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetRange()).compareTo(typedOther.isSetRange());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetRange()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.range, typedOther.range);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -653,6 +795,14 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     }
     first = false;
     if (!first) sb.append(", ");
+    sb.append("numerical:");
+    sb.append(this.numerical);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("range:");
+    sb.append(this.range);
+    first = false;
+    if (!first) sb.append(", ");
     sb.append("maxCount:");
     sb.append(this.maxCount);
     first = false;
@@ -733,7 +883,23 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // MAX_COUNT
+          case 2: // NUMERICAL
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.numerical = iprot.readBool();
+              struct.setNumericalIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 3: // RANGE
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.range = iprot.readBool();
+              struct.setRangeIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 4: // MAX_COUNT
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.maxCount = iprot.readI32();
               struct.setMaxCountIsSet(true);
@@ -741,7 +907,7 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // MIN_POPULATION
+          case 5: // MIN_POPULATION
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.minPopulation = iprot.readI32();
               struct.setMinPopulationIsSet(true);
@@ -749,7 +915,7 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 4: // DATE_RANGE_GAP
+          case 6: // DATE_RANGE_GAP
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.dateRangeGap = DateRangeGap.findByValue(iprot.readI32());
               struct.setDateRangeGapIsSet(true);
@@ -757,7 +923,7 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 5: // SORT_ORDER
+          case 7: // SORT_ORDER
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.sortOrder = FacetSortOrder.findByValue(iprot.readI32());
               struct.setSortOrderIsSet(true);
@@ -765,7 +931,7 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 6: // SORT_ASCENDING
+          case 8: // SORT_ASCENDING
             if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
               struct.sortAscending = iprot.readBool();
               struct.setSortAscendingIsSet(true);
@@ -793,6 +959,12 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
         oprot.writeString(struct.fieldName);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(NUMERICAL_FIELD_DESC);
+      oprot.writeBool(struct.numerical);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(RANGE_FIELD_DESC);
+      oprot.writeBool(struct.range);
+      oprot.writeFieldEnd();
       oprot.writeFieldBegin(MAX_COUNT_FIELD_DESC);
       oprot.writeI32(struct.maxCount);
       oprot.writeFieldEnd();
@@ -833,24 +1005,36 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       if (struct.isSetFieldName()) {
         optionals.set(0);
       }
-      if (struct.isSetMaxCount()) {
+      if (struct.isSetNumerical()) {
         optionals.set(1);
       }
-      if (struct.isSetMinPopulation()) {
+      if (struct.isSetRange()) {
         optionals.set(2);
       }
-      if (struct.isSetDateRangeGap()) {
+      if (struct.isSetMaxCount()) {
         optionals.set(3);
       }
-      if (struct.isSetSortOrder()) {
+      if (struct.isSetMinPopulation()) {
         optionals.set(4);
       }
-      if (struct.isSetSortAscending()) {
+      if (struct.isSetDateRangeGap()) {
         optionals.set(5);
       }
-      oprot.writeBitSet(optionals, 6);
+      if (struct.isSetSortOrder()) {
+        optionals.set(6);
+      }
+      if (struct.isSetSortAscending()) {
+        optionals.set(7);
+      }
+      oprot.writeBitSet(optionals, 8);
       if (struct.isSetFieldName()) {
         oprot.writeString(struct.fieldName);
+      }
+      if (struct.isSetNumerical()) {
+        oprot.writeBool(struct.numerical);
+      }
+      if (struct.isSetRange()) {
+        oprot.writeBool(struct.range);
       }
       if (struct.isSetMaxCount()) {
         oprot.writeI32(struct.maxCount);
@@ -872,28 +1056,36 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, FacetRequest struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(6);
+      BitSet incoming = iprot.readBitSet(8);
       if (incoming.get(0)) {
         struct.fieldName = iprot.readString();
         struct.setFieldNameIsSet(true);
       }
       if (incoming.get(1)) {
+        struct.numerical = iprot.readBool();
+        struct.setNumericalIsSet(true);
+      }
+      if (incoming.get(2)) {
+        struct.range = iprot.readBool();
+        struct.setRangeIsSet(true);
+      }
+      if (incoming.get(3)) {
         struct.maxCount = iprot.readI32();
         struct.setMaxCountIsSet(true);
       }
-      if (incoming.get(2)) {
+      if (incoming.get(4)) {
         struct.minPopulation = iprot.readI32();
         struct.setMinPopulationIsSet(true);
       }
-      if (incoming.get(3)) {
+      if (incoming.get(5)) {
         struct.dateRangeGap = DateRangeGap.findByValue(iprot.readI32());
         struct.setDateRangeGapIsSet(true);
       }
-      if (incoming.get(4)) {
+      if (incoming.get(6)) {
         struct.sortOrder = FacetSortOrder.findByValue(iprot.readI32());
         struct.setSortOrderIsSet(true);
       }
-      if (incoming.get(5)) {
+      if (incoming.get(7)) {
         struct.sortAscending = iprot.readBool();
         struct.setSortAscendingIsSet(true);
       }

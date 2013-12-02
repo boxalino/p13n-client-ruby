@@ -34,10 +34,7 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("FacetResponse");
 
   private static final org.apache.thrift.protocol.TField FIELD_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("fieldName", org.apache.thrift.protocol.TType.STRING, (short)1);
-  private static final org.apache.thrift.protocol.TField STRING_VALUE_FIELD_DESC = new org.apache.thrift.protocol.TField("stringValue", org.apache.thrift.protocol.TType.STRING, (short)2);
-  private static final org.apache.thrift.protocol.TField RANGE_FROM_INCLUSIVE_FIELD_DESC = new org.apache.thrift.protocol.TField("rangeFromInclusive", org.apache.thrift.protocol.TType.STRING, (short)3);
-  private static final org.apache.thrift.protocol.TField RANGE_TO_EXCLUSIVE_FIELD_DESC = new org.apache.thrift.protocol.TField("rangeToExclusive", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField HIT_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("hitCount", org.apache.thrift.protocol.TType.I64, (short)5);
+  private static final org.apache.thrift.protocol.TField VALUES_FIELD_DESC = new org.apache.thrift.protocol.TField("values", org.apache.thrift.protocol.TType.LIST, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -46,18 +43,12 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
   }
 
   public String fieldName; // required
-  public String stringValue; // required
-  public String rangeFromInclusive; // required
-  public String rangeToExclusive; // required
-  public long hitCount; // required
+  public List<FacetValue> values; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     FIELD_NAME((short)1, "fieldName"),
-    STRING_VALUE((short)2, "stringValue"),
-    RANGE_FROM_INCLUSIVE((short)3, "rangeFromInclusive"),
-    RANGE_TO_EXCLUSIVE((short)4, "rangeToExclusive"),
-    HIT_COUNT((short)5, "hitCount");
+    VALUES((short)2, "values");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -74,14 +65,8 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
       switch(fieldId) {
         case 1: // FIELD_NAME
           return FIELD_NAME;
-        case 2: // STRING_VALUE
-          return STRING_VALUE;
-        case 3: // RANGE_FROM_INCLUSIVE
-          return RANGE_FROM_INCLUSIVE;
-        case 4: // RANGE_TO_EXCLUSIVE
-          return RANGE_TO_EXCLUSIVE;
-        case 5: // HIT_COUNT
-          return HIT_COUNT;
+        case 2: // VALUES
+          return VALUES;
         default:
           return null;
       }
@@ -122,21 +107,14 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
   }
 
   // isset id assignments
-  private static final int __HITCOUNT_ISSET_ID = 0;
-  private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.FIELD_NAME, new org.apache.thrift.meta_data.FieldMetaData("fieldName", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.STRING_VALUE, new org.apache.thrift.meta_data.FieldMetaData("stringValue", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.RANGE_FROM_INCLUSIVE, new org.apache.thrift.meta_data.FieldMetaData("rangeFromInclusive", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.RANGE_TO_EXCLUSIVE, new org.apache.thrift.meta_data.FieldMetaData("rangeToExclusive", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.HIT_COUNT, new org.apache.thrift.meta_data.FieldMetaData("hitCount", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+    tmpMap.put(_Fields.VALUES, new org.apache.thrift.meta_data.FieldMetaData("values", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, FacetValue.class))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(FacetResponse.class, metaDataMap);
   }
@@ -146,38 +124,27 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
 
   public FacetResponse(
     String fieldName,
-    String stringValue,
-    String rangeFromInclusive,
-    String rangeToExclusive,
-    long hitCount)
+    List<FacetValue> values)
   {
     this();
     this.fieldName = fieldName;
-    this.stringValue = stringValue;
-    this.rangeFromInclusive = rangeFromInclusive;
-    this.rangeToExclusive = rangeToExclusive;
-    this.hitCount = hitCount;
-    setHitCountIsSet(true);
+    this.values = values;
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
   public FacetResponse(FacetResponse other) {
-    __isset_bitfield = other.__isset_bitfield;
     if (other.isSetFieldName()) {
       this.fieldName = other.fieldName;
     }
-    if (other.isSetStringValue()) {
-      this.stringValue = other.stringValue;
+    if (other.isSetValues()) {
+      List<FacetValue> __this__values = new ArrayList<FacetValue>();
+      for (FacetValue other_element : other.values) {
+        __this__values.add(new FacetValue(other_element));
+      }
+      this.values = __this__values;
     }
-    if (other.isSetRangeFromInclusive()) {
-      this.rangeFromInclusive = other.rangeFromInclusive;
-    }
-    if (other.isSetRangeToExclusive()) {
-      this.rangeToExclusive = other.rangeToExclusive;
-    }
-    this.hitCount = other.hitCount;
   }
 
   public FacetResponse deepCopy() {
@@ -187,11 +154,7 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
   @Override
   public void clear() {
     this.fieldName = null;
-    this.stringValue = null;
-    this.rangeFromInclusive = null;
-    this.rangeToExclusive = null;
-    setHitCountIsSet(false);
-    this.hitCount = 0;
+    this.values = null;
   }
 
   public String getFieldName() {
@@ -218,99 +181,43 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
     }
   }
 
-  public String getStringValue() {
-    return this.stringValue;
+  public int getValuesSize() {
+    return (this.values == null) ? 0 : this.values.size();
   }
 
-  public FacetResponse setStringValue(String stringValue) {
-    this.stringValue = stringValue;
-    return this;
+  public java.util.Iterator<FacetValue> getValuesIterator() {
+    return (this.values == null) ? null : this.values.iterator();
   }
 
-  public void unsetStringValue() {
-    this.stringValue = null;
-  }
-
-  /** Returns true if field stringValue is set (has been assigned a value) and false otherwise */
-  public boolean isSetStringValue() {
-    return this.stringValue != null;
-  }
-
-  public void setStringValueIsSet(boolean value) {
-    if (!value) {
-      this.stringValue = null;
+  public void addToValues(FacetValue elem) {
+    if (this.values == null) {
+      this.values = new ArrayList<FacetValue>();
     }
+    this.values.add(elem);
   }
 
-  public String getRangeFromInclusive() {
-    return this.rangeFromInclusive;
+  public List<FacetValue> getValues() {
+    return this.values;
   }
 
-  public FacetResponse setRangeFromInclusive(String rangeFromInclusive) {
-    this.rangeFromInclusive = rangeFromInclusive;
+  public FacetResponse setValues(List<FacetValue> values) {
+    this.values = values;
     return this;
   }
 
-  public void unsetRangeFromInclusive() {
-    this.rangeFromInclusive = null;
+  public void unsetValues() {
+    this.values = null;
   }
 
-  /** Returns true if field rangeFromInclusive is set (has been assigned a value) and false otherwise */
-  public boolean isSetRangeFromInclusive() {
-    return this.rangeFromInclusive != null;
+  /** Returns true if field values is set (has been assigned a value) and false otherwise */
+  public boolean isSetValues() {
+    return this.values != null;
   }
 
-  public void setRangeFromInclusiveIsSet(boolean value) {
+  public void setValuesIsSet(boolean value) {
     if (!value) {
-      this.rangeFromInclusive = null;
+      this.values = null;
     }
-  }
-
-  public String getRangeToExclusive() {
-    return this.rangeToExclusive;
-  }
-
-  public FacetResponse setRangeToExclusive(String rangeToExclusive) {
-    this.rangeToExclusive = rangeToExclusive;
-    return this;
-  }
-
-  public void unsetRangeToExclusive() {
-    this.rangeToExclusive = null;
-  }
-
-  /** Returns true if field rangeToExclusive is set (has been assigned a value) and false otherwise */
-  public boolean isSetRangeToExclusive() {
-    return this.rangeToExclusive != null;
-  }
-
-  public void setRangeToExclusiveIsSet(boolean value) {
-    if (!value) {
-      this.rangeToExclusive = null;
-    }
-  }
-
-  public long getHitCount() {
-    return this.hitCount;
-  }
-
-  public FacetResponse setHitCount(long hitCount) {
-    this.hitCount = hitCount;
-    setHitCountIsSet(true);
-    return this;
-  }
-
-  public void unsetHitCount() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __HITCOUNT_ISSET_ID);
-  }
-
-  /** Returns true if field hitCount is set (has been assigned a value) and false otherwise */
-  public boolean isSetHitCount() {
-    return EncodingUtils.testBit(__isset_bitfield, __HITCOUNT_ISSET_ID);
-  }
-
-  public void setHitCountIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __HITCOUNT_ISSET_ID, value);
   }
 
   public void setFieldValue(_Fields field, Object value) {
@@ -323,35 +230,11 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
       }
       break;
 
-    case STRING_VALUE:
+    case VALUES:
       if (value == null) {
-        unsetStringValue();
+        unsetValues();
       } else {
-        setStringValue((String)value);
-      }
-      break;
-
-    case RANGE_FROM_INCLUSIVE:
-      if (value == null) {
-        unsetRangeFromInclusive();
-      } else {
-        setRangeFromInclusive((String)value);
-      }
-      break;
-
-    case RANGE_TO_EXCLUSIVE:
-      if (value == null) {
-        unsetRangeToExclusive();
-      } else {
-        setRangeToExclusive((String)value);
-      }
-      break;
-
-    case HIT_COUNT:
-      if (value == null) {
-        unsetHitCount();
-      } else {
-        setHitCount((Long)value);
+        setValues((List<FacetValue>)value);
       }
       break;
 
@@ -363,17 +246,8 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
     case FIELD_NAME:
       return getFieldName();
 
-    case STRING_VALUE:
-      return getStringValue();
-
-    case RANGE_FROM_INCLUSIVE:
-      return getRangeFromInclusive();
-
-    case RANGE_TO_EXCLUSIVE:
-      return getRangeToExclusive();
-
-    case HIT_COUNT:
-      return Long.valueOf(getHitCount());
+    case VALUES:
+      return getValues();
 
     }
     throw new IllegalStateException();
@@ -388,14 +262,8 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
     switch (field) {
     case FIELD_NAME:
       return isSetFieldName();
-    case STRING_VALUE:
-      return isSetStringValue();
-    case RANGE_FROM_INCLUSIVE:
-      return isSetRangeFromInclusive();
-    case RANGE_TO_EXCLUSIVE:
-      return isSetRangeToExclusive();
-    case HIT_COUNT:
-      return isSetHitCount();
+    case VALUES:
+      return isSetValues();
     }
     throw new IllegalStateException();
   }
@@ -422,39 +290,12 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
         return false;
     }
 
-    boolean this_present_stringValue = true && this.isSetStringValue();
-    boolean that_present_stringValue = true && that.isSetStringValue();
-    if (this_present_stringValue || that_present_stringValue) {
-      if (!(this_present_stringValue && that_present_stringValue))
+    boolean this_present_values = true && this.isSetValues();
+    boolean that_present_values = true && that.isSetValues();
+    if (this_present_values || that_present_values) {
+      if (!(this_present_values && that_present_values))
         return false;
-      if (!this.stringValue.equals(that.stringValue))
-        return false;
-    }
-
-    boolean this_present_rangeFromInclusive = true && this.isSetRangeFromInclusive();
-    boolean that_present_rangeFromInclusive = true && that.isSetRangeFromInclusive();
-    if (this_present_rangeFromInclusive || that_present_rangeFromInclusive) {
-      if (!(this_present_rangeFromInclusive && that_present_rangeFromInclusive))
-        return false;
-      if (!this.rangeFromInclusive.equals(that.rangeFromInclusive))
-        return false;
-    }
-
-    boolean this_present_rangeToExclusive = true && this.isSetRangeToExclusive();
-    boolean that_present_rangeToExclusive = true && that.isSetRangeToExclusive();
-    if (this_present_rangeToExclusive || that_present_rangeToExclusive) {
-      if (!(this_present_rangeToExclusive && that_present_rangeToExclusive))
-        return false;
-      if (!this.rangeToExclusive.equals(that.rangeToExclusive))
-        return false;
-    }
-
-    boolean this_present_hitCount = true;
-    boolean that_present_hitCount = true;
-    if (this_present_hitCount || that_present_hitCount) {
-      if (!(this_present_hitCount && that_present_hitCount))
-        return false;
-      if (this.hitCount != that.hitCount)
+      if (!this.values.equals(that.values))
         return false;
     }
 
@@ -484,42 +325,12 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetStringValue()).compareTo(typedOther.isSetStringValue());
+    lastComparison = Boolean.valueOf(isSetValues()).compareTo(typedOther.isSetValues());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetStringValue()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.stringValue, typedOther.stringValue);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetRangeFromInclusive()).compareTo(typedOther.isSetRangeFromInclusive());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetRangeFromInclusive()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.rangeFromInclusive, typedOther.rangeFromInclusive);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetRangeToExclusive()).compareTo(typedOther.isSetRangeToExclusive());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetRangeToExclusive()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.rangeToExclusive, typedOther.rangeToExclusive);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetHitCount()).compareTo(typedOther.isSetHitCount());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetHitCount()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.hitCount, typedOther.hitCount);
+    if (isSetValues()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.values, typedOther.values);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -552,32 +363,12 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("stringValue:");
-    if (this.stringValue == null) {
+    sb.append("values:");
+    if (this.values == null) {
       sb.append("null");
     } else {
-      sb.append(this.stringValue);
+      sb.append(this.values);
     }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("rangeFromInclusive:");
-    if (this.rangeFromInclusive == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.rangeFromInclusive);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("rangeToExclusive:");
-    if (this.rangeToExclusive == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.rangeToExclusive);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("hitCount:");
-    sb.append(this.hitCount);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -598,8 +389,6 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
 
   private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
     try {
-      // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-      __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
     } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te);
@@ -632,34 +421,21 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // STRING_VALUE
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.stringValue = iprot.readString();
-              struct.setStringValueIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 3: // RANGE_FROM_INCLUSIVE
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.rangeFromInclusive = iprot.readString();
-              struct.setRangeFromInclusiveIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 4: // RANGE_TO_EXCLUSIVE
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.rangeToExclusive = iprot.readString();
-              struct.setRangeToExclusiveIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 5: // HIT_COUNT
-            if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
-              struct.hitCount = iprot.readI64();
-              struct.setHitCountIsSet(true);
+          case 2: // VALUES
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list92 = iprot.readListBegin();
+                struct.values = new ArrayList<FacetValue>(_list92.size);
+                for (int _i93 = 0; _i93 < _list92.size; ++_i93)
+                {
+                  FacetValue _elem94; // required
+                  _elem94 = new FacetValue();
+                  _elem94.read(iprot);
+                  struct.values.add(_elem94);
+                }
+                iprot.readListEnd();
+              }
+              struct.setValuesIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -684,24 +460,18 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
         oprot.writeString(struct.fieldName);
         oprot.writeFieldEnd();
       }
-      if (struct.stringValue != null) {
-        oprot.writeFieldBegin(STRING_VALUE_FIELD_DESC);
-        oprot.writeString(struct.stringValue);
+      if (struct.values != null) {
+        oprot.writeFieldBegin(VALUES_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.values.size()));
+          for (FacetValue _iter95 : struct.values)
+          {
+            _iter95.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
         oprot.writeFieldEnd();
       }
-      if (struct.rangeFromInclusive != null) {
-        oprot.writeFieldBegin(RANGE_FROM_INCLUSIVE_FIELD_DESC);
-        oprot.writeString(struct.rangeFromInclusive);
-        oprot.writeFieldEnd();
-      }
-      if (struct.rangeToExclusive != null) {
-        oprot.writeFieldBegin(RANGE_TO_EXCLUSIVE_FIELD_DESC);
-        oprot.writeString(struct.rangeToExclusive);
-        oprot.writeFieldEnd();
-      }
-      oprot.writeFieldBegin(HIT_COUNT_FIELD_DESC);
-      oprot.writeI64(struct.hitCount);
-      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -723,59 +493,45 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
       if (struct.isSetFieldName()) {
         optionals.set(0);
       }
-      if (struct.isSetStringValue()) {
+      if (struct.isSetValues()) {
         optionals.set(1);
       }
-      if (struct.isSetRangeFromInclusive()) {
-        optionals.set(2);
-      }
-      if (struct.isSetRangeToExclusive()) {
-        optionals.set(3);
-      }
-      if (struct.isSetHitCount()) {
-        optionals.set(4);
-      }
-      oprot.writeBitSet(optionals, 5);
+      oprot.writeBitSet(optionals, 2);
       if (struct.isSetFieldName()) {
         oprot.writeString(struct.fieldName);
       }
-      if (struct.isSetStringValue()) {
-        oprot.writeString(struct.stringValue);
-      }
-      if (struct.isSetRangeFromInclusive()) {
-        oprot.writeString(struct.rangeFromInclusive);
-      }
-      if (struct.isSetRangeToExclusive()) {
-        oprot.writeString(struct.rangeToExclusive);
-      }
-      if (struct.isSetHitCount()) {
-        oprot.writeI64(struct.hitCount);
+      if (struct.isSetValues()) {
+        {
+          oprot.writeI32(struct.values.size());
+          for (FacetValue _iter96 : struct.values)
+          {
+            _iter96.write(oprot);
+          }
+        }
       }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, FacetResponse struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(5);
+      BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
         struct.fieldName = iprot.readString();
         struct.setFieldNameIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.stringValue = iprot.readString();
-        struct.setStringValueIsSet(true);
-      }
-      if (incoming.get(2)) {
-        struct.rangeFromInclusive = iprot.readString();
-        struct.setRangeFromInclusiveIsSet(true);
-      }
-      if (incoming.get(3)) {
-        struct.rangeToExclusive = iprot.readString();
-        struct.setRangeToExclusiveIsSet(true);
-      }
-      if (incoming.get(4)) {
-        struct.hitCount = iprot.readI64();
-        struct.setHitCountIsSet(true);
+        {
+          org.apache.thrift.protocol.TList _list97 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.values = new ArrayList<FacetValue>(_list97.size);
+          for (int _i98 = 0; _i98 < _list97.size; ++_i98)
+          {
+            FacetValue _elem99; // required
+            _elem99 = new FacetValue();
+            _elem99.read(iprot);
+            struct.values.add(_elem99);
+          }
+        }
+        struct.setValuesIsSet(true);
       }
     }
   }

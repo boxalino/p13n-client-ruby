@@ -32,11 +32,13 @@ enum FacetSortOrder {
 
 struct FacetRequest {
   1: string fieldName,
-  2: i32 maxCount,
-  3: i32 minPopulation,
-  4: DateRangeGap dateRangeGap,
-  5: FacetSortOrder sortOrder,
-  6: bool sortAscending
+  2: bool numerical,
+  3: bool range,
+  4: i32 maxCount = -1,
+  5: i32 minPopulation = 1,
+  6: DateRangeGap dateRangeGap,
+  7: FacetSortOrder sortOrder,
+  8: bool sortAscending
 }
 
 struct SortField {
@@ -75,12 +77,16 @@ struct ChoiceRequest {
   4: RequestContext requestContext
 }
 
+struct FacetValue {
+  1: string stringValue,
+  2: string rangeFromInclusive,
+  3: string rangeToExclusive,
+  4: i64 hitCount;
+}
+
 struct FacetResponse {
   1: string fieldName,
-  2: string stringValue,
-  3: string rangeFromInclusive,
-  4: string rangeToExclusive,
-  5: i64 hitCount;
+  2: list<FacetValue> values
 }
 
 struct Hit {
