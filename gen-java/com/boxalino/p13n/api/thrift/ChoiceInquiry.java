@@ -35,7 +35,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
 
   private static final org.apache.thrift.protocol.TField CHOICE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("choiceId", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField SIMPLE_SEARCH_QUERY_FIELD_DESC = new org.apache.thrift.protocol.TField("simpleSearchQuery", org.apache.thrift.protocol.TType.STRUCT, (short)2);
-  private static final org.apache.thrift.protocol.TField PARAMS_FIELD_DESC = new org.apache.thrift.protocol.TField("params", org.apache.thrift.protocol.TType.MAP, (short)3);
+  private static final org.apache.thrift.protocol.TField CONTEXT_ITEMS_FIELD_DESC = new org.apache.thrift.protocol.TField("contextItems", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField MIN_HIT_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("minHitCount", org.apache.thrift.protocol.TType.I32, (short)4);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
@@ -46,14 +46,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
 
   public String choiceId; // required
   public SimpleSearchQuery simpleSearchQuery; // required
-  public Map<String,List<String>> params; // required
+  public List<ContextItem> contextItems; // required
   public int minHitCount; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     CHOICE_ID((short)1, "choiceId"),
     SIMPLE_SEARCH_QUERY((short)2, "simpleSearchQuery"),
-    PARAMS((short)3, "params"),
+    CONTEXT_ITEMS((short)3, "contextItems"),
     MIN_HIT_COUNT((short)4, "minHitCount");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
@@ -73,8 +73,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
           return CHOICE_ID;
         case 2: // SIMPLE_SEARCH_QUERY
           return SIMPLE_SEARCH_QUERY;
-        case 3: // PARAMS
-          return PARAMS;
+        case 3: // CONTEXT_ITEMS
+          return CONTEXT_ITEMS;
         case 4: // MIN_HIT_COUNT
           return MIN_HIT_COUNT;
         default:
@@ -126,11 +126,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.SIMPLE_SEARCH_QUERY, new org.apache.thrift.meta_data.FieldMetaData("simpleSearchQuery", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, SimpleSearchQuery.class)));
-    tmpMap.put(_Fields.PARAMS, new org.apache.thrift.meta_data.FieldMetaData("params", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
-            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
-            new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-                new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)))));
+    tmpMap.put(_Fields.CONTEXT_ITEMS, new org.apache.thrift.meta_data.FieldMetaData("contextItems", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ContextItem.class))));
     tmpMap.put(_Fields.MIN_HIT_COUNT, new org.apache.thrift.meta_data.FieldMetaData("minHitCount", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -143,13 +141,13 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
   public ChoiceInquiry(
     String choiceId,
     SimpleSearchQuery simpleSearchQuery,
-    Map<String,List<String>> params,
+    List<ContextItem> contextItems,
     int minHitCount)
   {
     this();
     this.choiceId = choiceId;
     this.simpleSearchQuery = simpleSearchQuery;
-    this.params = params;
+    this.contextItems = contextItems;
     this.minHitCount = minHitCount;
     setMinHitCountIsSet(true);
   }
@@ -165,23 +163,12 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     if (other.isSetSimpleSearchQuery()) {
       this.simpleSearchQuery = new SimpleSearchQuery(other.simpleSearchQuery);
     }
-    if (other.isSetParams()) {
-      Map<String,List<String>> __this__params = new HashMap<String,List<String>>();
-      for (Map.Entry<String, List<String>> other_element : other.params.entrySet()) {
-
-        String other_element_key = other_element.getKey();
-        List<String> other_element_value = other_element.getValue();
-
-        String __this__params_copy_key = other_element_key;
-
-        List<String> __this__params_copy_value = new ArrayList<String>();
-        for (String other_element_value_element : other_element_value) {
-          __this__params_copy_value.add(other_element_value_element);
-        }
-
-        __this__params.put(__this__params_copy_key, __this__params_copy_value);
+    if (other.isSetContextItems()) {
+      List<ContextItem> __this__contextItems = new ArrayList<ContextItem>();
+      for (ContextItem other_element : other.contextItems) {
+        __this__contextItems.add(new ContextItem(other_element));
       }
-      this.params = __this__params;
+      this.contextItems = __this__contextItems;
     }
     this.minHitCount = other.minHitCount;
   }
@@ -194,7 +181,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
   public void clear() {
     this.choiceId = null;
     this.simpleSearchQuery = null;
-    this.params = null;
+    this.contextItems = null;
     setMinHitCountIsSet(false);
     this.minHitCount = 0;
   }
@@ -247,38 +234,42 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     }
   }
 
-  public int getParamsSize() {
-    return (this.params == null) ? 0 : this.params.size();
+  public int getContextItemsSize() {
+    return (this.contextItems == null) ? 0 : this.contextItems.size();
   }
 
-  public void putToParams(String key, List<String> val) {
-    if (this.params == null) {
-      this.params = new HashMap<String,List<String>>();
+  public java.util.Iterator<ContextItem> getContextItemsIterator() {
+    return (this.contextItems == null) ? null : this.contextItems.iterator();
+  }
+
+  public void addToContextItems(ContextItem elem) {
+    if (this.contextItems == null) {
+      this.contextItems = new ArrayList<ContextItem>();
     }
-    this.params.put(key, val);
+    this.contextItems.add(elem);
   }
 
-  public Map<String,List<String>> getParams() {
-    return this.params;
+  public List<ContextItem> getContextItems() {
+    return this.contextItems;
   }
 
-  public ChoiceInquiry setParams(Map<String,List<String>> params) {
-    this.params = params;
+  public ChoiceInquiry setContextItems(List<ContextItem> contextItems) {
+    this.contextItems = contextItems;
     return this;
   }
 
-  public void unsetParams() {
-    this.params = null;
+  public void unsetContextItems() {
+    this.contextItems = null;
   }
 
-  /** Returns true if field params is set (has been assigned a value) and false otherwise */
-  public boolean isSetParams() {
-    return this.params != null;
+  /** Returns true if field contextItems is set (has been assigned a value) and false otherwise */
+  public boolean isSetContextItems() {
+    return this.contextItems != null;
   }
 
-  public void setParamsIsSet(boolean value) {
+  public void setContextItemsIsSet(boolean value) {
     if (!value) {
-      this.params = null;
+      this.contextItems = null;
     }
   }
 
@@ -323,11 +314,11 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       }
       break;
 
-    case PARAMS:
+    case CONTEXT_ITEMS:
       if (value == null) {
-        unsetParams();
+        unsetContextItems();
       } else {
-        setParams((Map<String,List<String>>)value);
+        setContextItems((List<ContextItem>)value);
       }
       break;
 
@@ -350,8 +341,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     case SIMPLE_SEARCH_QUERY:
       return getSimpleSearchQuery();
 
-    case PARAMS:
-      return getParams();
+    case CONTEXT_ITEMS:
+      return getContextItems();
 
     case MIN_HIT_COUNT:
       return Integer.valueOf(getMinHitCount());
@@ -371,8 +362,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       return isSetChoiceId();
     case SIMPLE_SEARCH_QUERY:
       return isSetSimpleSearchQuery();
-    case PARAMS:
-      return isSetParams();
+    case CONTEXT_ITEMS:
+      return isSetContextItems();
     case MIN_HIT_COUNT:
       return isSetMinHitCount();
     }
@@ -410,12 +401,12 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         return false;
     }
 
-    boolean this_present_params = true && this.isSetParams();
-    boolean that_present_params = true && that.isSetParams();
-    if (this_present_params || that_present_params) {
-      if (!(this_present_params && that_present_params))
+    boolean this_present_contextItems = true && this.isSetContextItems();
+    boolean that_present_contextItems = true && that.isSetContextItems();
+    if (this_present_contextItems || that_present_contextItems) {
+      if (!(this_present_contextItems && that_present_contextItems))
         return false;
-      if (!this.params.equals(that.params))
+      if (!this.contextItems.equals(that.contextItems))
         return false;
     }
 
@@ -464,12 +455,12 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetParams()).compareTo(typedOther.isSetParams());
+    lastComparison = Boolean.valueOf(isSetContextItems()).compareTo(typedOther.isSetContextItems());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetParams()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.params, typedOther.params);
+    if (isSetContextItems()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.contextItems, typedOther.contextItems);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -520,11 +511,11 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("params:");
-    if (this.params == null) {
+    sb.append("contextItems:");
+    if (this.contextItems == null) {
       sb.append("null");
     } else {
-      sb.append(this.params);
+      sb.append(this.contextItems);
     }
     first = false;
     if (!first) sb.append(", ");
@@ -596,32 +587,21 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 3: // PARAMS
-            if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+          case 3: // CONTEXT_ITEMS
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TMap _map48 = iprot.readMapBegin();
-                struct.params = new HashMap<String,List<String>>(2*_map48.size);
-                for (int _i49 = 0; _i49 < _map48.size; ++_i49)
+                org.apache.thrift.protocol.TList _list48 = iprot.readListBegin();
+                struct.contextItems = new ArrayList<ContextItem>(_list48.size);
+                for (int _i49 = 0; _i49 < _list48.size; ++_i49)
                 {
-                  String _key50; // required
-                  List<String> _val51; // required
-                  _key50 = iprot.readString();
-                  {
-                    org.apache.thrift.protocol.TList _list52 = iprot.readListBegin();
-                    _val51 = new ArrayList<String>(_list52.size);
-                    for (int _i53 = 0; _i53 < _list52.size; ++_i53)
-                    {
-                      String _elem54; // required
-                      _elem54 = iprot.readString();
-                      _val51.add(_elem54);
-                    }
-                    iprot.readListEnd();
-                  }
-                  struct.params.put(_key50, _val51);
+                  ContextItem _elem50; // required
+                  _elem50 = new ContextItem();
+                  _elem50.read(iprot);
+                  struct.contextItems.add(_elem50);
                 }
-                iprot.readMapEnd();
+                iprot.readListEnd();
               }
-              struct.setParamsIsSet(true);
+              struct.setContextItemsIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -659,23 +639,15 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         struct.simpleSearchQuery.write(oprot);
         oprot.writeFieldEnd();
       }
-      if (struct.params != null) {
-        oprot.writeFieldBegin(PARAMS_FIELD_DESC);
+      if (struct.contextItems != null) {
+        oprot.writeFieldBegin(CONTEXT_ITEMS_FIELD_DESC);
         {
-          oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, struct.params.size()));
-          for (Map.Entry<String, List<String>> _iter55 : struct.params.entrySet())
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.contextItems.size()));
+          for (ContextItem _iter51 : struct.contextItems)
           {
-            oprot.writeString(_iter55.getKey());
-            {
-              oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, _iter55.getValue().size()));
-              for (String _iter56 : _iter55.getValue())
-              {
-                oprot.writeString(_iter56);
-              }
-              oprot.writeListEnd();
-            }
+            _iter51.write(oprot);
           }
-          oprot.writeMapEnd();
+          oprot.writeListEnd();
         }
         oprot.writeFieldEnd();
       }
@@ -706,7 +678,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (struct.isSetSimpleSearchQuery()) {
         optionals.set(1);
       }
-      if (struct.isSetParams()) {
+      if (struct.isSetContextItems()) {
         optionals.set(2);
       }
       if (struct.isSetMinHitCount()) {
@@ -719,19 +691,12 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (struct.isSetSimpleSearchQuery()) {
         struct.simpleSearchQuery.write(oprot);
       }
-      if (struct.isSetParams()) {
+      if (struct.isSetContextItems()) {
         {
-          oprot.writeI32(struct.params.size());
-          for (Map.Entry<String, List<String>> _iter57 : struct.params.entrySet())
+          oprot.writeI32(struct.contextItems.size());
+          for (ContextItem _iter52 : struct.contextItems)
           {
-            oprot.writeString(_iter57.getKey());
-            {
-              oprot.writeI32(_iter57.getValue().size());
-              for (String _iter58 : _iter57.getValue())
-              {
-                oprot.writeString(_iter58);
-              }
-            }
+            _iter52.write(oprot);
           }
         }
       }
@@ -755,27 +720,17 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TMap _map59 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
-          struct.params = new HashMap<String,List<String>>(2*_map59.size);
-          for (int _i60 = 0; _i60 < _map59.size; ++_i60)
+          org.apache.thrift.protocol.TList _list53 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.contextItems = new ArrayList<ContextItem>(_list53.size);
+          for (int _i54 = 0; _i54 < _list53.size; ++_i54)
           {
-            String _key61; // required
-            List<String> _val62; // required
-            _key61 = iprot.readString();
-            {
-              org.apache.thrift.protocol.TList _list63 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-              _val62 = new ArrayList<String>(_list63.size);
-              for (int _i64 = 0; _i64 < _list63.size; ++_i64)
-              {
-                String _elem65; // required
-                _elem65 = iprot.readString();
-                _val62.add(_elem65);
-              }
-            }
-            struct.params.put(_key61, _val62);
+            ContextItem _elem55; // required
+            _elem55 = new ContextItem();
+            _elem55.read(iprot);
+            struct.contextItems.add(_elem55);
           }
         }
-        struct.setParamsIsSet(true);
+        struct.setContextItemsIsSet(true);
       }
       if (incoming.get(3)) {
         struct.minHitCount = iprot.readI32();

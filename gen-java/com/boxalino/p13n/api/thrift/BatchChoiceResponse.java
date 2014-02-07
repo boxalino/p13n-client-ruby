@@ -339,14 +339,14 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
           case 1: // VARIANTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list150 = iprot.readListBegin();
-                struct.variants = new ArrayList<Variant>(_list150.size);
-                for (int _i151 = 0; _i151 < _list150.size; ++_i151)
+                org.apache.thrift.protocol.TList _list140 = iprot.readListBegin();
+                struct.variants = new ArrayList<Variant>(_list140.size);
+                for (int _i141 = 0; _i141 < _list140.size; ++_i141)
                 {
-                  Variant _elem152; // required
-                  _elem152 = new Variant();
-                  _elem152.read(iprot);
-                  struct.variants.add(_elem152);
+                  Variant _elem142; // required
+                  _elem142 = new Variant();
+                  _elem142.read(iprot);
+                  struct.variants.add(_elem142);
                 }
                 iprot.readListEnd();
               }
@@ -374,9 +374,9 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
         oprot.writeFieldBegin(VARIANTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.variants.size()));
-          for (Variant _iter153 : struct.variants)
+          for (Variant _iter143 : struct.variants)
           {
-            _iter153.write(oprot);
+            _iter143.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -407,9 +407,9 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
       if (struct.isSetVariants()) {
         {
           oprot.writeI32(struct.variants.size());
-          for (Variant _iter154 : struct.variants)
+          for (Variant _iter144 : struct.variants)
           {
-            _iter154.write(oprot);
+            _iter144.write(oprot);
           }
         }
       }
@@ -421,14 +421,14 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
       BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TList _list155 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.variants = new ArrayList<Variant>(_list155.size);
-          for (int _i156 = 0; _i156 < _list155.size; ++_i156)
+          org.apache.thrift.protocol.TList _list145 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.variants = new ArrayList<Variant>(_list145.size);
+          for (int _i146 = 0; _i146 < _list145.size; ++_i146)
           {
-            Variant _elem157; // required
-            _elem157 = new Variant();
-            _elem157.read(iprot);
-            struct.variants.add(_elem157);
+            Variant _elem147; // required
+            _elem147 = new Variant();
+            _elem147.read(iprot);
+            struct.variants.add(_elem147);
           }
         }
         struct.setVariantsIsSet(true);

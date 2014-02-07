@@ -59,10 +59,24 @@ struct SimpleSearchQuery {
  10: list<string> returnFields
 }
 
+struct ContextItem {
+  # id of the index to fetch context item data from
+  1: string indexId,
+  # the field name of the item's unique identifier within the items index
+  # for example: 'sku' for items 'products' 
+  2: string fieldName,
+  # actual item's identifier
+  # for example: actual sku of the product
+  3: string contextItemId,
+  # role of the item within the context, used to address the item in the recommendation.
+  # for example: 'main product' for recommendations within product detail page
+  4: string role
+}
+
 struct ChoiceInquiry {
   1: string choiceId,
   2: SimpleSearchQuery simpleSearchQuery,
-  3: map<string,list<string>> params, 
+  3: list<ContextItem> contextItems, 
   4: i32 minHitCount
 }
 
