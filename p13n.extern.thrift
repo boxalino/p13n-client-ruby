@@ -102,7 +102,7 @@ struct ContextItem {
 # actual item's identifier
 # for example: actual sku of the product
   3: string contextItemId,
-# role of the item within the context, used to address the item in the recommendation.
+# role of the item within the context, used to address the item in the recommendation script.
 # for example: 'main product' for recommendations within product detail page
   4: string role
 }
@@ -115,7 +115,7 @@ struct ChoiceInquiry {
 # context items for recommendations 
   3: list<ContextItem> contextItems,
 # minimal hit count to return for recommendations.
-# if higher priority recommendation strategy yields less results, next strategy is tried  
+# If higher priority recommendation strategy yields less results, next strategy is tried  
   4: i32 minHitCount,
 # set of variantIds to be excluded from result
   5: set<string> excludeVariantIds
@@ -127,7 +127,7 @@ struct RequestContext {
 }
 
 struct ChoiceRequest {
-#
+# unused
   1: string authenticationToken,
 # profile (visitor) identificator 
   2: string profileId,
@@ -177,11 +177,11 @@ struct SearchResult {
 struct Variant {
 # id of the personalized variant
   1: string variantId,
-# scenario identificator used to produce recommendation result
+# scenario identificator used to produce recommendation result or search result personalization
   2: string scenarioId,
 # result of the search request for recommendations and search requests
   3: SearchResult searchResult,
-# recommendation's result title localized by language given in SimpleSearchQuery
+# recommendation's result title localized in language requested in corresponding SimpleSearchQuery
   4: string searchResultTitle
 }
 
@@ -190,32 +190,10 @@ struct ChoiceResponse {
   1: list<Variant> variants
 }
 
-struct ProfilePropertyValue {
-  1: string profileId,
-  2: string propertyName,
-  3: string propertyValue, 
-  4: i32 confidence
-}
-
-struct BatchChoiceRequest {
-  1: string authenticationToken,
-  2: ChoiceInquiry choiceInquiry,
-  3: RequestContext requestContext
-  4: list<string> profileIds
-}
-
-struct BatchChoiceResponse {
-  1: list<Variant> variants
-}
-
-exception P13ServiceException {
+exception P13nServiceException {
   1: required string message
 }
 
 service P13nService {
-  ChoiceResponse choose(ChoiceRequest choiceRequest) throws (1: P13ServiceException p13ServiceException),
-  binary uploadChoiceConfiguration(binary xmlPayload) throws (1: P13ServiceException p13ServiceException),
-  i32 saveProfileProperties(list<ProfilePropertyValue> profilePropertyValues) throws (1: P13ServiceException p13ServiceException),
-  string command(string command) throws (1: P13ServiceException p13ServiceException),
-  BatchChoiceResponse batchChoose(BatchChoiceRequest batchChoiceRequest) throws (1: P13ServiceException p13ServiceException)
+  ChoiceResponse choose(ChoiceRequest choiceRequest) throws (1: P13nServiceException p13nServiceException)
 }

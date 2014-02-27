@@ -37,6 +37,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
   private static final org.apache.thrift.protocol.TField SIMPLE_SEARCH_QUERY_FIELD_DESC = new org.apache.thrift.protocol.TField("simpleSearchQuery", org.apache.thrift.protocol.TType.STRUCT, (short)2);
   private static final org.apache.thrift.protocol.TField CONTEXT_ITEMS_FIELD_DESC = new org.apache.thrift.protocol.TField("contextItems", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField MIN_HIT_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("minHitCount", org.apache.thrift.protocol.TType.I32, (short)4);
+  private static final org.apache.thrift.protocol.TField EXCLUDE_VARIANT_IDS_FIELD_DESC = new org.apache.thrift.protocol.TField("excludeVariantIds", org.apache.thrift.protocol.TType.SET, (short)5);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -48,13 +49,15 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
   public SimpleSearchQuery simpleSearchQuery; // required
   public List<ContextItem> contextItems; // required
   public int minHitCount; // required
+  public Set<String> excludeVariantIds; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     CHOICE_ID((short)1, "choiceId"),
     SIMPLE_SEARCH_QUERY((short)2, "simpleSearchQuery"),
     CONTEXT_ITEMS((short)3, "contextItems"),
-    MIN_HIT_COUNT((short)4, "minHitCount");
+    MIN_HIT_COUNT((short)4, "minHitCount"),
+    EXCLUDE_VARIANT_IDS((short)5, "excludeVariantIds");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -77,6 +80,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
           return CONTEXT_ITEMS;
         case 4: // MIN_HIT_COUNT
           return MIN_HIT_COUNT;
+        case 5: // EXCLUDE_VARIANT_IDS
+          return EXCLUDE_VARIANT_IDS;
         default:
           return null;
       }
@@ -131,6 +136,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ContextItem.class))));
     tmpMap.put(_Fields.MIN_HIT_COUNT, new org.apache.thrift.meta_data.FieldMetaData("minHitCount", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+    tmpMap.put(_Fields.EXCLUDE_VARIANT_IDS, new org.apache.thrift.meta_data.FieldMetaData("excludeVariantIds", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.SetMetaData(org.apache.thrift.protocol.TType.SET, 
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ChoiceInquiry.class, metaDataMap);
   }
@@ -142,7 +150,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     String choiceId,
     SimpleSearchQuery simpleSearchQuery,
     List<ContextItem> contextItems,
-    int minHitCount)
+    int minHitCount,
+    Set<String> excludeVariantIds)
   {
     this();
     this.choiceId = choiceId;
@@ -150,6 +159,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     this.contextItems = contextItems;
     this.minHitCount = minHitCount;
     setMinHitCountIsSet(true);
+    this.excludeVariantIds = excludeVariantIds;
   }
 
   /**
@@ -171,6 +181,13 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       this.contextItems = __this__contextItems;
     }
     this.minHitCount = other.minHitCount;
+    if (other.isSetExcludeVariantIds()) {
+      Set<String> __this__excludeVariantIds = new HashSet<String>();
+      for (String other_element : other.excludeVariantIds) {
+        __this__excludeVariantIds.add(other_element);
+      }
+      this.excludeVariantIds = __this__excludeVariantIds;
+    }
   }
 
   public ChoiceInquiry deepCopy() {
@@ -184,6 +201,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     this.contextItems = null;
     setMinHitCountIsSet(false);
     this.minHitCount = 0;
+    this.excludeVariantIds = null;
   }
 
   public String getChoiceId() {
@@ -296,6 +314,45 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __MINHITCOUNT_ISSET_ID, value);
   }
 
+  public int getExcludeVariantIdsSize() {
+    return (this.excludeVariantIds == null) ? 0 : this.excludeVariantIds.size();
+  }
+
+  public java.util.Iterator<String> getExcludeVariantIdsIterator() {
+    return (this.excludeVariantIds == null) ? null : this.excludeVariantIds.iterator();
+  }
+
+  public void addToExcludeVariantIds(String elem) {
+    if (this.excludeVariantIds == null) {
+      this.excludeVariantIds = new HashSet<String>();
+    }
+    this.excludeVariantIds.add(elem);
+  }
+
+  public Set<String> getExcludeVariantIds() {
+    return this.excludeVariantIds;
+  }
+
+  public ChoiceInquiry setExcludeVariantIds(Set<String> excludeVariantIds) {
+    this.excludeVariantIds = excludeVariantIds;
+    return this;
+  }
+
+  public void unsetExcludeVariantIds() {
+    this.excludeVariantIds = null;
+  }
+
+  /** Returns true if field excludeVariantIds is set (has been assigned a value) and false otherwise */
+  public boolean isSetExcludeVariantIds() {
+    return this.excludeVariantIds != null;
+  }
+
+  public void setExcludeVariantIdsIsSet(boolean value) {
+    if (!value) {
+      this.excludeVariantIds = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case CHOICE_ID:
@@ -330,6 +387,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       }
       break;
 
+    case EXCLUDE_VARIANT_IDS:
+      if (value == null) {
+        unsetExcludeVariantIds();
+      } else {
+        setExcludeVariantIds((Set<String>)value);
+      }
+      break;
+
     }
   }
 
@@ -346,6 +411,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
 
     case MIN_HIT_COUNT:
       return Integer.valueOf(getMinHitCount());
+
+    case EXCLUDE_VARIANT_IDS:
+      return getExcludeVariantIds();
 
     }
     throw new IllegalStateException();
@@ -366,6 +434,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       return isSetContextItems();
     case MIN_HIT_COUNT:
       return isSetMinHitCount();
+    case EXCLUDE_VARIANT_IDS:
+      return isSetExcludeVariantIds();
     }
     throw new IllegalStateException();
   }
@@ -416,6 +486,15 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (!(this_present_minHitCount && that_present_minHitCount))
         return false;
       if (this.minHitCount != that.minHitCount)
+        return false;
+    }
+
+    boolean this_present_excludeVariantIds = true && this.isSetExcludeVariantIds();
+    boolean that_present_excludeVariantIds = true && that.isSetExcludeVariantIds();
+    if (this_present_excludeVariantIds || that_present_excludeVariantIds) {
+      if (!(this_present_excludeVariantIds && that_present_excludeVariantIds))
+        return false;
+      if (!this.excludeVariantIds.equals(that.excludeVariantIds))
         return false;
     }
 
@@ -475,6 +554,16 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetExcludeVariantIds()).compareTo(typedOther.isSetExcludeVariantIds());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetExcludeVariantIds()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.excludeVariantIds, typedOther.excludeVariantIds);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -521,6 +610,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     if (!first) sb.append(", ");
     sb.append("minHitCount:");
     sb.append(this.minHitCount);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("excludeVariantIds:");
+    if (this.excludeVariantIds == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.excludeVariantIds);
+    }
     first = false;
     sb.append(")");
     return sb.toString();
@@ -614,6 +711,24 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 5: // EXCLUDE_VARIANT_IDS
+            if (schemeField.type == org.apache.thrift.protocol.TType.SET) {
+              {
+                org.apache.thrift.protocol.TSet _set51 = iprot.readSetBegin();
+                struct.excludeVariantIds = new HashSet<String>(2*_set51.size);
+                for (int _i52 = 0; _i52 < _set51.size; ++_i52)
+                {
+                  String _elem53; // required
+                  _elem53 = iprot.readString();
+                  struct.excludeVariantIds.add(_elem53);
+                }
+                iprot.readSetEnd();
+              }
+              struct.setExcludeVariantIdsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -643,9 +758,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         oprot.writeFieldBegin(CONTEXT_ITEMS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.contextItems.size()));
-          for (ContextItem _iter51 : struct.contextItems)
+          for (ContextItem _iter54 : struct.contextItems)
           {
-            _iter51.write(oprot);
+            _iter54.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -654,6 +769,18 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       oprot.writeFieldBegin(MIN_HIT_COUNT_FIELD_DESC);
       oprot.writeI32(struct.minHitCount);
       oprot.writeFieldEnd();
+      if (struct.excludeVariantIds != null) {
+        oprot.writeFieldBegin(EXCLUDE_VARIANT_IDS_FIELD_DESC);
+        {
+          oprot.writeSetBegin(new org.apache.thrift.protocol.TSet(org.apache.thrift.protocol.TType.STRING, struct.excludeVariantIds.size()));
+          for (String _iter55 : struct.excludeVariantIds)
+          {
+            oprot.writeString(_iter55);
+          }
+          oprot.writeSetEnd();
+        }
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -684,7 +811,10 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (struct.isSetMinHitCount()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetExcludeVariantIds()) {
+        optionals.set(4);
+      }
+      oprot.writeBitSet(optionals, 5);
       if (struct.isSetChoiceId()) {
         oprot.writeString(struct.choiceId);
       }
@@ -694,21 +824,30 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (struct.isSetContextItems()) {
         {
           oprot.writeI32(struct.contextItems.size());
-          for (ContextItem _iter52 : struct.contextItems)
+          for (ContextItem _iter56 : struct.contextItems)
           {
-            _iter52.write(oprot);
+            _iter56.write(oprot);
           }
         }
       }
       if (struct.isSetMinHitCount()) {
         oprot.writeI32(struct.minHitCount);
       }
+      if (struct.isSetExcludeVariantIds()) {
+        {
+          oprot.writeI32(struct.excludeVariantIds.size());
+          for (String _iter57 : struct.excludeVariantIds)
+          {
+            oprot.writeString(_iter57);
+          }
+        }
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, ChoiceInquiry struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(4);
+      BitSet incoming = iprot.readBitSet(5);
       if (incoming.get(0)) {
         struct.choiceId = iprot.readString();
         struct.setChoiceIdIsSet(true);
@@ -720,14 +859,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TList _list53 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.contextItems = new ArrayList<ContextItem>(_list53.size);
-          for (int _i54 = 0; _i54 < _list53.size; ++_i54)
+          org.apache.thrift.protocol.TList _list58 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.contextItems = new ArrayList<ContextItem>(_list58.size);
+          for (int _i59 = 0; _i59 < _list58.size; ++_i59)
           {
-            ContextItem _elem55; // required
-            _elem55 = new ContextItem();
-            _elem55.read(iprot);
-            struct.contextItems.add(_elem55);
+            ContextItem _elem60; // required
+            _elem60 = new ContextItem();
+            _elem60.read(iprot);
+            struct.contextItems.add(_elem60);
           }
         }
         struct.setContextItemsIsSet(true);
@@ -735,6 +874,19 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (incoming.get(3)) {
         struct.minHitCount = iprot.readI32();
         struct.setMinHitCountIsSet(true);
+      }
+      if (incoming.get(4)) {
+        {
+          org.apache.thrift.protocol.TSet _set61 = new org.apache.thrift.protocol.TSet(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.excludeVariantIds = new HashSet<String>(2*_set61.size);
+          for (int _i62 = 0; _i62 < _set61.size; ++_i62)
+          {
+            String _elem63; // required
+            _elem63 = iprot.readString();
+            struct.excludeVariantIds.add(_elem63);
+          }
+        }
+        struct.setExcludeVariantIdsIsSet(true);
       }
     }
   }

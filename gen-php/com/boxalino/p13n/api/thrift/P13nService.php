@@ -698,15 +698,15 @@ class P13nService_saveProfileProperties_args {
         case -1:
           if ($ftype == TType::LST) {
             $this->profilePropertyValues = array();
-            $_size130 = 0;
-            $_etype133 = 0;
-            $xfer += $input->readListBegin($_etype133, $_size130);
-            for ($_i134 = 0; $_i134 < $_size130; ++$_i134)
+            $_size138 = 0;
+            $_etype141 = 0;
+            $xfer += $input->readListBegin($_etype141, $_size138);
+            for ($_i142 = 0; $_i142 < $_size138; ++$_i142)
             {
-              $elem135 = null;
-              $elem135 = new \com\boxalino\p13n\api\thrift\ProfilePropertyValue();
-              $xfer += $elem135->read($input);
-              $this->profilePropertyValues []= $elem135;
+              $elem143 = null;
+              $elem143 = new \com\boxalino\p13n\api\thrift\ProfilePropertyValue();
+              $xfer += $elem143->read($input);
+              $this->profilePropertyValues []= $elem143;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -734,9 +734,9 @@ class P13nService_saveProfileProperties_args {
       {
         $output->writeListBegin(TType::STRUCT, count($this->profilePropertyValues));
         {
-          foreach ($this->profilePropertyValues as $iter136)
+          foreach ($this->profilePropertyValues as $iter144)
           {
-            $xfer += $iter136->write($output);
+            $xfer += $iter144->write($output);
           }
         }
         $output->writeListEnd();

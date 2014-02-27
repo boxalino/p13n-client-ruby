@@ -348,25 +348,25 @@ public class RequestContext implements org.apache.thrift.TBase<RequestContext, R
           case 1: // PARAMETERS
             if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
               {
-                org.apache.thrift.protocol.TMap _map56 = iprot.readMapBegin();
-                struct.parameters = new HashMap<String,List<String>>(2*_map56.size);
-                for (int _i57 = 0; _i57 < _map56.size; ++_i57)
+                org.apache.thrift.protocol.TMap _map64 = iprot.readMapBegin();
+                struct.parameters = new HashMap<String,List<String>>(2*_map64.size);
+                for (int _i65 = 0; _i65 < _map64.size; ++_i65)
                 {
-                  String _key58; // required
-                  List<String> _val59; // required
-                  _key58 = iprot.readString();
+                  String _key66; // required
+                  List<String> _val67; // required
+                  _key66 = iprot.readString();
                   {
-                    org.apache.thrift.protocol.TList _list60 = iprot.readListBegin();
-                    _val59 = new ArrayList<String>(_list60.size);
-                    for (int _i61 = 0; _i61 < _list60.size; ++_i61)
+                    org.apache.thrift.protocol.TList _list68 = iprot.readListBegin();
+                    _val67 = new ArrayList<String>(_list68.size);
+                    for (int _i69 = 0; _i69 < _list68.size; ++_i69)
                     {
-                      String _elem62; // required
-                      _elem62 = iprot.readString();
-                      _val59.add(_elem62);
+                      String _elem70; // required
+                      _elem70 = iprot.readString();
+                      _val67.add(_elem70);
                     }
                     iprot.readListEnd();
                   }
-                  struct.parameters.put(_key58, _val59);
+                  struct.parameters.put(_key66, _val67);
                 }
                 iprot.readMapEnd();
               }
@@ -394,14 +394,14 @@ public class RequestContext implements org.apache.thrift.TBase<RequestContext, R
         oprot.writeFieldBegin(PARAMETERS_FIELD_DESC);
         {
           oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, struct.parameters.size()));
-          for (Map.Entry<String, List<String>> _iter63 : struct.parameters.entrySet())
+          for (Map.Entry<String, List<String>> _iter71 : struct.parameters.entrySet())
           {
-            oprot.writeString(_iter63.getKey());
+            oprot.writeString(_iter71.getKey());
             {
-              oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, _iter63.getValue().size()));
-              for (String _iter64 : _iter63.getValue())
+              oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, _iter71.getValue().size()));
+              for (String _iter72 : _iter71.getValue())
               {
-                oprot.writeString(_iter64);
+                oprot.writeString(_iter72);
               }
               oprot.writeListEnd();
             }
@@ -435,14 +435,14 @@ public class RequestContext implements org.apache.thrift.TBase<RequestContext, R
       if (struct.isSetParameters()) {
         {
           oprot.writeI32(struct.parameters.size());
-          for (Map.Entry<String, List<String>> _iter65 : struct.parameters.entrySet())
+          for (Map.Entry<String, List<String>> _iter73 : struct.parameters.entrySet())
           {
-            oprot.writeString(_iter65.getKey());
+            oprot.writeString(_iter73.getKey());
             {
-              oprot.writeI32(_iter65.getValue().size());
-              for (String _iter66 : _iter65.getValue())
+              oprot.writeI32(_iter73.getValue().size());
+              for (String _iter74 : _iter73.getValue())
               {
-                oprot.writeString(_iter66);
+                oprot.writeString(_iter74);
               }
             }
           }
@@ -456,24 +456,24 @@ public class RequestContext implements org.apache.thrift.TBase<RequestContext, R
       BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TMap _map67 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
-          struct.parameters = new HashMap<String,List<String>>(2*_map67.size);
-          for (int _i68 = 0; _i68 < _map67.size; ++_i68)
+          org.apache.thrift.protocol.TMap _map75 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
+          struct.parameters = new HashMap<String,List<String>>(2*_map75.size);
+          for (int _i76 = 0; _i76 < _map75.size; ++_i76)
           {
-            String _key69; // required
-            List<String> _val70; // required
-            _key69 = iprot.readString();
+            String _key77; // required
+            List<String> _val78; // required
+            _key77 = iprot.readString();
             {
-              org.apache.thrift.protocol.TList _list71 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-              _val70 = new ArrayList<String>(_list71.size);
-              for (int _i72 = 0; _i72 < _list71.size; ++_i72)
+              org.apache.thrift.protocol.TList _list79 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+              _val78 = new ArrayList<String>(_list79.size);
+              for (int _i80 = 0; _i80 < _list79.size; ++_i80)
               {
-                String _elem73; // required
-                _elem73 = iprot.readString();
-                _val70.add(_elem73);
+                String _elem81; // required
+                _elem81 = iprot.readString();
+                _val78.add(_elem81);
               }
             }
-            struct.parameters.put(_key69, _val70);
+            struct.parameters.put(_key77, _val78);
           }
         }
         struct.setParametersIsSet(true);

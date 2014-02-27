@@ -424,14 +424,14 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
           case 2: // VALUES
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list82 = iprot.readListBegin();
-                struct.values = new ArrayList<FacetValue>(_list82.size);
-                for (int _i83 = 0; _i83 < _list82.size; ++_i83)
+                org.apache.thrift.protocol.TList _list90 = iprot.readListBegin();
+                struct.values = new ArrayList<FacetValue>(_list90.size);
+                for (int _i91 = 0; _i91 < _list90.size; ++_i91)
                 {
-                  FacetValue _elem84; // required
-                  _elem84 = new FacetValue();
-                  _elem84.read(iprot);
-                  struct.values.add(_elem84);
+                  FacetValue _elem92; // required
+                  _elem92 = new FacetValue();
+                  _elem92.read(iprot);
+                  struct.values.add(_elem92);
                 }
                 iprot.readListEnd();
               }
@@ -464,9 +464,9 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
         oprot.writeFieldBegin(VALUES_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.values.size()));
-          for (FacetValue _iter85 : struct.values)
+          for (FacetValue _iter93 : struct.values)
           {
-            _iter85.write(oprot);
+            _iter93.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -503,9 +503,9 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
       if (struct.isSetValues()) {
         {
           oprot.writeI32(struct.values.size());
-          for (FacetValue _iter86 : struct.values)
+          for (FacetValue _iter94 : struct.values)
           {
-            _iter86.write(oprot);
+            _iter94.write(oprot);
           }
         }
       }
@@ -521,14 +521,14 @@ public class FacetResponse implements org.apache.thrift.TBase<FacetResponse, Fac
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list87 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.values = new ArrayList<FacetValue>(_list87.size);
-          for (int _i88 = 0; _i88 < _list87.size; ++_i88)
+          org.apache.thrift.protocol.TList _list95 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.values = new ArrayList<FacetValue>(_list95.size);
+          for (int _i96 = 0; _i96 < _list95.size; ++_i96)
           {
-            FacetValue _elem89; // required
-            _elem89 = new FacetValue();
-            _elem89.read(iprot);
-            struct.values.add(_elem89);
+            FacetValue _elem97; // required
+            _elem97 = new FacetValue();
+            _elem97.read(iprot);
+            struct.values.add(_elem97);
           }
         }
         struct.setValuesIsSet(true);
