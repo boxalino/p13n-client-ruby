@@ -38,6 +38,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
   private static final org.apache.thrift.protocol.TField CONTEXT_ITEMS_FIELD_DESC = new org.apache.thrift.protocol.TField("contextItems", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField MIN_HIT_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("minHitCount", org.apache.thrift.protocol.TType.I32, (short)4);
   private static final org.apache.thrift.protocol.TField EXCLUDE_VARIANT_IDS_FIELD_DESC = new org.apache.thrift.protocol.TField("excludeVariantIds", org.apache.thrift.protocol.TType.SET, (short)5);
+  private static final org.apache.thrift.protocol.TField SCOPE_FIELD_DESC = new org.apache.thrift.protocol.TField("scope", org.apache.thrift.protocol.TType.STRING, (short)6);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -50,6 +51,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
   public List<ContextItem> contextItems; // required
   public int minHitCount; // required
   public Set<String> excludeVariantIds; // required
+  public String scope; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -57,7 +59,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     SIMPLE_SEARCH_QUERY((short)2, "simpleSearchQuery"),
     CONTEXT_ITEMS((short)3, "contextItems"),
     MIN_HIT_COUNT((short)4, "minHitCount"),
-    EXCLUDE_VARIANT_IDS((short)5, "excludeVariantIds");
+    EXCLUDE_VARIANT_IDS((short)5, "excludeVariantIds"),
+    SCOPE((short)6, "scope");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -82,6 +85,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
           return MIN_HIT_COUNT;
         case 5: // EXCLUDE_VARIANT_IDS
           return EXCLUDE_VARIANT_IDS;
+        case 6: // SCOPE
+          return SCOPE;
         default:
           return null;
       }
@@ -139,6 +144,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     tmpMap.put(_Fields.EXCLUDE_VARIANT_IDS, new org.apache.thrift.meta_data.FieldMetaData("excludeVariantIds", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.SetMetaData(org.apache.thrift.protocol.TType.SET, 
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+    tmpMap.put(_Fields.SCOPE, new org.apache.thrift.meta_data.FieldMetaData("scope", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ChoiceInquiry.class, metaDataMap);
   }
@@ -151,7 +158,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     SimpleSearchQuery simpleSearchQuery,
     List<ContextItem> contextItems,
     int minHitCount,
-    Set<String> excludeVariantIds)
+    Set<String> excludeVariantIds,
+    String scope)
   {
     this();
     this.choiceId = choiceId;
@@ -160,6 +168,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     this.minHitCount = minHitCount;
     setMinHitCountIsSet(true);
     this.excludeVariantIds = excludeVariantIds;
+    this.scope = scope;
   }
 
   /**
@@ -188,6 +197,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       }
       this.excludeVariantIds = __this__excludeVariantIds;
     }
+    if (other.isSetScope()) {
+      this.scope = other.scope;
+    }
   }
 
   public ChoiceInquiry deepCopy() {
@@ -202,6 +214,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     setMinHitCountIsSet(false);
     this.minHitCount = 0;
     this.excludeVariantIds = null;
+    this.scope = null;
   }
 
   public String getChoiceId() {
@@ -353,6 +366,30 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     }
   }
 
+  public String getScope() {
+    return this.scope;
+  }
+
+  public ChoiceInquiry setScope(String scope) {
+    this.scope = scope;
+    return this;
+  }
+
+  public void unsetScope() {
+    this.scope = null;
+  }
+
+  /** Returns true if field scope is set (has been assigned a value) and false otherwise */
+  public boolean isSetScope() {
+    return this.scope != null;
+  }
+
+  public void setScopeIsSet(boolean value) {
+    if (!value) {
+      this.scope = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case CHOICE_ID:
@@ -395,6 +432,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       }
       break;
 
+    case SCOPE:
+      if (value == null) {
+        unsetScope();
+      } else {
+        setScope((String)value);
+      }
+      break;
+
     }
   }
 
@@ -414,6 +459,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
 
     case EXCLUDE_VARIANT_IDS:
       return getExcludeVariantIds();
+
+    case SCOPE:
+      return getScope();
 
     }
     throw new IllegalStateException();
@@ -436,6 +484,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       return isSetMinHitCount();
     case EXCLUDE_VARIANT_IDS:
       return isSetExcludeVariantIds();
+    case SCOPE:
+      return isSetScope();
     }
     throw new IllegalStateException();
   }
@@ -495,6 +545,15 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (!(this_present_excludeVariantIds && that_present_excludeVariantIds))
         return false;
       if (!this.excludeVariantIds.equals(that.excludeVariantIds))
+        return false;
+    }
+
+    boolean this_present_scope = true && this.isSetScope();
+    boolean that_present_scope = true && that.isSetScope();
+    if (this_present_scope || that_present_scope) {
+      if (!(this_present_scope && that_present_scope))
+        return false;
+      if (!this.scope.equals(that.scope))
         return false;
     }
 
@@ -564,6 +623,16 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetScope()).compareTo(typedOther.isSetScope());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetScope()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.scope, typedOther.scope);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -617,6 +686,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       sb.append("null");
     } else {
       sb.append(this.excludeVariantIds);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("scope:");
+    if (this.scope == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.scope);
     }
     first = false;
     sb.append(")");
@@ -729,6 +806,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 6: // SCOPE
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.scope = iprot.readString();
+              struct.setScopeIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -781,6 +866,11 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         }
         oprot.writeFieldEnd();
       }
+      if (struct.scope != null) {
+        oprot.writeFieldBegin(SCOPE_FIELD_DESC);
+        oprot.writeString(struct.scope);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -814,7 +904,10 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (struct.isSetExcludeVariantIds()) {
         optionals.set(4);
       }
-      oprot.writeBitSet(optionals, 5);
+      if (struct.isSetScope()) {
+        optionals.set(5);
+      }
+      oprot.writeBitSet(optionals, 6);
       if (struct.isSetChoiceId()) {
         oprot.writeString(struct.choiceId);
       }
@@ -842,12 +935,15 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
           }
         }
       }
+      if (struct.isSetScope()) {
+        oprot.writeString(struct.scope);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, ChoiceInquiry struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(5);
+      BitSet incoming = iprot.readBitSet(6);
       if (incoming.get(0)) {
         struct.choiceId = iprot.readString();
         struct.setChoiceIdIsSet(true);
@@ -887,6 +983,10 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
           }
         }
         struct.setExcludeVariantIdsIsSet(true);
+      }
+      if (incoming.get(5)) {
+        struct.scope = iprot.readString();
+        struct.setScopeIsSet(true);
       }
     }
   }

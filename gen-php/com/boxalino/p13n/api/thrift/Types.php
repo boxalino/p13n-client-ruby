@@ -1138,6 +1138,7 @@ class ChoiceInquiry {
   public $contextItems = null;
   public $minHitCount = null;
   public $excludeVariantIds = null;
+  public $scope = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -1172,6 +1173,10 @@ class ChoiceInquiry {
             'type' => TType::STRING,
             ),
           ),
+        6 => array(
+          'var' => 'scope',
+          'type' => TType::STRING,
+          ),
         );
     }
     if (is_array($vals)) {
@@ -1189,6 +1194,9 @@ class ChoiceInquiry {
       }
       if (isset($vals['excludeVariantIds'])) {
         $this->excludeVariantIds = $vals['excludeVariantIds'];
+      }
+      if (isset($vals['scope'])) {
+        $this->scope = $vals['scope'];
       }
     }
   }
@@ -1273,6 +1281,13 @@ class ChoiceInquiry {
             $xfer += $input->skip($ftype);
           }
           break;
+        case 6:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->scope);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
         default:
           $xfer += $input->skip($ftype);
           break;
@@ -1340,6 +1355,11 @@ class ChoiceInquiry {
         }
         $output->writeSetEnd();
       }
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->scope !== null) {
+      $xfer += $output->writeFieldBegin('scope', TType::STRING, 6);
+      $xfer += $output->writeString($this->scope);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
@@ -1478,10 +1498,82 @@ class RequestContext {
 
 }
 
+class UserRecord {
+  static $_TSPEC;
+
+  public $username = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'username',
+          'type' => TType::STRING,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['username'])) {
+        $this->username = $vals['username'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'UserRecord';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->username);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('UserRecord');
+    if ($this->username !== null) {
+      $xfer += $output->writeFieldBegin('username', TType::STRING, 1);
+      $xfer += $output->writeString($this->username);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
 class ChoiceRequest {
   static $_TSPEC;
 
-  public $authenticationToken = null;
+  public $userRecord = null;
   public $profileId = null;
   public $inquiries = null;
   public $requestContext = null;
@@ -1490,8 +1582,9 @@ class ChoiceRequest {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'authenticationToken',
-          'type' => TType::STRING,
+          'var' => 'userRecord',
+          'type' => TType::STRUCT,
+          'class' => '\com\boxalino\p13n\api\thrift\UserRecord',
           ),
         2 => array(
           'var' => 'profileId',
@@ -1514,8 +1607,8 @@ class ChoiceRequest {
         );
     }
     if (is_array($vals)) {
-      if (isset($vals['authenticationToken'])) {
-        $this->authenticationToken = $vals['authenticationToken'];
+      if (isset($vals['userRecord'])) {
+        $this->userRecord = $vals['userRecord'];
       }
       if (isset($vals['profileId'])) {
         $this->profileId = $vals['profileId'];
@@ -1549,8 +1642,9 @@ class ChoiceRequest {
       switch ($fid)
       {
         case 1:
-          if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->authenticationToken);
+          if ($ftype == TType::STRUCT) {
+            $this->userRecord = new \com\boxalino\p13n\api\thrift\UserRecord();
+            $xfer += $this->userRecord->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -1601,9 +1695,12 @@ class ChoiceRequest {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('ChoiceRequest');
-    if ($this->authenticationToken !== null) {
-      $xfer += $output->writeFieldBegin('authenticationToken', TType::STRING, 1);
-      $xfer += $output->writeString($this->authenticationToken);
+    if ($this->userRecord !== null) {
+      if (!is_object($this->userRecord)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('userRecord', TType::STRUCT, 1);
+      $xfer += $this->userRecord->write($output);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->profileId !== null) {
@@ -2584,7 +2681,7 @@ class ProfilePropertyValue {
 class BatchChoiceRequest {
   static $_TSPEC;
 
-  public $authenticationToken = null;
+  public $userRecord = null;
   public $choiceInquiry = null;
   public $requestContext = null;
   public $profileIds = null;
@@ -2593,8 +2690,9 @@ class BatchChoiceRequest {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => 'authenticationToken',
-          'type' => TType::STRING,
+          'var' => 'userRecord',
+          'type' => TType::STRUCT,
+          'class' => '\com\boxalino\p13n\api\thrift\UserRecord',
           ),
         2 => array(
           'var' => 'choiceInquiry',
@@ -2617,8 +2715,8 @@ class BatchChoiceRequest {
         );
     }
     if (is_array($vals)) {
-      if (isset($vals['authenticationToken'])) {
-        $this->authenticationToken = $vals['authenticationToken'];
+      if (isset($vals['userRecord'])) {
+        $this->userRecord = $vals['userRecord'];
       }
       if (isset($vals['choiceInquiry'])) {
         $this->choiceInquiry = $vals['choiceInquiry'];
@@ -2652,8 +2750,9 @@ class BatchChoiceRequest {
       switch ($fid)
       {
         case 1:
-          if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->authenticationToken);
+          if ($ftype == TType::STRUCT) {
+            $this->userRecord = new \com\boxalino\p13n\api\thrift\UserRecord();
+            $xfer += $this->userRecord->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -2704,9 +2803,12 @@ class BatchChoiceRequest {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('BatchChoiceRequest');
-    if ($this->authenticationToken !== null) {
-      $xfer += $output->writeFieldBegin('authenticationToken', TType::STRING, 1);
-      $xfer += $output->writeString($this->authenticationToken);
+    if ($this->userRecord !== null) {
+      if (!is_object($this->userRecord)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('userRecord', TType::STRUCT, 1);
+      $xfer += $this->userRecord->write($output);
       $xfer += $output->writeFieldEnd();
     }
     if ($this->choiceInquiry !== null) {

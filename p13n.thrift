@@ -118,7 +118,9 @@ struct ChoiceInquiry {
 # if higher priority recommendation strategy yields less results, next strategy is tried  
   4: i32 minHitCount,
 # set of variantIds to be excluded from result
-  5: set<string> excludeVariantIds
+  5: set<string> excludeVariantIds,
+# 
+  6: string scope
 }
 
 struct RequestContext {
@@ -126,16 +128,21 @@ struct RequestContext {
   1: map<string,list<string>> parameters
 }
 
+struct UserRecord {
+# unique identifier of the customer
+  1: string username
+}
+
 struct ChoiceRequest {
-#
-  1: string authenticationToken,
+# 
+  1: UserRecord userRecord,
 # profile (visitor) identificator 
   2: string profileId,
 # list of inquiries to be executed sequentially
 # Inquiries with higher index may depend from those with lower index.
   3: list<ChoiceInquiry> inquiries,
 # context of the request
-  4: RequestContext requestContext
+  4: RequestContext requestContext,
 }
 
 struct FacetValue {
@@ -198,10 +205,10 @@ struct ProfilePropertyValue {
 }
 
 struct BatchChoiceRequest {
-  1: string authenticationToken,
+  1: UserRecord userRecord,
   2: ChoiceInquiry choiceInquiry,
-  3: RequestContext requestContext
-  4: list<string> profileIds
+  3: RequestContext requestContext,
+  4: list<string> profileIds,
 }
 
 struct BatchChoiceResponse {

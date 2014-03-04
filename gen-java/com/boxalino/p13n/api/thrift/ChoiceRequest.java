@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, ChoiceRequest._Fields>, java.io.Serializable, Cloneable {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ChoiceRequest");
 
-  private static final org.apache.thrift.protocol.TField AUTHENTICATION_TOKEN_FIELD_DESC = new org.apache.thrift.protocol.TField("authenticationToken", org.apache.thrift.protocol.TType.STRING, (short)1);
+  private static final org.apache.thrift.protocol.TField USER_RECORD_FIELD_DESC = new org.apache.thrift.protocol.TField("userRecord", org.apache.thrift.protocol.TType.STRUCT, (short)1);
   private static final org.apache.thrift.protocol.TField PROFILE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("profileId", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField INQUIRIES_FIELD_DESC = new org.apache.thrift.protocol.TField("inquiries", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField REQUEST_CONTEXT_FIELD_DESC = new org.apache.thrift.protocol.TField("requestContext", org.apache.thrift.protocol.TType.STRUCT, (short)4);
@@ -44,14 +44,14 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
     schemes.put(TupleScheme.class, new ChoiceRequestTupleSchemeFactory());
   }
 
-  public String authenticationToken; // required
+  public UserRecord userRecord; // required
   public String profileId; // required
   public List<ChoiceInquiry> inquiries; // required
   public RequestContext requestContext; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    AUTHENTICATION_TOKEN((short)1, "authenticationToken"),
+    USER_RECORD((short)1, "userRecord"),
     PROFILE_ID((short)2, "profileId"),
     INQUIRIES((short)3, "inquiries"),
     REQUEST_CONTEXT((short)4, "requestContext");
@@ -69,8 +69,8 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // AUTHENTICATION_TOKEN
-          return AUTHENTICATION_TOKEN;
+        case 1: // USER_RECORD
+          return USER_RECORD;
         case 2: // PROFILE_ID
           return PROFILE_ID;
         case 3: // INQUIRIES
@@ -120,8 +120,8 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.AUTHENTICATION_TOKEN, new org.apache.thrift.meta_data.FieldMetaData("authenticationToken", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.USER_RECORD, new org.apache.thrift.meta_data.FieldMetaData("userRecord", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, UserRecord.class)));
     tmpMap.put(_Fields.PROFILE_ID, new org.apache.thrift.meta_data.FieldMetaData("profileId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.INQUIRIES, new org.apache.thrift.meta_data.FieldMetaData("inquiries", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -137,13 +137,13 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
   }
 
   public ChoiceRequest(
-    String authenticationToken,
+    UserRecord userRecord,
     String profileId,
     List<ChoiceInquiry> inquiries,
     RequestContext requestContext)
   {
     this();
-    this.authenticationToken = authenticationToken;
+    this.userRecord = userRecord;
     this.profileId = profileId;
     this.inquiries = inquiries;
     this.requestContext = requestContext;
@@ -153,8 +153,8 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
    * Performs a deep copy on <i>other</i>.
    */
   public ChoiceRequest(ChoiceRequest other) {
-    if (other.isSetAuthenticationToken()) {
-      this.authenticationToken = other.authenticationToken;
+    if (other.isSetUserRecord()) {
+      this.userRecord = new UserRecord(other.userRecord);
     }
     if (other.isSetProfileId()) {
       this.profileId = other.profileId;
@@ -177,33 +177,33 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
 
   @Override
   public void clear() {
-    this.authenticationToken = null;
+    this.userRecord = null;
     this.profileId = null;
     this.inquiries = null;
     this.requestContext = null;
   }
 
-  public String getAuthenticationToken() {
-    return this.authenticationToken;
+  public UserRecord getUserRecord() {
+    return this.userRecord;
   }
 
-  public ChoiceRequest setAuthenticationToken(String authenticationToken) {
-    this.authenticationToken = authenticationToken;
+  public ChoiceRequest setUserRecord(UserRecord userRecord) {
+    this.userRecord = userRecord;
     return this;
   }
 
-  public void unsetAuthenticationToken() {
-    this.authenticationToken = null;
+  public void unsetUserRecord() {
+    this.userRecord = null;
   }
 
-  /** Returns true if field authenticationToken is set (has been assigned a value) and false otherwise */
-  public boolean isSetAuthenticationToken() {
-    return this.authenticationToken != null;
+  /** Returns true if field userRecord is set (has been assigned a value) and false otherwise */
+  public boolean isSetUserRecord() {
+    return this.userRecord != null;
   }
 
-  public void setAuthenticationTokenIsSet(boolean value) {
+  public void setUserRecordIsSet(boolean value) {
     if (!value) {
-      this.authenticationToken = null;
+      this.userRecord = null;
     }
   }
 
@@ -296,11 +296,11 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
 
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
-    case AUTHENTICATION_TOKEN:
+    case USER_RECORD:
       if (value == null) {
-        unsetAuthenticationToken();
+        unsetUserRecord();
       } else {
-        setAuthenticationToken((String)value);
+        setUserRecord((UserRecord)value);
       }
       break;
 
@@ -333,8 +333,8 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
 
   public Object getFieldValue(_Fields field) {
     switch (field) {
-    case AUTHENTICATION_TOKEN:
-      return getAuthenticationToken();
+    case USER_RECORD:
+      return getUserRecord();
 
     case PROFILE_ID:
       return getProfileId();
@@ -356,8 +356,8 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
     }
 
     switch (field) {
-    case AUTHENTICATION_TOKEN:
-      return isSetAuthenticationToken();
+    case USER_RECORD:
+      return isSetUserRecord();
     case PROFILE_ID:
       return isSetProfileId();
     case INQUIRIES:
@@ -381,12 +381,12 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
     if (that == null)
       return false;
 
-    boolean this_present_authenticationToken = true && this.isSetAuthenticationToken();
-    boolean that_present_authenticationToken = true && that.isSetAuthenticationToken();
-    if (this_present_authenticationToken || that_present_authenticationToken) {
-      if (!(this_present_authenticationToken && that_present_authenticationToken))
+    boolean this_present_userRecord = true && this.isSetUserRecord();
+    boolean that_present_userRecord = true && that.isSetUserRecord();
+    if (this_present_userRecord || that_present_userRecord) {
+      if (!(this_present_userRecord && that_present_userRecord))
         return false;
-      if (!this.authenticationToken.equals(that.authenticationToken))
+      if (!this.userRecord.equals(that.userRecord))
         return false;
     }
 
@@ -433,12 +433,12 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
     int lastComparison = 0;
     ChoiceRequest typedOther = (ChoiceRequest)other;
 
-    lastComparison = Boolean.valueOf(isSetAuthenticationToken()).compareTo(typedOther.isSetAuthenticationToken());
+    lastComparison = Boolean.valueOf(isSetUserRecord()).compareTo(typedOther.isSetUserRecord());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetAuthenticationToken()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.authenticationToken, typedOther.authenticationToken);
+    if (isSetUserRecord()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.userRecord, typedOther.userRecord);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -493,11 +493,11 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
     StringBuilder sb = new StringBuilder("ChoiceRequest(");
     boolean first = true;
 
-    sb.append("authenticationToken:");
-    if (this.authenticationToken == null) {
+    sb.append("userRecord:");
+    if (this.userRecord == null) {
       sb.append("null");
     } else {
-      sb.append(this.authenticationToken);
+      sb.append(this.userRecord);
     }
     first = false;
     if (!first) sb.append(", ");
@@ -531,6 +531,9 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
+    if (userRecord != null) {
+      userRecord.validate();
+    }
     if (requestContext != null) {
       requestContext.validate();
     }
@@ -570,10 +573,11 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
           break;
         }
         switch (schemeField.id) {
-          case 1: // AUTHENTICATION_TOKEN
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.authenticationToken = iprot.readString();
-              struct.setAuthenticationTokenIsSet(true);
+          case 1: // USER_RECORD
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.userRecord = new UserRecord();
+              struct.userRecord.read(iprot);
+              struct.setUserRecordIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -629,9 +633,9 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.authenticationToken != null) {
-        oprot.writeFieldBegin(AUTHENTICATION_TOKEN_FIELD_DESC);
-        oprot.writeString(struct.authenticationToken);
+      if (struct.userRecord != null) {
+        oprot.writeFieldBegin(USER_RECORD_FIELD_DESC);
+        struct.userRecord.write(oprot);
         oprot.writeFieldEnd();
       }
       if (struct.profileId != null) {
@@ -674,7 +678,7 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
     public void write(org.apache.thrift.protocol.TProtocol prot, ChoiceRequest struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
-      if (struct.isSetAuthenticationToken()) {
+      if (struct.isSetUserRecord()) {
         optionals.set(0);
       }
       if (struct.isSetProfileId()) {
@@ -687,8 +691,8 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
         optionals.set(3);
       }
       oprot.writeBitSet(optionals, 4);
-      if (struct.isSetAuthenticationToken()) {
-        oprot.writeString(struct.authenticationToken);
+      if (struct.isSetUserRecord()) {
+        struct.userRecord.write(oprot);
       }
       if (struct.isSetProfileId()) {
         oprot.writeString(struct.profileId);
@@ -712,8 +716,9 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
-        struct.authenticationToken = iprot.readString();
-        struct.setAuthenticationTokenIsSet(true);
+        struct.userRecord = new UserRecord();
+        struct.userRecord.read(iprot);
+        struct.setUserRecordIsSet(true);
       }
       if (incoming.get(1)) {
         struct.profileId = iprot.readString();
