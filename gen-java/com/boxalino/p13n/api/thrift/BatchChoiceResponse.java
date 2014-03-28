@@ -34,6 +34,7 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("BatchChoiceResponse");
 
   private static final org.apache.thrift.protocol.TField VARIANTS_FIELD_DESC = new org.apache.thrift.protocol.TField("variants", org.apache.thrift.protocol.TType.LIST, (short)1);
+  private static final org.apache.thrift.protocol.TField SELECTED_VARIANTS_FIELD_DESC = new org.apache.thrift.protocol.TField("selectedVariants", org.apache.thrift.protocol.TType.LIST, (short)2);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -42,10 +43,12 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
   }
 
   public List<Variant> variants; // required
+  public List<List<Variant>> selectedVariants; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    VARIANTS((short)1, "variants");
+    VARIANTS((short)1, "variants"),
+    SELECTED_VARIANTS((short)2, "selectedVariants");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -62,6 +65,8 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
       switch(fieldId) {
         case 1: // VARIANTS
           return VARIANTS;
+        case 2: // SELECTED_VARIANTS
+          return SELECTED_VARIANTS;
         default:
           return null;
       }
@@ -108,6 +113,10 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
     tmpMap.put(_Fields.VARIANTS, new org.apache.thrift.meta_data.FieldMetaData("variants", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Variant.class))));
+    tmpMap.put(_Fields.SELECTED_VARIANTS, new org.apache.thrift.meta_data.FieldMetaData("selectedVariants", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+                new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Variant.class)))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(BatchChoiceResponse.class, metaDataMap);
   }
@@ -116,10 +125,12 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
   }
 
   public BatchChoiceResponse(
-    List<Variant> variants)
+    List<Variant> variants,
+    List<List<Variant>> selectedVariants)
   {
     this();
     this.variants = variants;
+    this.selectedVariants = selectedVariants;
   }
 
   /**
@@ -133,6 +144,17 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
       }
       this.variants = __this__variants;
     }
+    if (other.isSetSelectedVariants()) {
+      List<List<Variant>> __this__selectedVariants = new ArrayList<List<Variant>>();
+      for (List<Variant> other_element : other.selectedVariants) {
+        List<Variant> __this__selectedVariants_copy = new ArrayList<Variant>();
+        for (Variant other_element_element : other_element) {
+          __this__selectedVariants_copy.add(new Variant(other_element_element));
+        }
+        __this__selectedVariants.add(__this__selectedVariants_copy);
+      }
+      this.selectedVariants = __this__selectedVariants;
+    }
   }
 
   public BatchChoiceResponse deepCopy() {
@@ -142,6 +164,7 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
   @Override
   public void clear() {
     this.variants = null;
+    this.selectedVariants = null;
   }
 
   public int getVariantsSize() {
@@ -183,6 +206,45 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
     }
   }
 
+  public int getSelectedVariantsSize() {
+    return (this.selectedVariants == null) ? 0 : this.selectedVariants.size();
+  }
+
+  public java.util.Iterator<List<Variant>> getSelectedVariantsIterator() {
+    return (this.selectedVariants == null) ? null : this.selectedVariants.iterator();
+  }
+
+  public void addToSelectedVariants(List<Variant> elem) {
+    if (this.selectedVariants == null) {
+      this.selectedVariants = new ArrayList<List<Variant>>();
+    }
+    this.selectedVariants.add(elem);
+  }
+
+  public List<List<Variant>> getSelectedVariants() {
+    return this.selectedVariants;
+  }
+
+  public BatchChoiceResponse setSelectedVariants(List<List<Variant>> selectedVariants) {
+    this.selectedVariants = selectedVariants;
+    return this;
+  }
+
+  public void unsetSelectedVariants() {
+    this.selectedVariants = null;
+  }
+
+  /** Returns true if field selectedVariants is set (has been assigned a value) and false otherwise */
+  public boolean isSetSelectedVariants() {
+    return this.selectedVariants != null;
+  }
+
+  public void setSelectedVariantsIsSet(boolean value) {
+    if (!value) {
+      this.selectedVariants = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case VARIANTS:
@@ -193,6 +255,14 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
       }
       break;
 
+    case SELECTED_VARIANTS:
+      if (value == null) {
+        unsetSelectedVariants();
+      } else {
+        setSelectedVariants((List<List<Variant>>)value);
+      }
+      break;
+
     }
   }
 
@@ -200,6 +270,9 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
     switch (field) {
     case VARIANTS:
       return getVariants();
+
+    case SELECTED_VARIANTS:
+      return getSelectedVariants();
 
     }
     throw new IllegalStateException();
@@ -214,6 +287,8 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
     switch (field) {
     case VARIANTS:
       return isSetVariants();
+    case SELECTED_VARIANTS:
+      return isSetSelectedVariants();
     }
     throw new IllegalStateException();
   }
@@ -237,6 +312,15 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
       if (!(this_present_variants && that_present_variants))
         return false;
       if (!this.variants.equals(that.variants))
+        return false;
+    }
+
+    boolean this_present_selectedVariants = true && this.isSetSelectedVariants();
+    boolean that_present_selectedVariants = true && that.isSetSelectedVariants();
+    if (this_present_selectedVariants || that_present_selectedVariants) {
+      if (!(this_present_selectedVariants && that_present_selectedVariants))
+        return false;
+      if (!this.selectedVariants.equals(that.selectedVariants))
         return false;
     }
 
@@ -266,6 +350,16 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetSelectedVariants()).compareTo(typedOther.isSetSelectedVariants());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetSelectedVariants()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.selectedVariants, typedOther.selectedVariants);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -291,6 +385,14 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
       sb.append("null");
     } else {
       sb.append(this.variants);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("selectedVariants:");
+    if (this.selectedVariants == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.selectedVariants);
     }
     first = false;
     sb.append(")");
@@ -339,18 +441,47 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
           case 1: // VARIANTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list148 = iprot.readListBegin();
-                struct.variants = new ArrayList<Variant>(_list148.size);
-                for (int _i149 = 0; _i149 < _list148.size; ++_i149)
+                org.apache.thrift.protocol.TList _list156 = iprot.readListBegin();
+                struct.variants = new ArrayList<Variant>(_list156.size);
+                for (int _i157 = 0; _i157 < _list156.size; ++_i157)
                 {
-                  Variant _elem150; // required
-                  _elem150 = new Variant();
-                  _elem150.read(iprot);
-                  struct.variants.add(_elem150);
+                  Variant _elem158; // required
+                  _elem158 = new Variant();
+                  _elem158.read(iprot);
+                  struct.variants.add(_elem158);
                 }
                 iprot.readListEnd();
               }
               struct.setVariantsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 2: // SELECTED_VARIANTS
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list159 = iprot.readListBegin();
+                struct.selectedVariants = new ArrayList<List<Variant>>(_list159.size);
+                for (int _i160 = 0; _i160 < _list159.size; ++_i160)
+                {
+                  List<Variant> _elem161; // required
+                  {
+                    org.apache.thrift.protocol.TList _list162 = iprot.readListBegin();
+                    _elem161 = new ArrayList<Variant>(_list162.size);
+                    for (int _i163 = 0; _i163 < _list162.size; ++_i163)
+                    {
+                      Variant _elem164; // required
+                      _elem164 = new Variant();
+                      _elem164.read(iprot);
+                      _elem161.add(_elem164);
+                    }
+                    iprot.readListEnd();
+                  }
+                  struct.selectedVariants.add(_elem161);
+                }
+                iprot.readListEnd();
+              }
+              struct.setSelectedVariantsIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -374,9 +505,28 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
         oprot.writeFieldBegin(VARIANTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.variants.size()));
-          for (Variant _iter151 : struct.variants)
+          for (Variant _iter165 : struct.variants)
           {
-            _iter151.write(oprot);
+            _iter165.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      if (struct.selectedVariants != null) {
+        oprot.writeFieldBegin(SELECTED_VARIANTS_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.LIST, struct.selectedVariants.size()));
+          for (List<Variant> _iter166 : struct.selectedVariants)
+          {
+            {
+              oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, _iter166.size()));
+              for (Variant _iter167 : _iter166)
+              {
+                _iter167.write(oprot);
+              }
+              oprot.writeListEnd();
+            }
           }
           oprot.writeListEnd();
         }
@@ -403,13 +553,31 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
       if (struct.isSetVariants()) {
         optionals.set(0);
       }
-      oprot.writeBitSet(optionals, 1);
+      if (struct.isSetSelectedVariants()) {
+        optionals.set(1);
+      }
+      oprot.writeBitSet(optionals, 2);
       if (struct.isSetVariants()) {
         {
           oprot.writeI32(struct.variants.size());
-          for (Variant _iter152 : struct.variants)
+          for (Variant _iter168 : struct.variants)
           {
-            _iter152.write(oprot);
+            _iter168.write(oprot);
+          }
+        }
+      }
+      if (struct.isSetSelectedVariants()) {
+        {
+          oprot.writeI32(struct.selectedVariants.size());
+          for (List<Variant> _iter169 : struct.selectedVariants)
+          {
+            {
+              oprot.writeI32(_iter169.size());
+              for (Variant _iter170 : _iter169)
+              {
+                _iter170.write(oprot);
+              }
+            }
           }
         }
       }
@@ -418,20 +586,43 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, BatchChoiceResponse struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(1);
+      BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TList _list153 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.variants = new ArrayList<Variant>(_list153.size);
-          for (int _i154 = 0; _i154 < _list153.size; ++_i154)
+          org.apache.thrift.protocol.TList _list171 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.variants = new ArrayList<Variant>(_list171.size);
+          for (int _i172 = 0; _i172 < _list171.size; ++_i172)
           {
-            Variant _elem155; // required
-            _elem155 = new Variant();
-            _elem155.read(iprot);
-            struct.variants.add(_elem155);
+            Variant _elem173; // required
+            _elem173 = new Variant();
+            _elem173.read(iprot);
+            struct.variants.add(_elem173);
           }
         }
         struct.setVariantsIsSet(true);
+      }
+      if (incoming.get(1)) {
+        {
+          org.apache.thrift.protocol.TList _list174 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.LIST, iprot.readI32());
+          struct.selectedVariants = new ArrayList<List<Variant>>(_list174.size);
+          for (int _i175 = 0; _i175 < _list174.size; ++_i175)
+          {
+            List<Variant> _elem176; // required
+            {
+              org.apache.thrift.protocol.TList _list177 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+              _elem176 = new ArrayList<Variant>(_list177.size);
+              for (int _i178 = 0; _i178 < _list177.size; ++_i178)
+              {
+                Variant _elem179; // required
+                _elem179 = new Variant();
+                _elem179.read(iprot);
+                _elem176.add(_elem179);
+              }
+            }
+            struct.selectedVariants.add(_elem176);
+          }
+        }
+        struct.setSelectedVariantsIsSet(true);
       }
     }
   }

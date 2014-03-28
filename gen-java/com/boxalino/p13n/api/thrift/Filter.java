@@ -37,6 +37,7 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
   private static final org.apache.thrift.protocol.TField FIELD_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("fieldName", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField STRING_VALUES_FIELD_DESC = new org.apache.thrift.protocol.TField("stringValues", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField PREFIX_FIELD_DESC = new org.apache.thrift.protocol.TField("prefix", org.apache.thrift.protocol.TType.STRING, (short)4);
+  private static final org.apache.thrift.protocol.TField HIERARCHY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("hierarchyId", org.apache.thrift.protocol.TType.STRING, (short)41);
   private static final org.apache.thrift.protocol.TField HIERARCHY_FIELD_DESC = new org.apache.thrift.protocol.TField("hierarchy", org.apache.thrift.protocol.TType.LIST, (short)5);
   private static final org.apache.thrift.protocol.TField RANGE_FROM_FIELD_DESC = new org.apache.thrift.protocol.TField("rangeFrom", org.apache.thrift.protocol.TType.STRING, (short)6);
   private static final org.apache.thrift.protocol.TField RANGE_FROM_INCLUSIVE_FIELD_DESC = new org.apache.thrift.protocol.TField("rangeFromInclusive", org.apache.thrift.protocol.TType.BOOL, (short)7);
@@ -53,6 +54,7 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
   public String fieldName; // required
   public List<String> stringValues; // required
   public String prefix; // required
+  public String hierarchyId; // required
   public List<String> hierarchy; // required
   public String rangeFrom; // required
   public boolean rangeFromInclusive; // required
@@ -65,6 +67,7 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
     FIELD_NAME((short)2, "fieldName"),
     STRING_VALUES((short)3, "stringValues"),
     PREFIX((short)4, "prefix"),
+    HIERARCHY_ID((short)41, "hierarchyId"),
     HIERARCHY((short)5, "hierarchy"),
     RANGE_FROM((short)6, "rangeFrom"),
     RANGE_FROM_INCLUSIVE((short)7, "rangeFromInclusive"),
@@ -92,6 +95,8 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
           return STRING_VALUES;
         case 4: // PREFIX
           return PREFIX;
+        case 41: // HIERARCHY_ID
+          return HIERARCHY_ID;
         case 5: // HIERARCHY
           return HIERARCHY;
         case 6: // RANGE_FROM
@@ -158,6 +163,8 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
     tmpMap.put(_Fields.PREFIX, new org.apache.thrift.meta_data.FieldMetaData("prefix", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.HIERARCHY_ID, new org.apache.thrift.meta_data.FieldMetaData("hierarchyId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.HIERARCHY, new org.apache.thrift.meta_data.FieldMetaData("hierarchy", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
@@ -181,6 +188,7 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
     String fieldName,
     List<String> stringValues,
     String prefix,
+    String hierarchyId,
     List<String> hierarchy,
     String rangeFrom,
     boolean rangeFromInclusive,
@@ -193,6 +201,7 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
     this.fieldName = fieldName;
     this.stringValues = stringValues;
     this.prefix = prefix;
+    this.hierarchyId = hierarchyId;
     this.hierarchy = hierarchy;
     this.rangeFrom = rangeFrom;
     this.rangeFromInclusive = rangeFromInclusive;
@@ -220,6 +229,9 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
     }
     if (other.isSetPrefix()) {
       this.prefix = other.prefix;
+    }
+    if (other.isSetHierarchyId()) {
+      this.hierarchyId = other.hierarchyId;
     }
     if (other.isSetHierarchy()) {
       List<String> __this__hierarchy = new ArrayList<String>();
@@ -249,6 +261,7 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
     this.fieldName = null;
     this.stringValues = null;
     this.prefix = null;
+    this.hierarchyId = null;
     this.hierarchy = null;
     this.rangeFrom = null;
     setRangeFromInclusiveIsSet(false);
@@ -365,6 +378,30 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
   public void setPrefixIsSet(boolean value) {
     if (!value) {
       this.prefix = null;
+    }
+  }
+
+  public String getHierarchyId() {
+    return this.hierarchyId;
+  }
+
+  public Filter setHierarchyId(String hierarchyId) {
+    this.hierarchyId = hierarchyId;
+    return this;
+  }
+
+  public void unsetHierarchyId() {
+    this.hierarchyId = null;
+  }
+
+  /** Returns true if field hierarchyId is set (has been assigned a value) and false otherwise */
+  public boolean isSetHierarchyId() {
+    return this.hierarchyId != null;
+  }
+
+  public void setHierarchyIdIsSet(boolean value) {
+    if (!value) {
+      this.hierarchyId = null;
     }
   }
 
@@ -535,6 +572,14 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
       }
       break;
 
+    case HIERARCHY_ID:
+      if (value == null) {
+        unsetHierarchyId();
+      } else {
+        setHierarchyId((String)value);
+      }
+      break;
+
     case HIERARCHY:
       if (value == null) {
         unsetHierarchy();
@@ -592,6 +637,9 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
     case PREFIX:
       return getPrefix();
 
+    case HIERARCHY_ID:
+      return getHierarchyId();
+
     case HIERARCHY:
       return getHierarchy();
 
@@ -626,6 +674,8 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
       return isSetStringValues();
     case PREFIX:
       return isSetPrefix();
+    case HIERARCHY_ID:
+      return isSetHierarchyId();
     case HIERARCHY:
       return isSetHierarchy();
     case RANGE_FROM:
@@ -686,6 +736,15 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
       if (!(this_present_prefix && that_present_prefix))
         return false;
       if (!this.prefix.equals(that.prefix))
+        return false;
+    }
+
+    boolean this_present_hierarchyId = true && this.isSetHierarchyId();
+    boolean that_present_hierarchyId = true && that.isSetHierarchyId();
+    if (this_present_hierarchyId || that_present_hierarchyId) {
+      if (!(this_present_hierarchyId && that_present_hierarchyId))
+        return false;
+      if (!this.hierarchyId.equals(that.hierarchyId))
         return false;
     }
 
@@ -790,6 +849,16 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetHierarchyId()).compareTo(typedOther.isSetHierarchyId());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetHierarchyId()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.hierarchyId, typedOther.hierarchyId);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     lastComparison = Boolean.valueOf(isSetHierarchy()).compareTo(typedOther.isSetHierarchy());
     if (lastComparison != 0) {
       return lastComparison;
@@ -885,6 +954,14 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
       sb.append("null");
     } else {
       sb.append(this.prefix);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("hierarchyId:");
+    if (this.hierarchyId == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.hierarchyId);
     }
     first = false;
     if (!first) sb.append(", ");
@@ -1002,6 +1079,14 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.prefix = iprot.readString();
               struct.setPrefixIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 41: // HIERARCHY_ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.hierarchyId = iprot.readString();
+              struct.setHierarchyIdIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -1124,6 +1209,11 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
       oprot.writeFieldBegin(RANGE_TO_INCLUSIVE_FIELD_DESC);
       oprot.writeBool(struct.rangeToInclusive);
       oprot.writeFieldEnd();
+      if (struct.hierarchyId != null) {
+        oprot.writeFieldBegin(HIERARCHY_ID_FIELD_DESC);
+        oprot.writeString(struct.hierarchyId);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -1154,22 +1244,25 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
       if (struct.isSetPrefix()) {
         optionals.set(3);
       }
-      if (struct.isSetHierarchy()) {
+      if (struct.isSetHierarchyId()) {
         optionals.set(4);
       }
-      if (struct.isSetRangeFrom()) {
+      if (struct.isSetHierarchy()) {
         optionals.set(5);
       }
-      if (struct.isSetRangeFromInclusive()) {
+      if (struct.isSetRangeFrom()) {
         optionals.set(6);
       }
-      if (struct.isSetRangeTo()) {
+      if (struct.isSetRangeFromInclusive()) {
         optionals.set(7);
       }
-      if (struct.isSetRangeToInclusive()) {
+      if (struct.isSetRangeTo()) {
         optionals.set(8);
       }
-      oprot.writeBitSet(optionals, 9);
+      if (struct.isSetRangeToInclusive()) {
+        optionals.set(9);
+      }
+      oprot.writeBitSet(optionals, 10);
       if (struct.isSetNegative()) {
         oprot.writeBool(struct.negative);
       }
@@ -1187,6 +1280,9 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
       }
       if (struct.isSetPrefix()) {
         oprot.writeString(struct.prefix);
+      }
+      if (struct.isSetHierarchyId()) {
+        oprot.writeString(struct.hierarchyId);
       }
       if (struct.isSetHierarchy()) {
         {
@@ -1214,7 +1310,7 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, Filter struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(9);
+      BitSet incoming = iprot.readBitSet(10);
       if (incoming.get(0)) {
         struct.negative = iprot.readBool();
         struct.setNegativeIsSet(true);
@@ -1241,6 +1337,10 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
         struct.setPrefixIsSet(true);
       }
       if (incoming.get(4)) {
+        struct.hierarchyId = iprot.readString();
+        struct.setHierarchyIdIsSet(true);
+      }
+      if (incoming.get(5)) {
         {
           org.apache.thrift.protocol.TList _list13 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
           struct.hierarchy = new ArrayList<String>(_list13.size);
@@ -1253,19 +1353,19 @@ public class Filter implements org.apache.thrift.TBase<Filter, Filter._Fields>, 
         }
         struct.setHierarchyIsSet(true);
       }
-      if (incoming.get(5)) {
+      if (incoming.get(6)) {
         struct.rangeFrom = iprot.readString();
         struct.setRangeFromIsSet(true);
       }
-      if (incoming.get(6)) {
+      if (incoming.get(7)) {
         struct.rangeFromInclusive = iprot.readBool();
         struct.setRangeFromInclusiveIsSet(true);
       }
-      if (incoming.get(7)) {
+      if (incoming.get(8)) {
         struct.rangeTo = iprot.readString();
         struct.setRangeToIsSet(true);
       }
-      if (incoming.get(8)) {
+      if (incoming.get(9)) {
         struct.rangeToInclusive = iprot.readBool();
         struct.setRangeToInclusiveIsSet(true);
       }

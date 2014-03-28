@@ -82,8 +82,8 @@ class P13nServiceClient implements \com\boxalino\p13n\api\thrift\P13nServiceIf {
     if ($result->success !== null) {
       return $result->success;
     }
-    if ($result->p13ServiceException !== null) {
-      throw $result->p13ServiceException;
+    if ($result->p13nServiceException !== null) {
+      throw $result->p13nServiceException;
     }
     throw new \Exception("choose failed: unknown result");
   }
@@ -136,8 +136,8 @@ class P13nServiceClient implements \com\boxalino\p13n\api\thrift\P13nServiceIf {
     if ($result->success !== null) {
       return $result->success;
     }
-    if ($result->p13ServiceException !== null) {
-      throw $result->p13ServiceException;
+    if ($result->p13nServiceException !== null) {
+      throw $result->p13nServiceException;
     }
     throw new \Exception("uploadChoiceConfiguration failed: unknown result");
   }
@@ -190,8 +190,8 @@ class P13nServiceClient implements \com\boxalino\p13n\api\thrift\P13nServiceIf {
     if ($result->success !== null) {
       return $result->success;
     }
-    if ($result->p13ServiceException !== null) {
-      throw $result->p13ServiceException;
+    if ($result->p13nServiceException !== null) {
+      throw $result->p13nServiceException;
     }
     throw new \Exception("saveProfileProperties failed: unknown result");
   }
@@ -244,8 +244,8 @@ class P13nServiceClient implements \com\boxalino\p13n\api\thrift\P13nServiceIf {
     if ($result->success !== null) {
       return $result->success;
     }
-    if ($result->p13ServiceException !== null) {
-      throw $result->p13ServiceException;
+    if ($result->p13nServiceException !== null) {
+      throw $result->p13nServiceException;
     }
     throw new \Exception("command failed: unknown result");
   }
@@ -298,8 +298,8 @@ class P13nServiceClient implements \com\boxalino\p13n\api\thrift\P13nServiceIf {
     if ($result->success !== null) {
       return $result->success;
     }
-    if ($result->p13ServiceException !== null) {
-      throw $result->p13ServiceException;
+    if ($result->p13nServiceException !== null) {
+      throw $result->p13nServiceException;
     }
     throw new \Exception("batchChoose failed: unknown result");
   }
@@ -389,7 +389,7 @@ class P13nService_choose_result {
   static $_TSPEC;
 
   public $success = null;
-  public $p13ServiceException = null;
+  public $p13nServiceException = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -400,9 +400,9 @@ class P13nService_choose_result {
           'class' => '\com\boxalino\p13n\api\thrift\ChoiceResponse',
           ),
         1 => array(
-          'var' => 'p13ServiceException',
+          'var' => 'p13nServiceException',
           'type' => TType::STRUCT,
-          'class' => '\com\boxalino\p13n\api\thrift\P13ServiceException',
+          'class' => '\com\boxalino\p13n\api\thrift\P13nServiceException',
           ),
         );
     }
@@ -410,8 +410,8 @@ class P13nService_choose_result {
       if (isset($vals['success'])) {
         $this->success = $vals['success'];
       }
-      if (isset($vals['p13ServiceException'])) {
-        $this->p13ServiceException = $vals['p13ServiceException'];
+      if (isset($vals['p13nServiceException'])) {
+        $this->p13nServiceException = $vals['p13nServiceException'];
       }
     }
   }
@@ -445,8 +445,8 @@ class P13nService_choose_result {
           break;
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->p13ServiceException = new \com\boxalino\p13n\api\thrift\P13ServiceException();
-            $xfer += $this->p13ServiceException->read($input);
+            $this->p13nServiceException = new \com\boxalino\p13n\api\thrift\P13nServiceException();
+            $xfer += $this->p13nServiceException->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -472,9 +472,9 @@ class P13nService_choose_result {
       $xfer += $this->success->write($output);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->p13ServiceException !== null) {
-      $xfer += $output->writeFieldBegin('p13ServiceException', TType::STRUCT, 1);
-      $xfer += $this->p13ServiceException->write($output);
+    if ($this->p13nServiceException !== null) {
+      $xfer += $output->writeFieldBegin('p13nServiceException', TType::STRUCT, 1);
+      $xfer += $this->p13nServiceException->write($output);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
@@ -560,7 +560,7 @@ class P13nService_uploadChoiceConfiguration_result {
   static $_TSPEC;
 
   public $success = null;
-  public $p13ServiceException = null;
+  public $p13nServiceException = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -570,9 +570,9 @@ class P13nService_uploadChoiceConfiguration_result {
           'type' => TType::STRING,
           ),
         1 => array(
-          'var' => 'p13ServiceException',
+          'var' => 'p13nServiceException',
           'type' => TType::STRUCT,
-          'class' => '\com\boxalino\p13n\api\thrift\P13ServiceException',
+          'class' => '\com\boxalino\p13n\api\thrift\P13nServiceException',
           ),
         );
     }
@@ -580,8 +580,8 @@ class P13nService_uploadChoiceConfiguration_result {
       if (isset($vals['success'])) {
         $this->success = $vals['success'];
       }
-      if (isset($vals['p13ServiceException'])) {
-        $this->p13ServiceException = $vals['p13ServiceException'];
+      if (isset($vals['p13nServiceException'])) {
+        $this->p13nServiceException = $vals['p13nServiceException'];
       }
     }
   }
@@ -614,8 +614,8 @@ class P13nService_uploadChoiceConfiguration_result {
           break;
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->p13ServiceException = new \com\boxalino\p13n\api\thrift\P13ServiceException();
-            $xfer += $this->p13ServiceException->read($input);
+            $this->p13nServiceException = new \com\boxalino\p13n\api\thrift\P13nServiceException();
+            $xfer += $this->p13nServiceException->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -638,9 +638,9 @@ class P13nService_uploadChoiceConfiguration_result {
       $xfer += $output->writeString($this->success);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->p13ServiceException !== null) {
-      $xfer += $output->writeFieldBegin('p13ServiceException', TType::STRUCT, 1);
-      $xfer += $this->p13ServiceException->write($output);
+    if ($this->p13nServiceException !== null) {
+      $xfer += $output->writeFieldBegin('p13nServiceException', TType::STRUCT, 1);
+      $xfer += $this->p13nServiceException->write($output);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
@@ -698,15 +698,15 @@ class P13nService_saveProfileProperties_args {
         case -1:
           if ($ftype == TType::LST) {
             $this->profilePropertyValues = array();
-            $_size138 = 0;
-            $_etype141 = 0;
-            $xfer += $input->readListBegin($_etype141, $_size138);
-            for ($_i142 = 0; $_i142 < $_size138; ++$_i142)
+            $_size159 = 0;
+            $_etype162 = 0;
+            $xfer += $input->readListBegin($_etype162, $_size159);
+            for ($_i163 = 0; $_i163 < $_size159; ++$_i163)
             {
-              $elem143 = null;
-              $elem143 = new \com\boxalino\p13n\api\thrift\ProfilePropertyValue();
-              $xfer += $elem143->read($input);
-              $this->profilePropertyValues []= $elem143;
+              $elem164 = null;
+              $elem164 = new \com\boxalino\p13n\api\thrift\ProfilePropertyValue();
+              $xfer += $elem164->read($input);
+              $this->profilePropertyValues []= $elem164;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -734,9 +734,9 @@ class P13nService_saveProfileProperties_args {
       {
         $output->writeListBegin(TType::STRUCT, count($this->profilePropertyValues));
         {
-          foreach ($this->profilePropertyValues as $iter144)
+          foreach ($this->profilePropertyValues as $iter165)
           {
-            $xfer += $iter144->write($output);
+            $xfer += $iter165->write($output);
           }
         }
         $output->writeListEnd();
@@ -754,7 +754,7 @@ class P13nService_saveProfileProperties_result {
   static $_TSPEC;
 
   public $success = null;
-  public $p13ServiceException = null;
+  public $p13nServiceException = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -764,9 +764,9 @@ class P13nService_saveProfileProperties_result {
           'type' => TType::I32,
           ),
         1 => array(
-          'var' => 'p13ServiceException',
+          'var' => 'p13nServiceException',
           'type' => TType::STRUCT,
-          'class' => '\com\boxalino\p13n\api\thrift\P13ServiceException',
+          'class' => '\com\boxalino\p13n\api\thrift\P13nServiceException',
           ),
         );
     }
@@ -774,8 +774,8 @@ class P13nService_saveProfileProperties_result {
       if (isset($vals['success'])) {
         $this->success = $vals['success'];
       }
-      if (isset($vals['p13ServiceException'])) {
-        $this->p13ServiceException = $vals['p13ServiceException'];
+      if (isset($vals['p13nServiceException'])) {
+        $this->p13nServiceException = $vals['p13nServiceException'];
       }
     }
   }
@@ -808,8 +808,8 @@ class P13nService_saveProfileProperties_result {
           break;
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->p13ServiceException = new \com\boxalino\p13n\api\thrift\P13ServiceException();
-            $xfer += $this->p13ServiceException->read($input);
+            $this->p13nServiceException = new \com\boxalino\p13n\api\thrift\P13nServiceException();
+            $xfer += $this->p13nServiceException->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -832,9 +832,9 @@ class P13nService_saveProfileProperties_result {
       $xfer += $output->writeI32($this->success);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->p13ServiceException !== null) {
-      $xfer += $output->writeFieldBegin('p13ServiceException', TType::STRUCT, 1);
-      $xfer += $this->p13ServiceException->write($output);
+    if ($this->p13nServiceException !== null) {
+      $xfer += $output->writeFieldBegin('p13nServiceException', TType::STRUCT, 1);
+      $xfer += $this->p13nServiceException->write($output);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
@@ -920,7 +920,7 @@ class P13nService_command_result {
   static $_TSPEC;
 
   public $success = null;
-  public $p13ServiceException = null;
+  public $p13nServiceException = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -930,9 +930,9 @@ class P13nService_command_result {
           'type' => TType::STRING,
           ),
         1 => array(
-          'var' => 'p13ServiceException',
+          'var' => 'p13nServiceException',
           'type' => TType::STRUCT,
-          'class' => '\com\boxalino\p13n\api\thrift\P13ServiceException',
+          'class' => '\com\boxalino\p13n\api\thrift\P13nServiceException',
           ),
         );
     }
@@ -940,8 +940,8 @@ class P13nService_command_result {
       if (isset($vals['success'])) {
         $this->success = $vals['success'];
       }
-      if (isset($vals['p13ServiceException'])) {
-        $this->p13ServiceException = $vals['p13ServiceException'];
+      if (isset($vals['p13nServiceException'])) {
+        $this->p13nServiceException = $vals['p13nServiceException'];
       }
     }
   }
@@ -974,8 +974,8 @@ class P13nService_command_result {
           break;
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->p13ServiceException = new \com\boxalino\p13n\api\thrift\P13ServiceException();
-            $xfer += $this->p13ServiceException->read($input);
+            $this->p13nServiceException = new \com\boxalino\p13n\api\thrift\P13nServiceException();
+            $xfer += $this->p13nServiceException->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -998,9 +998,9 @@ class P13nService_command_result {
       $xfer += $output->writeString($this->success);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->p13ServiceException !== null) {
-      $xfer += $output->writeFieldBegin('p13ServiceException', TType::STRUCT, 1);
-      $xfer += $this->p13ServiceException->write($output);
+    if ($this->p13nServiceException !== null) {
+      $xfer += $output->writeFieldBegin('p13nServiceException', TType::STRUCT, 1);
+      $xfer += $this->p13nServiceException->write($output);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
@@ -1091,7 +1091,7 @@ class P13nService_batchChoose_result {
   static $_TSPEC;
 
   public $success = null;
-  public $p13ServiceException = null;
+  public $p13nServiceException = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -1102,9 +1102,9 @@ class P13nService_batchChoose_result {
           'class' => '\com\boxalino\p13n\api\thrift\BatchChoiceResponse',
           ),
         1 => array(
-          'var' => 'p13ServiceException',
+          'var' => 'p13nServiceException',
           'type' => TType::STRUCT,
-          'class' => '\com\boxalino\p13n\api\thrift\P13ServiceException',
+          'class' => '\com\boxalino\p13n\api\thrift\P13nServiceException',
           ),
         );
     }
@@ -1112,8 +1112,8 @@ class P13nService_batchChoose_result {
       if (isset($vals['success'])) {
         $this->success = $vals['success'];
       }
-      if (isset($vals['p13ServiceException'])) {
-        $this->p13ServiceException = $vals['p13ServiceException'];
+      if (isset($vals['p13nServiceException'])) {
+        $this->p13nServiceException = $vals['p13nServiceException'];
       }
     }
   }
@@ -1147,8 +1147,8 @@ class P13nService_batchChoose_result {
           break;
         case 1:
           if ($ftype == TType::STRUCT) {
-            $this->p13ServiceException = new \com\boxalino\p13n\api\thrift\P13ServiceException();
-            $xfer += $this->p13ServiceException->read($input);
+            $this->p13nServiceException = new \com\boxalino\p13n\api\thrift\P13nServiceException();
+            $xfer += $this->p13nServiceException->read($input);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -1174,9 +1174,9 @@ class P13nService_batchChoose_result {
       $xfer += $this->success->write($output);
       $xfer += $output->writeFieldEnd();
     }
-    if ($this->p13ServiceException !== null) {
-      $xfer += $output->writeFieldBegin('p13ServiceException', TType::STRUCT, 1);
-      $xfer += $this->p13ServiceException->write($output);
+    if ($this->p13nServiceException !== null) {
+      $xfer += $output->writeFieldBegin('p13nServiceException', TType::STRUCT, 1);
+      $xfer += $this->p13nServiceException->write($output);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();

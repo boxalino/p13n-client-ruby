@@ -55,6 +55,7 @@ class Filter {
   public $fieldName = null;
   public $stringValues = null;
   public $prefix = null;
+  public $hierarchyId = null;
   public $hierarchy = null;
   public $rangeFrom = null;
   public $rangeFromInclusive = null;
@@ -82,6 +83,10 @@ class Filter {
           ),
         4 => array(
           'var' => 'prefix',
+          'type' => TType::STRING,
+          ),
+        41 => array(
+          'var' => 'hierarchyId',
           'type' => TType::STRING,
           ),
         5 => array(
@@ -122,6 +127,9 @@ class Filter {
       }
       if (isset($vals['prefix'])) {
         $this->prefix = $vals['prefix'];
+      }
+      if (isset($vals['hierarchyId'])) {
+        $this->hierarchyId = $vals['hierarchyId'];
       }
       if (isset($vals['hierarchy'])) {
         $this->hierarchy = $vals['hierarchy'];
@@ -194,6 +202,13 @@ class Filter {
         case 4:
           if ($ftype == TType::STRING) {
             $xfer += $input->readString($this->prefix);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 41:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->hierarchyId);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -323,6 +338,11 @@ class Filter {
     if ($this->rangeToInclusive !== null) {
       $xfer += $output->writeFieldBegin('rangeToInclusive', TType::BOOL, 9);
       $xfer += $output->writeBool($this->rangeToInclusive);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->hierarchyId !== null) {
+      $xfer += $output->writeFieldBegin('hierarchyId', TType::STRING, 41);
+      $xfer += $output->writeString($this->hierarchyId);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
@@ -2685,6 +2705,7 @@ class BatchChoiceRequest {
   public $choiceInquiry = null;
   public $requestContext = null;
   public $profileIds = null;
+  public $choiceInquiries = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -2712,6 +2733,15 @@ class BatchChoiceRequest {
             'type' => TType::STRING,
             ),
           ),
+        5 => array(
+          'var' => 'choiceInquiries',
+          'type' => TType::LST,
+          'etype' => TType::STRUCT,
+          'elem' => array(
+            'type' => TType::STRUCT,
+            'class' => '\com\boxalino\p13n\api\thrift\ChoiceInquiry',
+            ),
+          ),
         );
     }
     if (is_array($vals)) {
@@ -2726,6 +2756,9 @@ class BatchChoiceRequest {
       }
       if (isset($vals['profileIds'])) {
         $this->profileIds = $vals['profileIds'];
+      }
+      if (isset($vals['choiceInquiries'])) {
+        $this->choiceInquiries = $vals['choiceInquiries'];
       }
     }
   }
@@ -2790,6 +2823,24 @@ class BatchChoiceRequest {
             $xfer += $input->skip($ftype);
           }
           break;
+        case 5:
+          if ($ftype == TType::LST) {
+            $this->choiceInquiries = array();
+            $_size130 = 0;
+            $_etype133 = 0;
+            $xfer += $input->readListBegin($_etype133, $_size130);
+            for ($_i134 = 0; $_i134 < $_size130; ++$_i134)
+            {
+              $elem135 = null;
+              $elem135 = new \com\boxalino\p13n\api\thrift\ChoiceInquiry();
+              $xfer += $elem135->read($input);
+              $this->choiceInquiries []= $elem135;
+            }
+            $xfer += $input->readListEnd();
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
         default:
           $xfer += $input->skip($ftype);
           break;
@@ -2835,9 +2886,26 @@ class BatchChoiceRequest {
       {
         $output->writeListBegin(TType::STRING, count($this->profileIds));
         {
-          foreach ($this->profileIds as $iter130)
+          foreach ($this->profileIds as $iter136)
           {
-            $xfer += $output->writeString($iter130);
+            $xfer += $output->writeString($iter136);
+          }
+        }
+        $output->writeListEnd();
+      }
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->choiceInquiries !== null) {
+      if (!is_array($this->choiceInquiries)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('choiceInquiries', TType::LST, 5);
+      {
+        $output->writeListBegin(TType::STRUCT, count($this->choiceInquiries));
+        {
+          foreach ($this->choiceInquiries as $iter137)
+          {
+            $xfer += $iter137->write($output);
           }
         }
         $output->writeListEnd();
@@ -2855,6 +2923,7 @@ class BatchChoiceResponse {
   static $_TSPEC;
 
   public $variants = null;
+  public $selectedVariants = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -2868,11 +2937,27 @@ class BatchChoiceResponse {
             'class' => '\com\boxalino\p13n\api\thrift\Variant',
             ),
           ),
+        2 => array(
+          'var' => 'selectedVariants',
+          'type' => TType::LST,
+          'etype' => TType::LST,
+          'elem' => array(
+            'type' => TType::LST,
+            'etype' => TType::STRUCT,
+            'elem' => array(
+              'type' => TType::STRUCT,
+              'class' => '\com\boxalino\p13n\api\thrift\Variant',
+              ),
+            ),
+          ),
         );
     }
     if (is_array($vals)) {
       if (isset($vals['variants'])) {
         $this->variants = $vals['variants'];
+      }
+      if (isset($vals['selectedVariants'])) {
+        $this->selectedVariants = $vals['selectedVariants'];
       }
     }
   }
@@ -2899,15 +2984,43 @@ class BatchChoiceResponse {
         case 1:
           if ($ftype == TType::LST) {
             $this->variants = array();
-            $_size131 = 0;
-            $_etype134 = 0;
-            $xfer += $input->readListBegin($_etype134, $_size131);
-            for ($_i135 = 0; $_i135 < $_size131; ++$_i135)
+            $_size138 = 0;
+            $_etype141 = 0;
+            $xfer += $input->readListBegin($_etype141, $_size138);
+            for ($_i142 = 0; $_i142 < $_size138; ++$_i142)
             {
-              $elem136 = null;
-              $elem136 = new \com\boxalino\p13n\api\thrift\Variant();
-              $xfer += $elem136->read($input);
-              $this->variants []= $elem136;
+              $elem143 = null;
+              $elem143 = new \com\boxalino\p13n\api\thrift\Variant();
+              $xfer += $elem143->read($input);
+              $this->variants []= $elem143;
+            }
+            $xfer += $input->readListEnd();
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::LST) {
+            $this->selectedVariants = array();
+            $_size144 = 0;
+            $_etype147 = 0;
+            $xfer += $input->readListBegin($_etype147, $_size144);
+            for ($_i148 = 0; $_i148 < $_size144; ++$_i148)
+            {
+              $elem149 = null;
+              $elem149 = array();
+              $_size150 = 0;
+              $_etype153 = 0;
+              $xfer += $input->readListBegin($_etype153, $_size150);
+              for ($_i154 = 0; $_i154 < $_size150; ++$_i154)
+              {
+                $elem155 = null;
+                $elem155 = new \com\boxalino\p13n\api\thrift\Variant();
+                $xfer += $elem155->read($input);
+                $elem149 []= $elem155;
+              }
+              $xfer += $input->readListEnd();
+              $this->selectedVariants []= $elem149;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -2935,9 +3048,35 @@ class BatchChoiceResponse {
       {
         $output->writeListBegin(TType::STRUCT, count($this->variants));
         {
-          foreach ($this->variants as $iter137)
+          foreach ($this->variants as $iter156)
           {
-            $xfer += $iter137->write($output);
+            $xfer += $iter156->write($output);
+          }
+        }
+        $output->writeListEnd();
+      }
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->selectedVariants !== null) {
+      if (!is_array($this->selectedVariants)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('selectedVariants', TType::LST, 2);
+      {
+        $output->writeListBegin(TType::LST, count($this->selectedVariants));
+        {
+          foreach ($this->selectedVariants as $iter157)
+          {
+            {
+              $output->writeListBegin(TType::STRUCT, count($iter157));
+              {
+                foreach ($iter157 as $iter158)
+                {
+                  $xfer += $iter158->write($output);
+                }
+              }
+              $output->writeListEnd();
+            }
           }
         }
         $output->writeListEnd();
@@ -2951,7 +3090,7 @@ class BatchChoiceResponse {
 
 }
 
-class P13ServiceException extends TException {
+class P13nServiceException extends TException {
   static $_TSPEC;
 
   public $message = null;
@@ -2973,7 +3112,7 @@ class P13ServiceException extends TException {
   }
 
   public function getName() {
-    return 'P13ServiceException';
+    return 'P13nServiceException';
   }
 
   public function read($input)
@@ -3010,7 +3149,7 @@ class P13ServiceException extends TException {
 
   public function write($output) {
     $xfer = 0;
-    $xfer += $output->writeStructBegin('P13ServiceException');
+    $xfer += $output->writeStructBegin('P13nServiceException');
     if ($this->message !== null) {
       $xfer += $output->writeFieldBegin('message', TType::STRING, 1);
       $xfer += $output->writeString($this->message);

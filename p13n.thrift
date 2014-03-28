@@ -13,6 +13,7 @@ struct Filter {
 # prefix match
   4: string prefix,
 # hierarchy filter - for example categories (ids) path in top-down order
+  41: string hierarchyId,
   5: list<string> hierarchy,
 # lower bound for range filter
   6: string rangeFrom,
@@ -206,23 +207,32 @@ struct ProfilePropertyValue {
 
 struct BatchChoiceRequest {
   1: UserRecord userRecord,
+# deprecated - use choiceInquiries instead.
+# If choiceInquiries is given this field will be ignored 
   2: ChoiceInquiry choiceInquiry,
   3: RequestContext requestContext,
   4: list<string> profileIds,
+# list of ChoiceInquiries to be executed sequentially.
+# Note that list items can depend of items before in list 
+  5: list<ChoiceInquiry> choiceInquiries
 }
 
 struct BatchChoiceResponse {
-  1: list<Variant> variants
+# deprecated - contains non-null value only if corresponding BatchChoiceRequest had only one ChoiceInquiry
+  1: list<Variant> variants,
+# outer list corresponds to profileIds given in BatchChoiceRequest, 
+# while inner list corresponds to list of ChoiceInquiries from BatchChoiceRequest
+  2: list<list<Variant>> selectedVariants
 }
 
-exception P13ServiceException {
+exception P13nServiceException {
   1: required string message
 }
 
 service P13nService {
-  ChoiceResponse choose(ChoiceRequest choiceRequest) throws (1: P13ServiceException p13ServiceException),
-  binary uploadChoiceConfiguration(binary xmlPayload) throws (1: P13ServiceException p13ServiceException),
-  i32 saveProfileProperties(list<ProfilePropertyValue> profilePropertyValues) throws (1: P13ServiceException p13ServiceException),
-  string command(string command) throws (1: P13ServiceException p13ServiceException),
-  BatchChoiceResponse batchChoose(BatchChoiceRequest batchChoiceRequest) throws (1: P13ServiceException p13ServiceException)
+  ChoiceResponse choose(ChoiceRequest choiceRequest) throws (1: P13nServiceException p13nServiceException),
+  binary uploadChoiceConfiguration(binary xmlPayload) throws (1: P13nServiceException p13nServiceException),
+  i32 saveProfileProperties(list<ProfilePropertyValue> profilePropertyValues) throws (1: P13nServiceException p13nServiceException),
+  string command(string command) throws (1: P13nServiceException p13nServiceException),
+  BatchChoiceResponse batchChoose(BatchChoiceRequest batchChoiceRequest) throws (1: P13nServiceException p13nServiceException)
 }

@@ -37,6 +37,7 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
   private static final org.apache.thrift.protocol.TField CHOICE_INQUIRY_FIELD_DESC = new org.apache.thrift.protocol.TField("choiceInquiry", org.apache.thrift.protocol.TType.STRUCT, (short)2);
   private static final org.apache.thrift.protocol.TField REQUEST_CONTEXT_FIELD_DESC = new org.apache.thrift.protocol.TField("requestContext", org.apache.thrift.protocol.TType.STRUCT, (short)3);
   private static final org.apache.thrift.protocol.TField PROFILE_IDS_FIELD_DESC = new org.apache.thrift.protocol.TField("profileIds", org.apache.thrift.protocol.TType.LIST, (short)4);
+  private static final org.apache.thrift.protocol.TField CHOICE_INQUIRIES_FIELD_DESC = new org.apache.thrift.protocol.TField("choiceInquiries", org.apache.thrift.protocol.TType.LIST, (short)5);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -48,13 +49,15 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
   public ChoiceInquiry choiceInquiry; // required
   public RequestContext requestContext; // required
   public List<String> profileIds; // required
+  public List<ChoiceInquiry> choiceInquiries; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     USER_RECORD((short)1, "userRecord"),
     CHOICE_INQUIRY((short)2, "choiceInquiry"),
     REQUEST_CONTEXT((short)3, "requestContext"),
-    PROFILE_IDS((short)4, "profileIds");
+    PROFILE_IDS((short)4, "profileIds"),
+    CHOICE_INQUIRIES((short)5, "choiceInquiries");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -77,6 +80,8 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
           return REQUEST_CONTEXT;
         case 4: // PROFILE_IDS
           return PROFILE_IDS;
+        case 5: // CHOICE_INQUIRIES
+          return CHOICE_INQUIRIES;
         default:
           return null;
       }
@@ -129,6 +134,9 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
     tmpMap.put(_Fields.PROFILE_IDS, new org.apache.thrift.meta_data.FieldMetaData("profileIds", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+    tmpMap.put(_Fields.CHOICE_INQUIRIES, new org.apache.thrift.meta_data.FieldMetaData("choiceInquiries", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ChoiceInquiry.class))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(BatchChoiceRequest.class, metaDataMap);
   }
@@ -140,13 +148,15 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
     UserRecord userRecord,
     ChoiceInquiry choiceInquiry,
     RequestContext requestContext,
-    List<String> profileIds)
+    List<String> profileIds,
+    List<ChoiceInquiry> choiceInquiries)
   {
     this();
     this.userRecord = userRecord;
     this.choiceInquiry = choiceInquiry;
     this.requestContext = requestContext;
     this.profileIds = profileIds;
+    this.choiceInquiries = choiceInquiries;
   }
 
   /**
@@ -169,6 +179,13 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       }
       this.profileIds = __this__profileIds;
     }
+    if (other.isSetChoiceInquiries()) {
+      List<ChoiceInquiry> __this__choiceInquiries = new ArrayList<ChoiceInquiry>();
+      for (ChoiceInquiry other_element : other.choiceInquiries) {
+        __this__choiceInquiries.add(new ChoiceInquiry(other_element));
+      }
+      this.choiceInquiries = __this__choiceInquiries;
+    }
   }
 
   public BatchChoiceRequest deepCopy() {
@@ -181,6 +198,7 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
     this.choiceInquiry = null;
     this.requestContext = null;
     this.profileIds = null;
+    this.choiceInquiries = null;
   }
 
   public UserRecord getUserRecord() {
@@ -294,6 +312,45 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
     }
   }
 
+  public int getChoiceInquiriesSize() {
+    return (this.choiceInquiries == null) ? 0 : this.choiceInquiries.size();
+  }
+
+  public java.util.Iterator<ChoiceInquiry> getChoiceInquiriesIterator() {
+    return (this.choiceInquiries == null) ? null : this.choiceInquiries.iterator();
+  }
+
+  public void addToChoiceInquiries(ChoiceInquiry elem) {
+    if (this.choiceInquiries == null) {
+      this.choiceInquiries = new ArrayList<ChoiceInquiry>();
+    }
+    this.choiceInquiries.add(elem);
+  }
+
+  public List<ChoiceInquiry> getChoiceInquiries() {
+    return this.choiceInquiries;
+  }
+
+  public BatchChoiceRequest setChoiceInquiries(List<ChoiceInquiry> choiceInquiries) {
+    this.choiceInquiries = choiceInquiries;
+    return this;
+  }
+
+  public void unsetChoiceInquiries() {
+    this.choiceInquiries = null;
+  }
+
+  /** Returns true if field choiceInquiries is set (has been assigned a value) and false otherwise */
+  public boolean isSetChoiceInquiries() {
+    return this.choiceInquiries != null;
+  }
+
+  public void setChoiceInquiriesIsSet(boolean value) {
+    if (!value) {
+      this.choiceInquiries = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case USER_RECORD:
@@ -328,6 +385,14 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       }
       break;
 
+    case CHOICE_INQUIRIES:
+      if (value == null) {
+        unsetChoiceInquiries();
+      } else {
+        setChoiceInquiries((List<ChoiceInquiry>)value);
+      }
+      break;
+
     }
   }
 
@@ -344,6 +409,9 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
 
     case PROFILE_IDS:
       return getProfileIds();
+
+    case CHOICE_INQUIRIES:
+      return getChoiceInquiries();
 
     }
     throw new IllegalStateException();
@@ -364,6 +432,8 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       return isSetRequestContext();
     case PROFILE_IDS:
       return isSetProfileIds();
+    case CHOICE_INQUIRIES:
+      return isSetChoiceInquiries();
     }
     throw new IllegalStateException();
   }
@@ -414,6 +484,15 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       if (!(this_present_profileIds && that_present_profileIds))
         return false;
       if (!this.profileIds.equals(that.profileIds))
+        return false;
+    }
+
+    boolean this_present_choiceInquiries = true && this.isSetChoiceInquiries();
+    boolean that_present_choiceInquiries = true && that.isSetChoiceInquiries();
+    if (this_present_choiceInquiries || that_present_choiceInquiries) {
+      if (!(this_present_choiceInquiries && that_present_choiceInquiries))
+        return false;
+      if (!this.choiceInquiries.equals(that.choiceInquiries))
         return false;
     }
 
@@ -473,6 +552,16 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetChoiceInquiries()).compareTo(typedOther.isSetChoiceInquiries());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetChoiceInquiries()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.choiceInquiries, typedOther.choiceInquiries);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -522,6 +611,14 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       sb.append("null");
     } else {
       sb.append(this.profileIds);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("choiceInquiries:");
+    if (this.choiceInquiries == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.choiceInquiries);
     }
     first = false;
     sb.append(")");
@@ -621,6 +718,25 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 5: // CHOICE_INQUIRIES
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list143 = iprot.readListBegin();
+                struct.choiceInquiries = new ArrayList<ChoiceInquiry>(_list143.size);
+                for (int _i144 = 0; _i144 < _list143.size; ++_i144)
+                {
+                  ChoiceInquiry _elem145; // required
+                  _elem145 = new ChoiceInquiry();
+                  _elem145.read(iprot);
+                  struct.choiceInquiries.add(_elem145);
+                }
+                iprot.readListEnd();
+              }
+              struct.setChoiceInquiriesIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -655,9 +771,21 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
         oprot.writeFieldBegin(PROFILE_IDS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.profileIds.size()));
-          for (String _iter143 : struct.profileIds)
+          for (String _iter146 : struct.profileIds)
           {
-            oprot.writeString(_iter143);
+            oprot.writeString(_iter146);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      if (struct.choiceInquiries != null) {
+        oprot.writeFieldBegin(CHOICE_INQUIRIES_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.choiceInquiries.size()));
+          for (ChoiceInquiry _iter147 : struct.choiceInquiries)
+          {
+            _iter147.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -693,7 +821,10 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       if (struct.isSetProfileIds()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetChoiceInquiries()) {
+        optionals.set(4);
+      }
+      oprot.writeBitSet(optionals, 5);
       if (struct.isSetUserRecord()) {
         struct.userRecord.write(oprot);
       }
@@ -706,9 +837,18 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       if (struct.isSetProfileIds()) {
         {
           oprot.writeI32(struct.profileIds.size());
-          for (String _iter144 : struct.profileIds)
+          for (String _iter148 : struct.profileIds)
           {
-            oprot.writeString(_iter144);
+            oprot.writeString(_iter148);
+          }
+        }
+      }
+      if (struct.isSetChoiceInquiries()) {
+        {
+          oprot.writeI32(struct.choiceInquiries.size());
+          for (ChoiceInquiry _iter149 : struct.choiceInquiries)
+          {
+            _iter149.write(oprot);
           }
         }
       }
@@ -717,7 +857,7 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, BatchChoiceRequest struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(4);
+      BitSet incoming = iprot.readBitSet(5);
       if (incoming.get(0)) {
         struct.userRecord = new UserRecord();
         struct.userRecord.read(iprot);
@@ -735,16 +875,30 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       }
       if (incoming.get(3)) {
         {
-          org.apache.thrift.protocol.TList _list145 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-          struct.profileIds = new ArrayList<String>(_list145.size);
-          for (int _i146 = 0; _i146 < _list145.size; ++_i146)
+          org.apache.thrift.protocol.TList _list150 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.profileIds = new ArrayList<String>(_list150.size);
+          for (int _i151 = 0; _i151 < _list150.size; ++_i151)
           {
-            String _elem147; // required
-            _elem147 = iprot.readString();
-            struct.profileIds.add(_elem147);
+            String _elem152; // required
+            _elem152 = iprot.readString();
+            struct.profileIds.add(_elem152);
           }
         }
         struct.setProfileIdsIsSet(true);
+      }
+      if (incoming.get(4)) {
+        {
+          org.apache.thrift.protocol.TList _list153 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.choiceInquiries = new ArrayList<ChoiceInquiry>(_list153.size);
+          for (int _i154 = 0; _i154 < _list153.size; ++_i154)
+          {
+            ChoiceInquiry _elem155; // required
+            _elem155 = new ChoiceInquiry();
+            _elem155.read(iprot);
+            struct.choiceInquiries.add(_elem155);
+          }
+        }
+        struct.setChoiceInquiriesIsSet(true);
       }
     }
   }

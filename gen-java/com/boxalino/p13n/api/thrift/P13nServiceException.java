@@ -30,15 +30,15 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class P13ServiceException extends TException implements org.apache.thrift.TBase<P13ServiceException, P13ServiceException._Fields>, java.io.Serializable, Cloneable {
-  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("P13ServiceException");
+public class P13nServiceException extends TException implements org.apache.thrift.TBase<P13nServiceException, P13nServiceException._Fields>, java.io.Serializable, Cloneable {
+  private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("P13nServiceException");
 
   private static final org.apache.thrift.protocol.TField MESSAGE_FIELD_DESC = new org.apache.thrift.protocol.TField("message", org.apache.thrift.protocol.TType.STRING, (short)1);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
-    schemes.put(StandardScheme.class, new P13ServiceExceptionStandardSchemeFactory());
-    schemes.put(TupleScheme.class, new P13ServiceExceptionTupleSchemeFactory());
+    schemes.put(StandardScheme.class, new P13nServiceExceptionStandardSchemeFactory());
+    schemes.put(TupleScheme.class, new P13nServiceExceptionTupleSchemeFactory());
   }
 
   public String message; // required
@@ -108,13 +108,13 @@ public class P13ServiceException extends TException implements org.apache.thrift
     tmpMap.put(_Fields.MESSAGE, new org.apache.thrift.meta_data.FieldMetaData("message", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
-    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(P13ServiceException.class, metaDataMap);
+    org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(P13nServiceException.class, metaDataMap);
   }
 
-  public P13ServiceException() {
+  public P13nServiceException() {
   }
 
-  public P13ServiceException(
+  public P13nServiceException(
     String message)
   {
     this();
@@ -124,14 +124,14 @@ public class P13ServiceException extends TException implements org.apache.thrift
   /**
    * Performs a deep copy on <i>other</i>.
    */
-  public P13ServiceException(P13ServiceException other) {
+  public P13nServiceException(P13nServiceException other) {
     if (other.isSetMessage()) {
       this.message = other.message;
     }
   }
 
-  public P13ServiceException deepCopy() {
-    return new P13ServiceException(this);
+  public P13nServiceException deepCopy() {
+    return new P13nServiceException(this);
   }
 
   @Override
@@ -143,7 +143,7 @@ public class P13ServiceException extends TException implements org.apache.thrift
     return this.message;
   }
 
-  public P13ServiceException setMessage(String message) {
+  public P13nServiceException setMessage(String message) {
     this.message = message;
     return this;
   }
@@ -202,12 +202,12 @@ public class P13ServiceException extends TException implements org.apache.thrift
   public boolean equals(Object that) {
     if (that == null)
       return false;
-    if (that instanceof P13ServiceException)
-      return this.equals((P13ServiceException)that);
+    if (that instanceof P13nServiceException)
+      return this.equals((P13nServiceException)that);
     return false;
   }
 
-  public boolean equals(P13ServiceException that) {
+  public boolean equals(P13nServiceException that) {
     if (that == null)
       return false;
 
@@ -228,13 +228,13 @@ public class P13ServiceException extends TException implements org.apache.thrift
     return 0;
   }
 
-  public int compareTo(P13ServiceException other) {
+  public int compareTo(P13nServiceException other) {
     if (!getClass().equals(other.getClass())) {
       return getClass().getName().compareTo(other.getClass().getName());
     }
 
     int lastComparison = 0;
-    P13ServiceException typedOther = (P13ServiceException)other;
+    P13nServiceException typedOther = (P13nServiceException)other;
 
     lastComparison = Boolean.valueOf(isSetMessage()).compareTo(typedOther.isSetMessage());
     if (lastComparison != 0) {
@@ -263,7 +263,7 @@ public class P13ServiceException extends TException implements org.apache.thrift
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("P13ServiceException(");
+    StringBuilder sb = new StringBuilder("P13nServiceException(");
     boolean first = true;
 
     sb.append("message:");
@@ -301,15 +301,15 @@ public class P13ServiceException extends TException implements org.apache.thrift
     }
   }
 
-  private static class P13ServiceExceptionStandardSchemeFactory implements SchemeFactory {
-    public P13ServiceExceptionStandardScheme getScheme() {
-      return new P13ServiceExceptionStandardScheme();
+  private static class P13nServiceExceptionStandardSchemeFactory implements SchemeFactory {
+    public P13nServiceExceptionStandardScheme getScheme() {
+      return new P13nServiceExceptionStandardScheme();
     }
   }
 
-  private static class P13ServiceExceptionStandardScheme extends StandardScheme<P13ServiceException> {
+  private static class P13nServiceExceptionStandardScheme extends StandardScheme<P13nServiceException> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, P13ServiceException struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, P13nServiceException struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -338,7 +338,7 @@ public class P13ServiceException extends TException implements org.apache.thrift
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, P13ServiceException struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, P13nServiceException struct) throws org.apache.thrift.TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -353,22 +353,22 @@ public class P13ServiceException extends TException implements org.apache.thrift
 
   }
 
-  private static class P13ServiceExceptionTupleSchemeFactory implements SchemeFactory {
-    public P13ServiceExceptionTupleScheme getScheme() {
-      return new P13ServiceExceptionTupleScheme();
+  private static class P13nServiceExceptionTupleSchemeFactory implements SchemeFactory {
+    public P13nServiceExceptionTupleScheme getScheme() {
+      return new P13nServiceExceptionTupleScheme();
     }
   }
 
-  private static class P13ServiceExceptionTupleScheme extends TupleScheme<P13ServiceException> {
+  private static class P13nServiceExceptionTupleScheme extends TupleScheme<P13nServiceException> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, P13ServiceException struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, P13nServiceException struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeString(struct.message);
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, P13ServiceException struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, P13nServiceException struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.message = iprot.readString();
       struct.setMessageIsSet(true);

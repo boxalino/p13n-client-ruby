@@ -13,15 +13,16 @@ struct Filter {
 # prefix match
   4: string prefix,
 # hierarchy filter - for example categories (ids) path in top-down order
-  5: list<string> hierarchy,
+  5: string hierarchyId,
+  6: list<string> hierarchy,
 # lower bound for range filter
-  6: string rangeFrom,
+  7: string rangeFrom,
 # whether the lower bound is inclusive
-  7: bool rangeFromInclusive,
+  8: bool rangeFromInclusive,
 # upper bound for range filter  
-  8: string rangeTo,
+  9: string rangeTo,
 # whether the upper bound is inclusive
-  9: bool rangeToInclusive
+  10: bool rangeToInclusive
 }
 
 # Used for date facets
