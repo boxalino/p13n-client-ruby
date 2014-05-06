@@ -20,14 +20,7 @@ $p13n->setHost($p13nHost);
 $p13n->setAuthorization($p13nUsername, $p13nPassword);
 
 // Create main choice request object
-$choiceRequest = new \com\boxalino\p13n\api\thrift\ChoiceRequest();
-// Get customer's profile id, used to identify customers for personalization
-$choiceRequest->profileId = $p13n->getProfileId();
-
-// Setup information about account
-$userRecord = new \com\boxalino\p13n\api\thrift\UserRecord();
-$userRecord->username = $p13nAccount;
-$choiceRequest->userRecord = $userRecord;
+$choiceRequest = $p13n->getChoiceRequest($p13nAccount);
 
 // Setup main choice inquiry object
 $inquiry = new \com\boxalino\p13n\api\thrift\ChoiceInquiry();

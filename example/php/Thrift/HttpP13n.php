@@ -40,22 +40,62 @@ class HttpP13n
 	}
 
 	/**
+	 * @param string $accountname
 	 * @return string
 	 */
-	public function getProfileId()
+	public function getChoiceRequest($accountname)
 	{
-		$profileId = null;
-		if (!empty($_COOKIE['cemv'])) {
-			$cemv = explode('|', $_COOKIE['cemv']);
-			foreach ($cemv as $values) {
-				$kvPair = explode('=', $values, 2);
-				if (!empty($kvPair[0]) && !empty($kvPair[1]) && $kvPair[0] === 'r') {
-					$profileId = $kvPair[1];
-					break;
-				}
-			}
+		$choiceRequest = new \com\boxalino\p13n\api\thrift\ChoiceRequest();
+
+		// Setup information about account
+		$userRecord = new \com\boxalino\p13n\api\thrift\UserRecord();
+		$userRecord->username = $accountname;
+		$choiceRequest->userRecord = $userRecord;
+
+		// Setup request context
+		$clientip    = @$_SERVER['HTTP_CLIENT_IP'];
+		$forwardedip = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+		if(filter_var($clientip, FILTER_VALIDATE_IP)) {
+			$ip = $clientip;
+		} elseif(filter_var($forwardedip, FILTER_VALIDATE_IP)) {
+			$ip = $forwardedip;
+		} else {
+			$ip = $_SERVER['REMOTE_ADDR'];
 		}
-		return $profileId;
+
+		if(empty($_COOKIE['cems'])) {
+			$sessionid = session_id();
+			if(empty($sessionid)) {
+				session_start();
+				$sessionid = session_id();
+			}
+		} else {
+			$sessionid = $_COOKIE['cems'];
+		}
+
+		if(empty($_COOKIE['cemv'])) {
+			$profileid = '';
+			if(function_exists('openssl_random_pseudo_bytes')) {
+				$profileid = bin2hex(openssl_random_pseudo_bytes(16));
+			}
+			if(empty($profileid)) {
+				$profileid = uniqid('', true);
+			}
+		} else {
+			$profileid = $_COOKIE['cemv'];
+		}
+
+		$requestContext = new \com\boxalino\p13n\api\thrift\RequestContext();
+		$requestContext->parameters = array(
+			'User-Agent'     => $_SERVER['HTTP_USER_AGENT'],
+			'User-Host'      => $ip,
+			'User-SessionId' => $sessionid,
+			'User-Referer'   => $_SERVER['HTTP_REFERER'],
+		);
+		$choiceRequest->RequestContext = $requestContext;
+		$choiceRequest->profileId = $profileid;
+
+		return $choiceRequest;
 	}
 
 	/**

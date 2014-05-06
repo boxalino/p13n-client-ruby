@@ -40,7 +40,7 @@ class P13nTHttpClient extends THttpClient {
 	// Connect failed?
 	if ($this->handle_ === FALSE) {
 	  $this->handle_ = null;
-	  $error = 'THttpClient: Could not connect to '.$host.$this->uri_;
+	  $error = 'P13nTHttpClient: Could not connect to '.$host.$this->uri_;
 	  throw new TTransportException($error, TTransportException::NOT_OPEN);
 	}
   }
