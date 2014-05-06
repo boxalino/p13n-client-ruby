@@ -60,7 +60,7 @@ class HttpP13n
 		} elseif(filter_var($forwardedip, FILTER_VALIDATE_IP)) {
 			$ip = $forwardedip;
 		} else {
-			$ip = $_SERVER['REMOTE_ADDR'];
+			$ip = @$_SERVER['REMOTE_ADDR'];
 		}
 
 		if(empty($_COOKIE['cems'])) {
@@ -87,10 +87,10 @@ class HttpP13n
 
 		$requestContext = new \com\boxalino\p13n\api\thrift\RequestContext();
 		$requestContext->parameters = array(
-			'User-Agent'     => $_SERVER['HTTP_USER_AGENT'],
+			'User-Agent'     => @$_SERVER['HTTP_USER_AGENT'],
 			'User-Host'      => $ip,
 			'User-SessionId' => $sessionid,
-			'User-Referer'   => $_SERVER['HTTP_REFERER'],
+			'User-Referer'   => @$_SERVER['HTTP_REFERER'],
 		);
 		$choiceRequest->RequestContext = $requestContext;
 		$choiceRequest->profileId = $profileid;
