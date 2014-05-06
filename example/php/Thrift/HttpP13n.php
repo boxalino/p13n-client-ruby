@@ -41,9 +41,10 @@ class HttpP13n
 
 	/**
 	 * @param string $accountname
+	 * @param string $cookieDomain
 	 * @return string
 	 */
-	public function getChoiceRequest($accountname)
+	public function getChoiceRequest($accountname, $cookieDomain = null)
 	{
 		$choiceRequest = new \com\boxalino\p13n\api\thrift\ChoiceRequest();
 
@@ -95,6 +96,15 @@ class HttpP13n
 		$choiceRequest->RequestContext = $requestContext;
 		$choiceRequest->profileId = $profileid;
 
+		// Refresh cookies
+		if(empty($cookieDomain)) {
+			setcookie('cems', $sessionid, 0);
+			setcookie('cemv', $profileid, time() + 1800);
+		} else {
+			setcookie('cems', $sessionid, 0, '/', $cookieDomain);
+			setcookie('cemv', $profileid, time() + 1800, '/', $cookieDomain);
+		}
+
 		return $choiceRequest;
 	}
 
@@ -119,6 +129,15 @@ class HttpP13n
 	{
 		$this->username = $username;
 		$this->password = $password;
+		$this->transport = null;
+	}
+
+	/**
+	 * @param string $host
+	 */
+	public function setHost($host)
+	{
+		$this->host = $host;
 		$this->transport = null;
 	}
 

@@ -6,6 +6,7 @@ $p13nHost     = 'c1.bx-cloud.com';
 $p13nAccount  = 'example-account';
 $p13nUsername = 'example-username';
 $p13nPassword = 'example-password';
+$cookieDomain = '.example.com';
 
 $p13nSearch   = 'example search query';
 $p13nChoiceId = 'test-search';
@@ -14,13 +15,15 @@ $p13nFields   = array('id'); // fields you want in the response, i.e. title, bod
 $p13nOffset   = 0;
 $p13nHitCount = 25;
 
+
+
 // Create basic P13n client
 $p13n = new HttpP13n();
 $p13n->setHost($p13nHost);
 $p13n->setAuthorization($p13nUsername, $p13nPassword);
 
 // Create main choice request object
-$choiceRequest = $p13n->getChoiceRequest($p13nAccount);
+$choiceRequest = $p13n->getChoiceRequest($p13nAccount, $cookieDomain);
 
 // Setup main choice inquiry object
 $inquiry = new \com\boxalino\p13n\api\thrift\ChoiceInquiry();
