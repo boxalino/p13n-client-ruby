@@ -103,7 +103,7 @@ struct ContextItem {
 # actual item's identifier
 # for example: actual sku of the product
   3: string contextItemId,
-# role of the item within the context, used to address the item in the recommendation.
+# role of the item within the context, used to address the item in the recommendation script.
 # for example: 'main product' for recommendations within product detail page
   4: string role
 }
@@ -121,7 +121,7 @@ struct ChoiceInquiry {
 # set of variantIds to be excluded from result
   5: set<string> excludeVariantIds,
 # 
-  6: string scope
+  6: string scope = "system_rec"
 }
 
 struct RequestContext {
@@ -143,7 +143,7 @@ struct ChoiceRequest {
 # Inquiries with higher index may depend from those with lower index.
   3: list<ChoiceInquiry> inquiries,
 # context of the request
-  4: RequestContext requestContext,
+  4: RequestContext requestContext
 }
 
 struct FacetValue {
@@ -185,11 +185,11 @@ struct SearchResult {
 struct Variant {
 # id of the personalized variant
   1: string variantId,
-# scenario identificator used to produce recommendation result
+# scenario identificator used to produce recommendation result or search result personalization
   2: string scenarioId,
 # result of the search request for recommendations and search requests
   3: SearchResult searchResult,
-# recommendation's result title localized by language given in SimpleSearchQuery
+# recommendation's result title localized in language requested in corresponding SimpleSearchQuery
   4: string searchResultTitle
 }
 

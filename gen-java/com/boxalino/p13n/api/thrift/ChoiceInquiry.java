@@ -151,6 +151,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
   }
 
   public ChoiceInquiry() {
+    this.scope = "system_rec";
+
   }
 
   public ChoiceInquiry(
@@ -214,7 +216,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     setMinHitCountIsSet(false);
     this.minHitCount = 0;
     this.excludeVariantIds = null;
-    this.scope = null;
+    this.scope = "system_rec";
+
   }
 
   public String getChoiceId() {

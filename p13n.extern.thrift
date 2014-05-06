@@ -13,16 +13,16 @@ struct Filter {
 # prefix match
   4: string prefix,
 # hierarchy filter - for example categories (ids) path in top-down order
-  5: string hierarchyId,
-  6: list<string> hierarchy,
+  41: string hierarchyId,
+  5: list<string> hierarchy,
 # lower bound for range filter
-  7: string rangeFrom,
+  6: string rangeFrom,
 # whether the lower bound is inclusive
-  8: bool rangeFromInclusive,
+  7: bool rangeFromInclusive,
 # upper bound for range filter  
-  9: string rangeTo,
+  8: string rangeTo,
 # whether the upper bound is inclusive
-  10: bool rangeToInclusive
+  9: bool rangeToInclusive
 }
 
 # Used for date facets
@@ -116,10 +116,12 @@ struct ChoiceInquiry {
 # context items for recommendations 
   3: list<ContextItem> contextItems,
 # minimal hit count to return for recommendations.
-# If higher priority recommendation strategy yields less results, next strategy is tried  
+# if higher priority recommendation strategy yields less results, next strategy is tried  
   4: i32 minHitCount,
 # set of variantIds to be excluded from result
-  5: set<string> excludeVariantIds
+  5: set<string> excludeVariantIds,
+# 
+  6: string scope = "system_rec"
 }
 
 struct RequestContext {
@@ -127,9 +129,14 @@ struct RequestContext {
   1: map<string,list<string>> parameters
 }
 
+struct UserRecord {
+# unique identifier of the customer
+  1: string username
+}
+
 struct ChoiceRequest {
-# unused
-  1: string authenticationToken,
+# 
+  1: UserRecord userRecord,
 # profile (visitor) identificator 
   2: string profileId,
 # list of inquiries to be executed sequentially
@@ -191,10 +198,31 @@ struct ChoiceResponse {
   1: list<Variant> variants
 }
 
+struct BatchChoiceRequest {
+  1: UserRecord userRecord,
+# deprecated - use choiceInquiries instead.
+# If choiceInquiries is given this field will be ignored 
+  2: ChoiceInquiry choiceInquiry,
+  3: RequestContext requestContext,
+  4: list<string> profileIds,
+# list of ChoiceInquiries to be executed sequentially.
+# Note that list items can depend of items before in list 
+  5: list<ChoiceInquiry> choiceInquiries
+}
+
+struct BatchChoiceResponse {
+# deprecated - contains non-null value only if corresponding BatchChoiceRequest had only one ChoiceInquiry
+  1: list<Variant> variants,
+# outer list corresponds to profileIds given in BatchChoiceRequest, 
+# while inner list corresponds to list of ChoiceInquiries from BatchChoiceRequest
+  2: list<list<Variant>> selectedVariants
+}
+
 exception P13nServiceException {
   1: required string message
 }
 
 service P13nService {
-  ChoiceResponse choose(ChoiceRequest choiceRequest) throws (1: P13nServiceException p13nServiceException)
+  ChoiceResponse choose(ChoiceRequest choiceRequest) throws (1: P13nServiceException p13nServiceException),
+  BatchChoiceResponse batchChoose(BatchChoiceRequest batchChoiceRequest) throws (1: P13nServiceException p13nServiceException)
 }
