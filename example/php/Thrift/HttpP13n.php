@@ -142,11 +142,11 @@ class HttpP13n
 	}
 
 	/**
-	 * @param string $host
+	 * @param string $schema
 	 */
-	public function setHost($host)
+	public function setSchema($schema)
 	{
-		$this->host = $host;
+		$this->host = $schema;
 		$this->transport = null;
 	}
 
