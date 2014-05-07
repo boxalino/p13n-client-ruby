@@ -142,20 +142,20 @@ class HttpP13n
 	}
 
 	/**
-	 * @param string $host
-	 */
-	public function setHost($host)
-	{
-		$this->host = $host;
-		$this->transport = null;
-	}
-
-	/**
 	 * @param int $port
 	 */
 	public function setPort($port)
 	{
 		$this->port = $port;
+		$this->transport = null;
+	}
+
+	/**
+	 * @param string $schema
+	 */
+	public function setSchema($schema)
+	{
+		$this->schema = $schema;
 		$this->transport = null;
 	}
 
