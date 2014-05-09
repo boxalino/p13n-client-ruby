@@ -12,8 +12,9 @@ struct Filter {
   3: list<string> stringValues,
 # prefix match
   4: string prefix,
-# hierarchy filter - for example categories (ids) path in top-down order
+# hierarchy filter - when corresponding hierarchical field has encoded id  
   41: string hierarchyId,
+# hierarchy filter - for example categories path in top-down order
   5: list<string> hierarchy,
 # lower bound for range filter
   6: string rangeFrom,
@@ -155,6 +156,10 @@ struct FacetValue {
   3: string rangeToExclusive,
 # number of hits found
   4: i64 hitCount;
+# id of hierarchy if corresponding field is hierarchical
+  50: string hierarchyId,
+# hierarchy if corresponding field is hierarchical
+  60: list<string> hierarchy
 }
 
 struct FacetResponse {

@@ -425,25 +425,25 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
           case 1: // VALUES
             if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
               {
-                org.apache.thrift.protocol.TMap _map98 = iprot.readMapBegin();
-                struct.values = new HashMap<String,List<String>>(2*_map98.size);
-                for (int _i99 = 0; _i99 < _map98.size; ++_i99)
+                org.apache.thrift.protocol.TMap _map106 = iprot.readMapBegin();
+                struct.values = new HashMap<String,List<String>>(2*_map106.size);
+                for (int _i107 = 0; _i107 < _map106.size; ++_i107)
                 {
-                  String _key100; // required
-                  List<String> _val101; // required
-                  _key100 = iprot.readString();
+                  String _key108; // required
+                  List<String> _val109; // required
+                  _key108 = iprot.readString();
                   {
-                    org.apache.thrift.protocol.TList _list102 = iprot.readListBegin();
-                    _val101 = new ArrayList<String>(_list102.size);
-                    for (int _i103 = 0; _i103 < _list102.size; ++_i103)
+                    org.apache.thrift.protocol.TList _list110 = iprot.readListBegin();
+                    _val109 = new ArrayList<String>(_list110.size);
+                    for (int _i111 = 0; _i111 < _list110.size; ++_i111)
                     {
-                      String _elem104; // required
-                      _elem104 = iprot.readString();
-                      _val101.add(_elem104);
+                      String _elem112; // required
+                      _elem112 = iprot.readString();
+                      _val109.add(_elem112);
                     }
                     iprot.readListEnd();
                   }
-                  struct.values.put(_key100, _val101);
+                  struct.values.put(_key108, _val109);
                 }
                 iprot.readMapEnd();
               }
@@ -479,14 +479,14 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
         oprot.writeFieldBegin(VALUES_FIELD_DESC);
         {
           oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, struct.values.size()));
-          for (Map.Entry<String, List<String>> _iter105 : struct.values.entrySet())
+          for (Map.Entry<String, List<String>> _iter113 : struct.values.entrySet())
           {
-            oprot.writeString(_iter105.getKey());
+            oprot.writeString(_iter113.getKey());
             {
-              oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, _iter105.getValue().size()));
-              for (String _iter106 : _iter105.getValue())
+              oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, _iter113.getValue().size()));
+              for (String _iter114 : _iter113.getValue())
               {
-                oprot.writeString(_iter106);
+                oprot.writeString(_iter114);
               }
               oprot.writeListEnd();
             }
@@ -526,14 +526,14 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
       if (struct.isSetValues()) {
         {
           oprot.writeI32(struct.values.size());
-          for (Map.Entry<String, List<String>> _iter107 : struct.values.entrySet())
+          for (Map.Entry<String, List<String>> _iter115 : struct.values.entrySet())
           {
-            oprot.writeString(_iter107.getKey());
+            oprot.writeString(_iter115.getKey());
             {
-              oprot.writeI32(_iter107.getValue().size());
-              for (String _iter108 : _iter107.getValue())
+              oprot.writeI32(_iter115.getValue().size());
+              for (String _iter116 : _iter115.getValue())
               {
-                oprot.writeString(_iter108);
+                oprot.writeString(_iter116);
               }
             }
           }
@@ -550,24 +550,24 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
       BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TMap _map109 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
-          struct.values = new HashMap<String,List<String>>(2*_map109.size);
-          for (int _i110 = 0; _i110 < _map109.size; ++_i110)
+          org.apache.thrift.protocol.TMap _map117 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
+          struct.values = new HashMap<String,List<String>>(2*_map117.size);
+          for (int _i118 = 0; _i118 < _map117.size; ++_i118)
           {
-            String _key111; // required
-            List<String> _val112; // required
-            _key111 = iprot.readString();
+            String _key119; // required
+            List<String> _val120; // required
+            _key119 = iprot.readString();
             {
-              org.apache.thrift.protocol.TList _list113 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-              _val112 = new ArrayList<String>(_list113.size);
-              for (int _i114 = 0; _i114 < _list113.size; ++_i114)
+              org.apache.thrift.protocol.TList _list121 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+              _val120 = new ArrayList<String>(_list121.size);
+              for (int _i122 = 0; _i122 < _list121.size; ++_i122)
               {
-                String _elem115; // required
-                _elem115 = iprot.readString();
-                _val112.add(_elem115);
+                String _elem123; // required
+                _elem123 = iprot.readString();
+                _val120.add(_elem123);
               }
             }
-            struct.values.put(_key111, _val112);
+            struct.values.put(_key119, _val120);
           }
         }
         struct.setValuesIsSet(true);

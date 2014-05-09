@@ -441,14 +441,14 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
           case 1: // VARIANTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list156 = iprot.readListBegin();
-                struct.variants = new ArrayList<Variant>(_list156.size);
-                for (int _i157 = 0; _i157 < _list156.size; ++_i157)
+                org.apache.thrift.protocol.TList _list164 = iprot.readListBegin();
+                struct.variants = new ArrayList<Variant>(_list164.size);
+                for (int _i165 = 0; _i165 < _list164.size; ++_i165)
                 {
-                  Variant _elem158; // required
-                  _elem158 = new Variant();
-                  _elem158.read(iprot);
-                  struct.variants.add(_elem158);
+                  Variant _elem166; // required
+                  _elem166 = new Variant();
+                  _elem166.read(iprot);
+                  struct.variants.add(_elem166);
                 }
                 iprot.readListEnd();
               }
@@ -460,24 +460,24 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
           case 2: // SELECTED_VARIANTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list159 = iprot.readListBegin();
-                struct.selectedVariants = new ArrayList<List<Variant>>(_list159.size);
-                for (int _i160 = 0; _i160 < _list159.size; ++_i160)
+                org.apache.thrift.protocol.TList _list167 = iprot.readListBegin();
+                struct.selectedVariants = new ArrayList<List<Variant>>(_list167.size);
+                for (int _i168 = 0; _i168 < _list167.size; ++_i168)
                 {
-                  List<Variant> _elem161; // required
+                  List<Variant> _elem169; // required
                   {
-                    org.apache.thrift.protocol.TList _list162 = iprot.readListBegin();
-                    _elem161 = new ArrayList<Variant>(_list162.size);
-                    for (int _i163 = 0; _i163 < _list162.size; ++_i163)
+                    org.apache.thrift.protocol.TList _list170 = iprot.readListBegin();
+                    _elem169 = new ArrayList<Variant>(_list170.size);
+                    for (int _i171 = 0; _i171 < _list170.size; ++_i171)
                     {
-                      Variant _elem164; // required
-                      _elem164 = new Variant();
-                      _elem164.read(iprot);
-                      _elem161.add(_elem164);
+                      Variant _elem172; // required
+                      _elem172 = new Variant();
+                      _elem172.read(iprot);
+                      _elem169.add(_elem172);
                     }
                     iprot.readListEnd();
                   }
-                  struct.selectedVariants.add(_elem161);
+                  struct.selectedVariants.add(_elem169);
                 }
                 iprot.readListEnd();
               }
@@ -505,9 +505,9 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
         oprot.writeFieldBegin(VARIANTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.variants.size()));
-          for (Variant _iter165 : struct.variants)
+          for (Variant _iter173 : struct.variants)
           {
-            _iter165.write(oprot);
+            _iter173.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -517,13 +517,13 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
         oprot.writeFieldBegin(SELECTED_VARIANTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.LIST, struct.selectedVariants.size()));
-          for (List<Variant> _iter166 : struct.selectedVariants)
+          for (List<Variant> _iter174 : struct.selectedVariants)
           {
             {
-              oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, _iter166.size()));
-              for (Variant _iter167 : _iter166)
+              oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, _iter174.size()));
+              for (Variant _iter175 : _iter174)
               {
-                _iter167.write(oprot);
+                _iter175.write(oprot);
               }
               oprot.writeListEnd();
             }
@@ -560,22 +560,22 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
       if (struct.isSetVariants()) {
         {
           oprot.writeI32(struct.variants.size());
-          for (Variant _iter168 : struct.variants)
+          for (Variant _iter176 : struct.variants)
           {
-            _iter168.write(oprot);
+            _iter176.write(oprot);
           }
         }
       }
       if (struct.isSetSelectedVariants()) {
         {
           oprot.writeI32(struct.selectedVariants.size());
-          for (List<Variant> _iter169 : struct.selectedVariants)
+          for (List<Variant> _iter177 : struct.selectedVariants)
           {
             {
-              oprot.writeI32(_iter169.size());
-              for (Variant _iter170 : _iter169)
+              oprot.writeI32(_iter177.size());
+              for (Variant _iter178 : _iter177)
               {
-                _iter170.write(oprot);
+                _iter178.write(oprot);
               }
             }
           }
@@ -589,37 +589,37 @@ public class BatchChoiceResponse implements org.apache.thrift.TBase<BatchChoiceR
       BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TList _list171 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.variants = new ArrayList<Variant>(_list171.size);
-          for (int _i172 = 0; _i172 < _list171.size; ++_i172)
+          org.apache.thrift.protocol.TList _list179 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.variants = new ArrayList<Variant>(_list179.size);
+          for (int _i180 = 0; _i180 < _list179.size; ++_i180)
           {
-            Variant _elem173; // required
-            _elem173 = new Variant();
-            _elem173.read(iprot);
-            struct.variants.add(_elem173);
+            Variant _elem181; // required
+            _elem181 = new Variant();
+            _elem181.read(iprot);
+            struct.variants.add(_elem181);
           }
         }
         struct.setVariantsIsSet(true);
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list174 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.LIST, iprot.readI32());
-          struct.selectedVariants = new ArrayList<List<Variant>>(_list174.size);
-          for (int _i175 = 0; _i175 < _list174.size; ++_i175)
+          org.apache.thrift.protocol.TList _list182 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.LIST, iprot.readI32());
+          struct.selectedVariants = new ArrayList<List<Variant>>(_list182.size);
+          for (int _i183 = 0; _i183 < _list182.size; ++_i183)
           {
-            List<Variant> _elem176; // required
+            List<Variant> _elem184; // required
             {
-              org.apache.thrift.protocol.TList _list177 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-              _elem176 = new ArrayList<Variant>(_list177.size);
-              for (int _i178 = 0; _i178 < _list177.size; ++_i178)
+              org.apache.thrift.protocol.TList _list185 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+              _elem184 = new ArrayList<Variant>(_list185.size);
+              for (int _i186 = 0; _i186 < _list185.size; ++_i186)
               {
-                Variant _elem179; // required
-                _elem179 = new Variant();
-                _elem179.read(iprot);
-                _elem176.add(_elem179);
+                Variant _elem187; // required
+                _elem187 = new Variant();
+                _elem187.read(iprot);
+                _elem184.add(_elem187);
               }
             }
-            struct.selectedVariants.add(_elem176);
+            struct.selectedVariants.add(_elem184);
           }
         }
         struct.setSelectedVariantsIsSet(true);

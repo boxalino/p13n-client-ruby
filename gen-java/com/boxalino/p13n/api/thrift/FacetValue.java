@@ -37,6 +37,8 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
   private static final org.apache.thrift.protocol.TField RANGE_FROM_INCLUSIVE_FIELD_DESC = new org.apache.thrift.protocol.TField("rangeFromInclusive", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField RANGE_TO_EXCLUSIVE_FIELD_DESC = new org.apache.thrift.protocol.TField("rangeToExclusive", org.apache.thrift.protocol.TType.STRING, (short)3);
   private static final org.apache.thrift.protocol.TField HIT_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("hitCount", org.apache.thrift.protocol.TType.I64, (short)4);
+  private static final org.apache.thrift.protocol.TField HIERARCHY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("hierarchyId", org.apache.thrift.protocol.TType.STRING, (short)50);
+  private static final org.apache.thrift.protocol.TField HIERARCHY_FIELD_DESC = new org.apache.thrift.protocol.TField("hierarchy", org.apache.thrift.protocol.TType.LIST, (short)60);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -48,13 +50,17 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
   public String rangeFromInclusive; // required
   public String rangeToExclusive; // required
   public long hitCount; // required
+  public String hierarchyId; // required
+  public List<String> hierarchy; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     STRING_VALUE((short)1, "stringValue"),
     RANGE_FROM_INCLUSIVE((short)2, "rangeFromInclusive"),
     RANGE_TO_EXCLUSIVE((short)3, "rangeToExclusive"),
-    HIT_COUNT((short)4, "hitCount");
+    HIT_COUNT((short)4, "hitCount"),
+    HIERARCHY_ID((short)50, "hierarchyId"),
+    HIERARCHY((short)60, "hierarchy");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -77,6 +83,10 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
           return RANGE_TO_EXCLUSIVE;
         case 4: // HIT_COUNT
           return HIT_COUNT;
+        case 50: // HIERARCHY_ID
+          return HIERARCHY_ID;
+        case 60: // HIERARCHY
+          return HIERARCHY;
         default:
           return null;
       }
@@ -130,6 +140,11 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.HIT_COUNT, new org.apache.thrift.meta_data.FieldMetaData("hitCount", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+    tmpMap.put(_Fields.HIERARCHY_ID, new org.apache.thrift.meta_data.FieldMetaData("hierarchyId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.HIERARCHY, new org.apache.thrift.meta_data.FieldMetaData("hierarchy", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(FacetValue.class, metaDataMap);
   }
@@ -141,7 +156,9 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     String stringValue,
     String rangeFromInclusive,
     String rangeToExclusive,
-    long hitCount)
+    long hitCount,
+    String hierarchyId,
+    List<String> hierarchy)
   {
     this();
     this.stringValue = stringValue;
@@ -149,6 +166,8 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     this.rangeToExclusive = rangeToExclusive;
     this.hitCount = hitCount;
     setHitCountIsSet(true);
+    this.hierarchyId = hierarchyId;
+    this.hierarchy = hierarchy;
   }
 
   /**
@@ -166,6 +185,16 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       this.rangeToExclusive = other.rangeToExclusive;
     }
     this.hitCount = other.hitCount;
+    if (other.isSetHierarchyId()) {
+      this.hierarchyId = other.hierarchyId;
+    }
+    if (other.isSetHierarchy()) {
+      List<String> __this__hierarchy = new ArrayList<String>();
+      for (String other_element : other.hierarchy) {
+        __this__hierarchy.add(other_element);
+      }
+      this.hierarchy = __this__hierarchy;
+    }
   }
 
   public FacetValue deepCopy() {
@@ -179,6 +208,8 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     this.rangeToExclusive = null;
     setHitCountIsSet(false);
     this.hitCount = 0;
+    this.hierarchyId = null;
+    this.hierarchy = null;
   }
 
   public String getStringValue() {
@@ -276,6 +307,69 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __HITCOUNT_ISSET_ID, value);
   }
 
+  public String getHierarchyId() {
+    return this.hierarchyId;
+  }
+
+  public FacetValue setHierarchyId(String hierarchyId) {
+    this.hierarchyId = hierarchyId;
+    return this;
+  }
+
+  public void unsetHierarchyId() {
+    this.hierarchyId = null;
+  }
+
+  /** Returns true if field hierarchyId is set (has been assigned a value) and false otherwise */
+  public boolean isSetHierarchyId() {
+    return this.hierarchyId != null;
+  }
+
+  public void setHierarchyIdIsSet(boolean value) {
+    if (!value) {
+      this.hierarchyId = null;
+    }
+  }
+
+  public int getHierarchySize() {
+    return (this.hierarchy == null) ? 0 : this.hierarchy.size();
+  }
+
+  public java.util.Iterator<String> getHierarchyIterator() {
+    return (this.hierarchy == null) ? null : this.hierarchy.iterator();
+  }
+
+  public void addToHierarchy(String elem) {
+    if (this.hierarchy == null) {
+      this.hierarchy = new ArrayList<String>();
+    }
+    this.hierarchy.add(elem);
+  }
+
+  public List<String> getHierarchy() {
+    return this.hierarchy;
+  }
+
+  public FacetValue setHierarchy(List<String> hierarchy) {
+    this.hierarchy = hierarchy;
+    return this;
+  }
+
+  public void unsetHierarchy() {
+    this.hierarchy = null;
+  }
+
+  /** Returns true if field hierarchy is set (has been assigned a value) and false otherwise */
+  public boolean isSetHierarchy() {
+    return this.hierarchy != null;
+  }
+
+  public void setHierarchyIsSet(boolean value) {
+    if (!value) {
+      this.hierarchy = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case STRING_VALUE:
@@ -310,6 +404,22 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       }
       break;
 
+    case HIERARCHY_ID:
+      if (value == null) {
+        unsetHierarchyId();
+      } else {
+        setHierarchyId((String)value);
+      }
+      break;
+
+    case HIERARCHY:
+      if (value == null) {
+        unsetHierarchy();
+      } else {
+        setHierarchy((List<String>)value);
+      }
+      break;
+
     }
   }
 
@@ -326,6 +436,12 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
 
     case HIT_COUNT:
       return Long.valueOf(getHitCount());
+
+    case HIERARCHY_ID:
+      return getHierarchyId();
+
+    case HIERARCHY:
+      return getHierarchy();
 
     }
     throw new IllegalStateException();
@@ -346,6 +462,10 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       return isSetRangeToExclusive();
     case HIT_COUNT:
       return isSetHitCount();
+    case HIERARCHY_ID:
+      return isSetHierarchyId();
+    case HIERARCHY:
+      return isSetHierarchy();
     }
     throw new IllegalStateException();
   }
@@ -396,6 +516,24 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       if (!(this_present_hitCount && that_present_hitCount))
         return false;
       if (this.hitCount != that.hitCount)
+        return false;
+    }
+
+    boolean this_present_hierarchyId = true && this.isSetHierarchyId();
+    boolean that_present_hierarchyId = true && that.isSetHierarchyId();
+    if (this_present_hierarchyId || that_present_hierarchyId) {
+      if (!(this_present_hierarchyId && that_present_hierarchyId))
+        return false;
+      if (!this.hierarchyId.equals(that.hierarchyId))
+        return false;
+    }
+
+    boolean this_present_hierarchy = true && this.isSetHierarchy();
+    boolean that_present_hierarchy = true && that.isSetHierarchy();
+    if (this_present_hierarchy || that_present_hierarchy) {
+      if (!(this_present_hierarchy && that_present_hierarchy))
+        return false;
+      if (!this.hierarchy.equals(that.hierarchy))
         return false;
     }
 
@@ -455,6 +593,26 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetHierarchyId()).compareTo(typedOther.isSetHierarchyId());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetHierarchyId()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.hierarchyId, typedOther.hierarchyId);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetHierarchy()).compareTo(typedOther.isSetHierarchy());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetHierarchy()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.hierarchy, typedOther.hierarchy);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -501,6 +659,22 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     if (!first) sb.append(", ");
     sb.append("hitCount:");
     sb.append(this.hitCount);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("hierarchyId:");
+    if (this.hierarchyId == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.hierarchyId);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("hierarchy:");
+    if (this.hierarchy == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.hierarchy);
+    }
     first = false;
     sb.append(")");
     return sb.toString();
@@ -579,6 +753,32 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 50: // HIERARCHY_ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.hierarchyId = iprot.readString();
+              struct.setHierarchyIdIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 60: // HIERARCHY
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list90 = iprot.readListBegin();
+                struct.hierarchy = new ArrayList<String>(_list90.size);
+                for (int _i91 = 0; _i91 < _list90.size; ++_i91)
+                {
+                  String _elem92; // required
+                  _elem92 = iprot.readString();
+                  struct.hierarchy.add(_elem92);
+                }
+                iprot.readListEnd();
+              }
+              struct.setHierarchyIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -612,6 +812,23 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       oprot.writeFieldBegin(HIT_COUNT_FIELD_DESC);
       oprot.writeI64(struct.hitCount);
       oprot.writeFieldEnd();
+      if (struct.hierarchyId != null) {
+        oprot.writeFieldBegin(HIERARCHY_ID_FIELD_DESC);
+        oprot.writeString(struct.hierarchyId);
+        oprot.writeFieldEnd();
+      }
+      if (struct.hierarchy != null) {
+        oprot.writeFieldBegin(HIERARCHY_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.hierarchy.size()));
+          for (String _iter93 : struct.hierarchy)
+          {
+            oprot.writeString(_iter93);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -642,7 +859,13 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       if (struct.isSetHitCount()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetHierarchyId()) {
+        optionals.set(4);
+      }
+      if (struct.isSetHierarchy()) {
+        optionals.set(5);
+      }
+      oprot.writeBitSet(optionals, 6);
       if (struct.isSetStringValue()) {
         oprot.writeString(struct.stringValue);
       }
@@ -655,12 +878,24 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       if (struct.isSetHitCount()) {
         oprot.writeI64(struct.hitCount);
       }
+      if (struct.isSetHierarchyId()) {
+        oprot.writeString(struct.hierarchyId);
+      }
+      if (struct.isSetHierarchy()) {
+        {
+          oprot.writeI32(struct.hierarchy.size());
+          for (String _iter94 : struct.hierarchy)
+          {
+            oprot.writeString(_iter94);
+          }
+        }
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, FacetValue struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(4);
+      BitSet incoming = iprot.readBitSet(6);
       if (incoming.get(0)) {
         struct.stringValue = iprot.readString();
         struct.setStringValueIsSet(true);
@@ -676,6 +911,23 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       if (incoming.get(3)) {
         struct.hitCount = iprot.readI64();
         struct.setHitCountIsSet(true);
+      }
+      if (incoming.get(4)) {
+        struct.hierarchyId = iprot.readString();
+        struct.setHierarchyIdIsSet(true);
+      }
+      if (incoming.get(5)) {
+        {
+          org.apache.thrift.protocol.TList _list95 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.hierarchy = new ArrayList<String>(_list95.size);
+          for (int _i96 = 0; _i96 < _list95.size; ++_i96)
+          {
+            String _elem97; // required
+            _elem97 = iprot.readString();
+            struct.hierarchy.add(_elem97);
+          }
+        }
+        struct.setHierarchyIsSet(true);
       }
     }
   }
