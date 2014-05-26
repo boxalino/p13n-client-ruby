@@ -3156,6 +3156,746 @@ class BatchChoiceResponse {
 
 }
 
+class AutocompleteHit {
+  static $_TSPEC;
+
+  public $suggestion = null;
+  public $highlighted = null;
+  public $searchResult = null;
+  public $score = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        11 => array(
+          'var' => 'suggestion',
+          'type' => TType::STRING,
+          ),
+        21 => array(
+          'var' => 'highlighted',
+          'type' => TType::STRING,
+          ),
+        31 => array(
+          'var' => 'searchResult',
+          'type' => TType::STRUCT,
+          'class' => '\com\boxalino\p13n\api\thrift\SearchResult',
+          ),
+        41 => array(
+          'var' => 'score',
+          'type' => TType::DOUBLE,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['suggestion'])) {
+        $this->suggestion = $vals['suggestion'];
+      }
+      if (isset($vals['highlighted'])) {
+        $this->highlighted = $vals['highlighted'];
+      }
+      if (isset($vals['searchResult'])) {
+        $this->searchResult = $vals['searchResult'];
+      }
+      if (isset($vals['score'])) {
+        $this->score = $vals['score'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'AutocompleteHit';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 11:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->suggestion);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 21:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->highlighted);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 31:
+          if ($ftype == TType::STRUCT) {
+            $this->searchResult = new \com\boxalino\p13n\api\thrift\SearchResult();
+            $xfer += $this->searchResult->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 41:
+          if ($ftype == TType::DOUBLE) {
+            $xfer += $input->readDouble($this->score);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('AutocompleteHit');
+    if ($this->suggestion !== null) {
+      $xfer += $output->writeFieldBegin('suggestion', TType::STRING, 11);
+      $xfer += $output->writeString($this->suggestion);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->highlighted !== null) {
+      $xfer += $output->writeFieldBegin('highlighted', TType::STRING, 21);
+      $xfer += $output->writeString($this->highlighted);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->searchResult !== null) {
+      if (!is_object($this->searchResult)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('searchResult', TType::STRUCT, 31);
+      $xfer += $this->searchResult->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->score !== null) {
+      $xfer += $output->writeFieldBegin('score', TType::DOUBLE, 41);
+      $xfer += $output->writeDouble($this->score);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class AutocompleteQuery {
+  static $_TSPEC;
+
+  public $indexId = null;
+  public $language = null;
+  public $queryText = null;
+  public $suggestionsHitCount = null;
+  public $highlight = null;
+  public $highlightPre = "<em>";
+  public $highlightPost = "</em>";
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        11 => array(
+          'var' => 'indexId',
+          'type' => TType::STRING,
+          ),
+        21 => array(
+          'var' => 'language',
+          'type' => TType::STRING,
+          ),
+        31 => array(
+          'var' => 'queryText',
+          'type' => TType::STRING,
+          ),
+        41 => array(
+          'var' => 'suggestionsHitCount',
+          'type' => TType::I32,
+          ),
+        51 => array(
+          'var' => 'highlight',
+          'type' => TType::BOOL,
+          ),
+        61 => array(
+          'var' => 'highlightPre',
+          'type' => TType::STRING,
+          ),
+        71 => array(
+          'var' => 'highlightPost',
+          'type' => TType::STRING,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['indexId'])) {
+        $this->indexId = $vals['indexId'];
+      }
+      if (isset($vals['language'])) {
+        $this->language = $vals['language'];
+      }
+      if (isset($vals['queryText'])) {
+        $this->queryText = $vals['queryText'];
+      }
+      if (isset($vals['suggestionsHitCount'])) {
+        $this->suggestionsHitCount = $vals['suggestionsHitCount'];
+      }
+      if (isset($vals['highlight'])) {
+        $this->highlight = $vals['highlight'];
+      }
+      if (isset($vals['highlightPre'])) {
+        $this->highlightPre = $vals['highlightPre'];
+      }
+      if (isset($vals['highlightPost'])) {
+        $this->highlightPost = $vals['highlightPost'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'AutocompleteQuery';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 11:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->indexId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 21:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->language);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 31:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->queryText);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 41:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->suggestionsHitCount);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 51:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->highlight);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 61:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->highlightPre);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 71:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->highlightPost);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('AutocompleteQuery');
+    if ($this->indexId !== null) {
+      $xfer += $output->writeFieldBegin('indexId', TType::STRING, 11);
+      $xfer += $output->writeString($this->indexId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->language !== null) {
+      $xfer += $output->writeFieldBegin('language', TType::STRING, 21);
+      $xfer += $output->writeString($this->language);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->queryText !== null) {
+      $xfer += $output->writeFieldBegin('queryText', TType::STRING, 31);
+      $xfer += $output->writeString($this->queryText);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->suggestionsHitCount !== null) {
+      $xfer += $output->writeFieldBegin('suggestionsHitCount', TType::I32, 41);
+      $xfer += $output->writeI32($this->suggestionsHitCount);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->highlight !== null) {
+      $xfer += $output->writeFieldBegin('highlight', TType::BOOL, 51);
+      $xfer += $output->writeBool($this->highlight);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->highlightPre !== null) {
+      $xfer += $output->writeFieldBegin('highlightPre', TType::STRING, 61);
+      $xfer += $output->writeString($this->highlightPre);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->highlightPost !== null) {
+      $xfer += $output->writeFieldBegin('highlightPost', TType::STRING, 71);
+      $xfer += $output->writeString($this->highlightPost);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class AutocompleteRequest {
+  static $_TSPEC;
+
+  public $userRecord = null;
+  public $scope = "system_rec";
+  public $choiceId = null;
+  public $profileId = null;
+  public $requestContext = null;
+  public $excludeVariantIds = null;
+  public $autocompleteQuery = null;
+  public $searchChoiceId = null;
+  public $searchQuery = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        11 => array(
+          'var' => 'userRecord',
+          'type' => TType::STRUCT,
+          'class' => '\com\boxalino\p13n\api\thrift\UserRecord',
+          ),
+        21 => array(
+          'var' => 'scope',
+          'type' => TType::STRING,
+          ),
+        31 => array(
+          'var' => 'choiceId',
+          'type' => TType::STRING,
+          ),
+        41 => array(
+          'var' => 'profileId',
+          'type' => TType::STRING,
+          ),
+        51 => array(
+          'var' => 'requestContext',
+          'type' => TType::STRUCT,
+          'class' => '\com\boxalino\p13n\api\thrift\RequestContext',
+          ),
+        61 => array(
+          'var' => 'excludeVariantIds',
+          'type' => TType::SET,
+          'etype' => TType::STRING,
+          'elem' => array(
+            'type' => TType::STRING,
+            ),
+          ),
+        71 => array(
+          'var' => 'autocompleteQuery',
+          'type' => TType::STRUCT,
+          'class' => '\com\boxalino\p13n\api\thrift\AutocompleteQuery',
+          ),
+        81 => array(
+          'var' => 'searchChoiceId',
+          'type' => TType::STRING,
+          ),
+        91 => array(
+          'var' => 'searchQuery',
+          'type' => TType::STRUCT,
+          'class' => '\com\boxalino\p13n\api\thrift\SimpleSearchQuery',
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['userRecord'])) {
+        $this->userRecord = $vals['userRecord'];
+      }
+      if (isset($vals['scope'])) {
+        $this->scope = $vals['scope'];
+      }
+      if (isset($vals['choiceId'])) {
+        $this->choiceId = $vals['choiceId'];
+      }
+      if (isset($vals['profileId'])) {
+        $this->profileId = $vals['profileId'];
+      }
+      if (isset($vals['requestContext'])) {
+        $this->requestContext = $vals['requestContext'];
+      }
+      if (isset($vals['excludeVariantIds'])) {
+        $this->excludeVariantIds = $vals['excludeVariantIds'];
+      }
+      if (isset($vals['autocompleteQuery'])) {
+        $this->autocompleteQuery = $vals['autocompleteQuery'];
+      }
+      if (isset($vals['searchChoiceId'])) {
+        $this->searchChoiceId = $vals['searchChoiceId'];
+      }
+      if (isset($vals['searchQuery'])) {
+        $this->searchQuery = $vals['searchQuery'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'AutocompleteRequest';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 11:
+          if ($ftype == TType::STRUCT) {
+            $this->userRecord = new \com\boxalino\p13n\api\thrift\UserRecord();
+            $xfer += $this->userRecord->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 21:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->scope);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 31:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->choiceId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 41:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->profileId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 51:
+          if ($ftype == TType::STRUCT) {
+            $this->requestContext = new \com\boxalino\p13n\api\thrift\RequestContext();
+            $xfer += $this->requestContext->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 61:
+          if ($ftype == TType::SET) {
+            $this->excludeVariantIds = array();
+            $_size166 = 0;
+            $_etype169 = 0;
+            $xfer += $input->readSetBegin($_etype169, $_size166);
+            for ($_i170 = 0; $_i170 < $_size166; ++$_i170)
+            {
+              $elem171 = null;
+              $xfer += $input->readString($elem171);
+              if (is_scalar($elem171)) {
+                $this->excludeVariantIds[$elem171] = true;
+              } else {
+                $this->excludeVariantIds []= $elem171;
+              }
+            }
+            $xfer += $input->readSetEnd();
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 71:
+          if ($ftype == TType::STRUCT) {
+            $this->autocompleteQuery = new \com\boxalino\p13n\api\thrift\AutocompleteQuery();
+            $xfer += $this->autocompleteQuery->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 81:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->searchChoiceId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 91:
+          if ($ftype == TType::STRUCT) {
+            $this->searchQuery = new \com\boxalino\p13n\api\thrift\SimpleSearchQuery();
+            $xfer += $this->searchQuery->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('AutocompleteRequest');
+    if ($this->userRecord !== null) {
+      if (!is_object($this->userRecord)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('userRecord', TType::STRUCT, 11);
+      $xfer += $this->userRecord->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->scope !== null) {
+      $xfer += $output->writeFieldBegin('scope', TType::STRING, 21);
+      $xfer += $output->writeString($this->scope);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->choiceId !== null) {
+      $xfer += $output->writeFieldBegin('choiceId', TType::STRING, 31);
+      $xfer += $output->writeString($this->choiceId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->profileId !== null) {
+      $xfer += $output->writeFieldBegin('profileId', TType::STRING, 41);
+      $xfer += $output->writeString($this->profileId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->requestContext !== null) {
+      if (!is_object($this->requestContext)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('requestContext', TType::STRUCT, 51);
+      $xfer += $this->requestContext->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->excludeVariantIds !== null) {
+      if (!is_array($this->excludeVariantIds)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('excludeVariantIds', TType::SET, 61);
+      {
+        $output->writeSetBegin(TType::STRING, count($this->excludeVariantIds));
+        {
+          foreach ($this->excludeVariantIds as $iter172 => $iter173)
+          {
+            if (is_scalar($iter173)) {
+            $xfer += $output->writeString($iter172);
+            } else {
+            $xfer += $output->writeString($iter173);
+            }
+          }
+        }
+        $output->writeSetEnd();
+      }
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->autocompleteQuery !== null) {
+      if (!is_object($this->autocompleteQuery)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('autocompleteQuery', TType::STRUCT, 71);
+      $xfer += $this->autocompleteQuery->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->searchChoiceId !== null) {
+      $xfer += $output->writeFieldBegin('searchChoiceId', TType::STRING, 81);
+      $xfer += $output->writeString($this->searchChoiceId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->searchQuery !== null) {
+      if (!is_object($this->searchQuery)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('searchQuery', TType::STRUCT, 91);
+      $xfer += $this->searchQuery->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class AutocompleteResponse {
+  static $_TSPEC;
+
+  public $hits = null;
+  public $prefixSearchResult = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        11 => array(
+          'var' => 'hits',
+          'type' => TType::LST,
+          'etype' => TType::STRUCT,
+          'elem' => array(
+            'type' => TType::STRUCT,
+            'class' => '\com\boxalino\p13n\api\thrift\AutocompleteHit',
+            ),
+          ),
+        21 => array(
+          'var' => 'prefixSearchResult',
+          'type' => TType::STRUCT,
+          'class' => '\com\boxalino\p13n\api\thrift\SearchResult',
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['hits'])) {
+        $this->hits = $vals['hits'];
+      }
+      if (isset($vals['prefixSearchResult'])) {
+        $this->prefixSearchResult = $vals['prefixSearchResult'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'AutocompleteResponse';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 11:
+          if ($ftype == TType::LST) {
+            $this->hits = array();
+            $_size174 = 0;
+            $_etype177 = 0;
+            $xfer += $input->readListBegin($_etype177, $_size174);
+            for ($_i178 = 0; $_i178 < $_size174; ++$_i178)
+            {
+              $elem179 = null;
+              $elem179 = new \com\boxalino\p13n\api\thrift\AutocompleteHit();
+              $xfer += $elem179->read($input);
+              $this->hits []= $elem179;
+            }
+            $xfer += $input->readListEnd();
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 21:
+          if ($ftype == TType::STRUCT) {
+            $this->prefixSearchResult = new \com\boxalino\p13n\api\thrift\SearchResult();
+            $xfer += $this->prefixSearchResult->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('AutocompleteResponse');
+    if ($this->hits !== null) {
+      if (!is_array($this->hits)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('hits', TType::LST, 11);
+      {
+        $output->writeListBegin(TType::STRUCT, count($this->hits));
+        {
+          foreach ($this->hits as $iter180)
+          {
+            $xfer += $iter180->write($output);
+          }
+        }
+        $output->writeListEnd();
+      }
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->prefixSearchResult !== null) {
+      if (!is_object($this->prefixSearchResult)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('prefixSearchResult', TType::STRUCT, 21);
+      $xfer += $this->prefixSearchResult->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
 class P13nServiceException extends TException {
   static $_TSPEC;
 
