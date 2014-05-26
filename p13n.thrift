@@ -230,14 +230,46 @@ struct BatchChoiceResponse {
   2: list<list<Variant>> selectedVariants
 }
 
+struct AutocompleteHit {
+    11: string suggestion,
+    21: string highlighted,
+    31: SearchResult searchResult,
+    41: double score
+}
+
+struct AutocompleteQuery {
+    11: string indexId,
+    21: string language,
+    31: string queryText,
+    41: i32 suggestionsHitCount,
+    51: bool highlight,
+    61: string highlightPre = "<em>",
+    71: string highlightPost = "</em>"
+}
+
+struct AutocompleteRequest {
+    11: UserRecord userRecord,
+    21: string scope = "system_rec",
+    31: string choiceId,
+    41: string profileId,
+    51: RequestContext requestContext,
+    61: set<string> excludeVariantIds,
+    71: AutocompleteQuery autocompleteQuery,
+    81: string searchChoiceId,
+    91: SimpleSearchQuery searchQuery
+}
+
+struct AutocompleteResponse {
+    11: list<AutocompleteHit> hits,
+    21: SearchResult prefixSearchResult
+}
+
 exception P13nServiceException {
   1: required string message
 }
 
 service P13nService {
   ChoiceResponse choose(ChoiceRequest choiceRequest) throws (1: P13nServiceException p13nServiceException),
-  binary uploadChoiceConfiguration(binary xmlPayload) throws (1: P13nServiceException p13nServiceException),
-  i32 saveProfileProperties(list<ProfilePropertyValue> profilePropertyValues) throws (1: P13nServiceException p13nServiceException),
-  string command(string command) throws (1: P13nServiceException p13nServiceException),
-  BatchChoiceResponse batchChoose(BatchChoiceRequest batchChoiceRequest) throws (1: P13nServiceException p13nServiceException)
+  BatchChoiceResponse batchChoose(BatchChoiceRequest batchChoiceRequest) throws (1: P13nServiceException p13nServiceException),
+  AutocompleteResponse autocomplete(AutocompleteRequest request) throws (1: P13nServiceException p13nServiceException)
 }
