@@ -36,6 +36,7 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
   private static final org.apache.thrift.protocol.TField HITS_FIELD_DESC = new org.apache.thrift.protocol.TField("hits", org.apache.thrift.protocol.TType.LIST, (short)1);
   private static final org.apache.thrift.protocol.TField FACET_RESPONSES_FIELD_DESC = new org.apache.thrift.protocol.TField("facetResponses", org.apache.thrift.protocol.TType.LIST, (short)2);
   private static final org.apache.thrift.protocol.TField TOTAL_HIT_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("totalHitCount", org.apache.thrift.protocol.TType.I64, (short)3);
+  private static final org.apache.thrift.protocol.TField QUERY_TEXT_FIELD_DESC = new org.apache.thrift.protocol.TField("queryText", org.apache.thrift.protocol.TType.STRING, (short)40);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -46,12 +47,14 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
   public List<Hit> hits; // required
   public List<FacetResponse> facetResponses; // required
   public long totalHitCount; // required
+  public String queryText; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     HITS((short)1, "hits"),
     FACET_RESPONSES((short)2, "facetResponses"),
-    TOTAL_HIT_COUNT((short)3, "totalHitCount");
+    TOTAL_HIT_COUNT((short)3, "totalHitCount"),
+    QUERY_TEXT((short)40, "queryText");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -72,6 +75,8 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
           return FACET_RESPONSES;
         case 3: // TOTAL_HIT_COUNT
           return TOTAL_HIT_COUNT;
+        case 40: // QUERY_TEXT
+          return QUERY_TEXT;
         default:
           return null;
       }
@@ -125,6 +130,8 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, FacetResponse.class))));
     tmpMap.put(_Fields.TOTAL_HIT_COUNT, new org.apache.thrift.meta_data.FieldMetaData("totalHitCount", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+    tmpMap.put(_Fields.QUERY_TEXT, new org.apache.thrift.meta_data.FieldMetaData("queryText", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(SearchResult.class, metaDataMap);
   }
@@ -135,13 +142,15 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
   public SearchResult(
     List<Hit> hits,
     List<FacetResponse> facetResponses,
-    long totalHitCount)
+    long totalHitCount,
+    String queryText)
   {
     this();
     this.hits = hits;
     this.facetResponses = facetResponses;
     this.totalHitCount = totalHitCount;
     setTotalHitCountIsSet(true);
+    this.queryText = queryText;
   }
 
   /**
@@ -164,6 +173,9 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
       this.facetResponses = __this__facetResponses;
     }
     this.totalHitCount = other.totalHitCount;
+    if (other.isSetQueryText()) {
+      this.queryText = other.queryText;
+    }
   }
 
   public SearchResult deepCopy() {
@@ -176,6 +188,7 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
     this.facetResponses = null;
     setTotalHitCountIsSet(false);
     this.totalHitCount = 0;
+    this.queryText = null;
   }
 
   public int getHitsSize() {
@@ -279,6 +292,30 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __TOTALHITCOUNT_ISSET_ID, value);
   }
 
+  public String getQueryText() {
+    return this.queryText;
+  }
+
+  public SearchResult setQueryText(String queryText) {
+    this.queryText = queryText;
+    return this;
+  }
+
+  public void unsetQueryText() {
+    this.queryText = null;
+  }
+
+  /** Returns true if field queryText is set (has been assigned a value) and false otherwise */
+  public boolean isSetQueryText() {
+    return this.queryText != null;
+  }
+
+  public void setQueryTextIsSet(boolean value) {
+    if (!value) {
+      this.queryText = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case HITS:
@@ -305,6 +342,14 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
       }
       break;
 
+    case QUERY_TEXT:
+      if (value == null) {
+        unsetQueryText();
+      } else {
+        setQueryText((String)value);
+      }
+      break;
+
     }
   }
 
@@ -318,6 +363,9 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
 
     case TOTAL_HIT_COUNT:
       return Long.valueOf(getTotalHitCount());
+
+    case QUERY_TEXT:
+      return getQueryText();
 
     }
     throw new IllegalStateException();
@@ -336,6 +384,8 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
       return isSetFacetResponses();
     case TOTAL_HIT_COUNT:
       return isSetTotalHitCount();
+    case QUERY_TEXT:
+      return isSetQueryText();
     }
     throw new IllegalStateException();
   }
@@ -377,6 +427,15 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
       if (!(this_present_totalHitCount && that_present_totalHitCount))
         return false;
       if (this.totalHitCount != that.totalHitCount)
+        return false;
+    }
+
+    boolean this_present_queryText = true && this.isSetQueryText();
+    boolean that_present_queryText = true && that.isSetQueryText();
+    if (this_present_queryText || that_present_queryText) {
+      if (!(this_present_queryText && that_present_queryText))
+        return false;
+      if (!this.queryText.equals(that.queryText))
         return false;
     }
 
@@ -426,6 +485,16 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetQueryText()).compareTo(typedOther.isSetQueryText());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetQueryText()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.queryText, typedOther.queryText);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -464,6 +533,14 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
     if (!first) sb.append(", ");
     sb.append("totalHitCount:");
     sb.append(this.totalHitCount);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("queryText:");
+    if (this.queryText == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.queryText);
+    }
     first = false;
     sb.append(")");
     return sb.toString();
@@ -556,6 +633,14 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 40: // QUERY_TEXT
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.queryText = iprot.readString();
+              struct.setQueryTextIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -598,6 +683,11 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
       oprot.writeFieldBegin(TOTAL_HIT_COUNT_FIELD_DESC);
       oprot.writeI64(struct.totalHitCount);
       oprot.writeFieldEnd();
+      if (struct.queryText != null) {
+        oprot.writeFieldBegin(QUERY_TEXT_FIELD_DESC);
+        oprot.writeString(struct.queryText);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -625,7 +715,10 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
       if (struct.isSetTotalHitCount()) {
         optionals.set(2);
       }
-      oprot.writeBitSet(optionals, 3);
+      if (struct.isSetQueryText()) {
+        optionals.set(3);
+      }
+      oprot.writeBitSet(optionals, 4);
       if (struct.isSetHits()) {
         {
           oprot.writeI32(struct.hits.size());
@@ -647,12 +740,15 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
       if (struct.isSetTotalHitCount()) {
         oprot.writeI64(struct.totalHitCount);
       }
+      if (struct.isSetQueryText()) {
+        oprot.writeString(struct.queryText);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, SearchResult struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(3);
+      BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         {
           org.apache.thrift.protocol.TList _list134 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
@@ -684,6 +780,10 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
       if (incoming.get(2)) {
         struct.totalHitCount = iprot.readI64();
         struct.setTotalHitCountIsSet(true);
+      }
+      if (incoming.get(3)) {
+        struct.queryText = iprot.readString();
+        struct.setQueryTextIsSet(true);
       }
     }
   }

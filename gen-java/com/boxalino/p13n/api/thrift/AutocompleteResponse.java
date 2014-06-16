@@ -419,14 +419,14 @@ public class AutocompleteResponse implements org.apache.thrift.TBase<Autocomplet
           case 11: // HITS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list196 = iprot.readListBegin();
-                struct.hits = new ArrayList<AutocompleteHit>(_list196.size);
-                for (int _i197 = 0; _i197 < _list196.size; ++_i197)
+                org.apache.thrift.protocol.TList _list212 = iprot.readListBegin();
+                struct.hits = new ArrayList<AutocompleteHit>(_list212.size);
+                for (int _i213 = 0; _i213 < _list212.size; ++_i213)
                 {
-                  AutocompleteHit _elem198; // required
-                  _elem198 = new AutocompleteHit();
-                  _elem198.read(iprot);
-                  struct.hits.add(_elem198);
+                  AutocompleteHit _elem214; // required
+                  _elem214 = new AutocompleteHit();
+                  _elem214.read(iprot);
+                  struct.hits.add(_elem214);
                 }
                 iprot.readListEnd();
               }
@@ -463,9 +463,9 @@ public class AutocompleteResponse implements org.apache.thrift.TBase<Autocomplet
         oprot.writeFieldBegin(HITS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.hits.size()));
-          for (AutocompleteHit _iter199 : struct.hits)
+          for (AutocompleteHit _iter215 : struct.hits)
           {
-            _iter199.write(oprot);
+            _iter215.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -504,9 +504,9 @@ public class AutocompleteResponse implements org.apache.thrift.TBase<Autocomplet
       if (struct.isSetHits()) {
         {
           oprot.writeI32(struct.hits.size());
-          for (AutocompleteHit _iter200 : struct.hits)
+          for (AutocompleteHit _iter216 : struct.hits)
           {
-            _iter200.write(oprot);
+            _iter216.write(oprot);
           }
         }
       }
@@ -521,14 +521,14 @@ public class AutocompleteResponse implements org.apache.thrift.TBase<Autocomplet
       BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TList _list201 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.hits = new ArrayList<AutocompleteHit>(_list201.size);
-          for (int _i202 = 0; _i202 < _list201.size; ++_i202)
+          org.apache.thrift.protocol.TList _list217 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.hits = new ArrayList<AutocompleteHit>(_list217.size);
+          for (int _i218 = 0; _i218 < _list217.size; ++_i218)
           {
-            AutocompleteHit _elem203; // required
-            _elem203 = new AutocompleteHit();
-            _elem203.read(iprot);
-            struct.hits.add(_elem203);
+            AutocompleteHit _elem219; // required
+            _elem219 = new AutocompleteHit();
+            _elem219.read(iprot);
+            struct.hits.add(_elem219);
           }
         }
         struct.setHitsIsSet(true);

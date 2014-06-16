@@ -122,7 +122,9 @@ struct ChoiceInquiry {
 # set of variantIds to be excluded from result
   5: set<string> excludeVariantIds,
 # 
-  6: string scope = "system_rec"
+  6: string scope = "system_rec",
+  # 
+  70: bool withRelaxation = false
 }
 
 struct RequestContext {
@@ -184,7 +186,16 @@ struct SearchResult {
 # list of requested facets or null if none requested
   2: list<FacetResponse> facetResponses,
 # total number of hits
-  3: i64 totalHitCount
+  3: i64 totalHitCount,
+# relaxation query text for relaxation results or requested queryText for a regular SearchResult
+  40: string queryText
+}
+
+struct SearchRelaxation {
+# 
+  10: list<SearchResult> suggestionsResults,
+# 
+  20: list<SearchResult> subphrasesResults
 }
 
 struct Variant {
@@ -195,7 +206,12 @@ struct Variant {
 # result of the search request for recommendations and search requests
   3: SearchResult searchResult,
 # recommendation's result title localized in language requested in corresponding SimpleSearchQuery
-  4: string searchResultTitle
+  4: string searchResultTitle,
+# When the service considers queryText invalid, it will evaluate and return relaxations 
+# if it is requested in corresponding ChoiceInquiry and if relaxations could be found.
+# Note that original query still could yield some results; it is up to the client to decide
+# whether searchRelaxations should be used (with displaying appropriate message) or not.
+  50: SearchRelaxation searchRelaxation
 }
 
 struct ChoiceResponse {

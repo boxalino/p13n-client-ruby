@@ -39,6 +39,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
   private static final org.apache.thrift.protocol.TField MIN_HIT_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("minHitCount", org.apache.thrift.protocol.TType.I32, (short)4);
   private static final org.apache.thrift.protocol.TField EXCLUDE_VARIANT_IDS_FIELD_DESC = new org.apache.thrift.protocol.TField("excludeVariantIds", org.apache.thrift.protocol.TType.SET, (short)5);
   private static final org.apache.thrift.protocol.TField SCOPE_FIELD_DESC = new org.apache.thrift.protocol.TField("scope", org.apache.thrift.protocol.TType.STRING, (short)6);
+  private static final org.apache.thrift.protocol.TField WITH_RELAXATION_FIELD_DESC = new org.apache.thrift.protocol.TField("withRelaxation", org.apache.thrift.protocol.TType.BOOL, (short)70);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -52,6 +53,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
   public int minHitCount; // required
   public Set<String> excludeVariantIds; // required
   public String scope; // required
+  public boolean withRelaxation; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -60,7 +62,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     CONTEXT_ITEMS((short)3, "contextItems"),
     MIN_HIT_COUNT((short)4, "minHitCount"),
     EXCLUDE_VARIANT_IDS((short)5, "excludeVariantIds"),
-    SCOPE((short)6, "scope");
+    SCOPE((short)6, "scope"),
+    WITH_RELAXATION((short)70, "withRelaxation");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -87,6 +90,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
           return EXCLUDE_VARIANT_IDS;
         case 6: // SCOPE
           return SCOPE;
+        case 70: // WITH_RELAXATION
+          return WITH_RELAXATION;
         default:
           return null;
       }
@@ -128,6 +133,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
 
   // isset id assignments
   private static final int __MINHITCOUNT_ISSET_ID = 0;
+  private static final int __WITHRELAXATION_ISSET_ID = 1;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -146,12 +152,16 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
     tmpMap.put(_Fields.SCOPE, new org.apache.thrift.meta_data.FieldMetaData("scope", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.WITH_RELAXATION, new org.apache.thrift.meta_data.FieldMetaData("withRelaxation", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ChoiceInquiry.class, metaDataMap);
   }
 
   public ChoiceInquiry() {
     this.scope = "system_rec";
+
+    this.withRelaxation = false;
 
   }
 
@@ -161,7 +171,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     List<ContextItem> contextItems,
     int minHitCount,
     Set<String> excludeVariantIds,
-    String scope)
+    String scope,
+    boolean withRelaxation)
   {
     this();
     this.choiceId = choiceId;
@@ -171,6 +182,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     setMinHitCountIsSet(true);
     this.excludeVariantIds = excludeVariantIds;
     this.scope = scope;
+    this.withRelaxation = withRelaxation;
+    setWithRelaxationIsSet(true);
   }
 
   /**
@@ -202,6 +215,7 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     if (other.isSetScope()) {
       this.scope = other.scope;
     }
+    this.withRelaxation = other.withRelaxation;
   }
 
   public ChoiceInquiry deepCopy() {
@@ -217,6 +231,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     this.minHitCount = 0;
     this.excludeVariantIds = null;
     this.scope = "system_rec";
+
+    this.withRelaxation = false;
 
   }
 
@@ -393,6 +409,29 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     }
   }
 
+  public boolean isWithRelaxation() {
+    return this.withRelaxation;
+  }
+
+  public ChoiceInquiry setWithRelaxation(boolean withRelaxation) {
+    this.withRelaxation = withRelaxation;
+    setWithRelaxationIsSet(true);
+    return this;
+  }
+
+  public void unsetWithRelaxation() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __WITHRELAXATION_ISSET_ID);
+  }
+
+  /** Returns true if field withRelaxation is set (has been assigned a value) and false otherwise */
+  public boolean isSetWithRelaxation() {
+    return EncodingUtils.testBit(__isset_bitfield, __WITHRELAXATION_ISSET_ID);
+  }
+
+  public void setWithRelaxationIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __WITHRELAXATION_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case CHOICE_ID:
@@ -443,6 +482,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       }
       break;
 
+    case WITH_RELAXATION:
+      if (value == null) {
+        unsetWithRelaxation();
+      } else {
+        setWithRelaxation((Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -465,6 +512,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
 
     case SCOPE:
       return getScope();
+
+    case WITH_RELAXATION:
+      return Boolean.valueOf(isWithRelaxation());
 
     }
     throw new IllegalStateException();
@@ -489,6 +539,8 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       return isSetExcludeVariantIds();
     case SCOPE:
       return isSetScope();
+    case WITH_RELAXATION:
+      return isSetWithRelaxation();
     }
     throw new IllegalStateException();
   }
@@ -557,6 +609,15 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (!(this_present_scope && that_present_scope))
         return false;
       if (!this.scope.equals(that.scope))
+        return false;
+    }
+
+    boolean this_present_withRelaxation = true;
+    boolean that_present_withRelaxation = true;
+    if (this_present_withRelaxation || that_present_withRelaxation) {
+      if (!(this_present_withRelaxation && that_present_withRelaxation))
+        return false;
+      if (this.withRelaxation != that.withRelaxation)
         return false;
     }
 
@@ -636,6 +697,16 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetWithRelaxation()).compareTo(typedOther.isSetWithRelaxation());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetWithRelaxation()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.withRelaxation, typedOther.withRelaxation);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -698,6 +769,10 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
     } else {
       sb.append(this.scope);
     }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("withRelaxation:");
+    sb.append(this.withRelaxation);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -817,6 +892,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 70: // WITH_RELAXATION
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.withRelaxation = iprot.readBool();
+              struct.setWithRelaxationIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -874,6 +957,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         oprot.writeString(struct.scope);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(WITH_RELAXATION_FIELD_DESC);
+      oprot.writeBool(struct.withRelaxation);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -910,7 +996,10 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (struct.isSetScope()) {
         optionals.set(5);
       }
-      oprot.writeBitSet(optionals, 6);
+      if (struct.isSetWithRelaxation()) {
+        optionals.set(6);
+      }
+      oprot.writeBitSet(optionals, 7);
       if (struct.isSetChoiceId()) {
         oprot.writeString(struct.choiceId);
       }
@@ -941,12 +1030,15 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (struct.isSetScope()) {
         oprot.writeString(struct.scope);
       }
+      if (struct.isSetWithRelaxation()) {
+        oprot.writeBool(struct.withRelaxation);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, ChoiceInquiry struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(6);
+      BitSet incoming = iprot.readBitSet(7);
       if (incoming.get(0)) {
         struct.choiceId = iprot.readString();
         struct.setChoiceIdIsSet(true);
@@ -990,6 +1082,10 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (incoming.get(5)) {
         struct.scope = iprot.readString();
         struct.setScopeIsSet(true);
+      }
+      if (incoming.get(6)) {
+        struct.withRelaxation = iprot.readBool();
+        struct.setWithRelaxationIsSet(true);
       }
     }
   }

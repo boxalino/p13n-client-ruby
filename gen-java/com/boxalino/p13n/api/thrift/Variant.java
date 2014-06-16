@@ -37,6 +37,7 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
   private static final org.apache.thrift.protocol.TField SCENARIO_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("scenarioId", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField SEARCH_RESULT_FIELD_DESC = new org.apache.thrift.protocol.TField("searchResult", org.apache.thrift.protocol.TType.STRUCT, (short)3);
   private static final org.apache.thrift.protocol.TField SEARCH_RESULT_TITLE_FIELD_DESC = new org.apache.thrift.protocol.TField("searchResultTitle", org.apache.thrift.protocol.TType.STRING, (short)4);
+  private static final org.apache.thrift.protocol.TField SEARCH_RELAXATION_FIELD_DESC = new org.apache.thrift.protocol.TField("searchRelaxation", org.apache.thrift.protocol.TType.STRUCT, (short)50);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -48,13 +49,15 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
   public String scenarioId; // required
   public SearchResult searchResult; // required
   public String searchResultTitle; // required
+  public SearchRelaxation searchRelaxation; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     VARIANT_ID((short)1, "variantId"),
     SCENARIO_ID((short)2, "scenarioId"),
     SEARCH_RESULT((short)3, "searchResult"),
-    SEARCH_RESULT_TITLE((short)4, "searchResultTitle");
+    SEARCH_RESULT_TITLE((short)4, "searchResultTitle"),
+    SEARCH_RELAXATION((short)50, "searchRelaxation");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -77,6 +80,8 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
           return SEARCH_RESULT;
         case 4: // SEARCH_RESULT_TITLE
           return SEARCH_RESULT_TITLE;
+        case 50: // SEARCH_RELAXATION
+          return SEARCH_RELAXATION;
         default:
           return null;
       }
@@ -128,6 +133,8 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, SearchResult.class)));
     tmpMap.put(_Fields.SEARCH_RESULT_TITLE, new org.apache.thrift.meta_data.FieldMetaData("searchResultTitle", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.SEARCH_RELAXATION, new org.apache.thrift.meta_data.FieldMetaData("searchRelaxation", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, SearchRelaxation.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Variant.class, metaDataMap);
   }
@@ -139,13 +146,15 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
     String variantId,
     String scenarioId,
     SearchResult searchResult,
-    String searchResultTitle)
+    String searchResultTitle,
+    SearchRelaxation searchRelaxation)
   {
     this();
     this.variantId = variantId;
     this.scenarioId = scenarioId;
     this.searchResult = searchResult;
     this.searchResultTitle = searchResultTitle;
+    this.searchRelaxation = searchRelaxation;
   }
 
   /**
@@ -164,6 +173,9 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
     if (other.isSetSearchResultTitle()) {
       this.searchResultTitle = other.searchResultTitle;
     }
+    if (other.isSetSearchRelaxation()) {
+      this.searchRelaxation = new SearchRelaxation(other.searchRelaxation);
+    }
   }
 
   public Variant deepCopy() {
@@ -176,6 +188,7 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
     this.scenarioId = null;
     this.searchResult = null;
     this.searchResultTitle = null;
+    this.searchRelaxation = null;
   }
 
   public String getVariantId() {
@@ -274,6 +287,30 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
     }
   }
 
+  public SearchRelaxation getSearchRelaxation() {
+    return this.searchRelaxation;
+  }
+
+  public Variant setSearchRelaxation(SearchRelaxation searchRelaxation) {
+    this.searchRelaxation = searchRelaxation;
+    return this;
+  }
+
+  public void unsetSearchRelaxation() {
+    this.searchRelaxation = null;
+  }
+
+  /** Returns true if field searchRelaxation is set (has been assigned a value) and false otherwise */
+  public boolean isSetSearchRelaxation() {
+    return this.searchRelaxation != null;
+  }
+
+  public void setSearchRelaxationIsSet(boolean value) {
+    if (!value) {
+      this.searchRelaxation = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case VARIANT_ID:
@@ -308,6 +345,14 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
       }
       break;
 
+    case SEARCH_RELAXATION:
+      if (value == null) {
+        unsetSearchRelaxation();
+      } else {
+        setSearchRelaxation((SearchRelaxation)value);
+      }
+      break;
+
     }
   }
 
@@ -324,6 +369,9 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
 
     case SEARCH_RESULT_TITLE:
       return getSearchResultTitle();
+
+    case SEARCH_RELAXATION:
+      return getSearchRelaxation();
 
     }
     throw new IllegalStateException();
@@ -344,6 +392,8 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
       return isSetSearchResult();
     case SEARCH_RESULT_TITLE:
       return isSetSearchResultTitle();
+    case SEARCH_RELAXATION:
+      return isSetSearchRelaxation();
     }
     throw new IllegalStateException();
   }
@@ -394,6 +444,15 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
       if (!(this_present_searchResultTitle && that_present_searchResultTitle))
         return false;
       if (!this.searchResultTitle.equals(that.searchResultTitle))
+        return false;
+    }
+
+    boolean this_present_searchRelaxation = true && this.isSetSearchRelaxation();
+    boolean that_present_searchRelaxation = true && that.isSetSearchRelaxation();
+    if (this_present_searchRelaxation || that_present_searchRelaxation) {
+      if (!(this_present_searchRelaxation && that_present_searchRelaxation))
+        return false;
+      if (!this.searchRelaxation.equals(that.searchRelaxation))
         return false;
     }
 
@@ -453,6 +512,16 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetSearchRelaxation()).compareTo(typedOther.isSetSearchRelaxation());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetSearchRelaxation()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.searchRelaxation, typedOther.searchRelaxation);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -504,6 +573,14 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
       sb.append(this.searchResultTitle);
     }
     first = false;
+    if (!first) sb.append(", ");
+    sb.append("searchRelaxation:");
+    if (this.searchRelaxation == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.searchRelaxation);
+    }
+    first = false;
     sb.append(")");
     return sb.toString();
   }
@@ -513,6 +590,9 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
     // check for sub-struct validity
     if (searchResult != null) {
       searchResult.validate();
+    }
+    if (searchRelaxation != null) {
+      searchRelaxation.validate();
     }
   }
 
@@ -583,6 +663,15 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 50: // SEARCH_RELAXATION
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+              struct.searchRelaxation = new SearchRelaxation();
+              struct.searchRelaxation.read(iprot);
+              struct.setSearchRelaxationIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -618,6 +707,11 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
         oprot.writeString(struct.searchResultTitle);
         oprot.writeFieldEnd();
       }
+      if (struct.searchRelaxation != null) {
+        oprot.writeFieldBegin(SEARCH_RELAXATION_FIELD_DESC);
+        struct.searchRelaxation.write(oprot);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -648,7 +742,10 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
       if (struct.isSetSearchResultTitle()) {
         optionals.set(3);
       }
-      oprot.writeBitSet(optionals, 4);
+      if (struct.isSetSearchRelaxation()) {
+        optionals.set(4);
+      }
+      oprot.writeBitSet(optionals, 5);
       if (struct.isSetVariantId()) {
         oprot.writeString(struct.variantId);
       }
@@ -661,12 +758,15 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
       if (struct.isSetSearchResultTitle()) {
         oprot.writeString(struct.searchResultTitle);
       }
+      if (struct.isSetSearchRelaxation()) {
+        struct.searchRelaxation.write(oprot);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, Variant struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(4);
+      BitSet incoming = iprot.readBitSet(5);
       if (incoming.get(0)) {
         struct.variantId = iprot.readString();
         struct.setVariantIdIsSet(true);
@@ -683,6 +783,11 @@ public class Variant implements org.apache.thrift.TBase<Variant, Variant._Fields
       if (incoming.get(3)) {
         struct.searchResultTitle = iprot.readString();
         struct.setSearchResultTitleIsSet(true);
+      }
+      if (incoming.get(4)) {
+        struct.searchRelaxation = new SearchRelaxation();
+        struct.searchRelaxation.read(iprot);
+        struct.setSearchRelaxationIsSet(true);
       }
     }
   }
