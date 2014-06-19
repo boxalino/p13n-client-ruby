@@ -1012,13 +1012,13 @@ public class AutocompleteRequest implements org.apache.thrift.TBase<Autocomplete
           case 61: // EXCLUDE_VARIANT_IDS
             if (schemeField.type == org.apache.thrift.protocol.TType.SET) {
               {
-                org.apache.thrift.protocol.TSet _set204 = iprot.readSetBegin();
-                struct.excludeVariantIds = new HashSet<String>(2*_set204.size);
-                for (int _i205 = 0; _i205 < _set204.size; ++_i205)
+                org.apache.thrift.protocol.TSet _set212 = iprot.readSetBegin();
+                struct.excludeVariantIds = new HashSet<String>(2*_set212.size);
+                for (int _i213 = 0; _i213 < _set212.size; ++_i213)
                 {
-                  String _elem206; // required
-                  _elem206 = iprot.readString();
-                  struct.excludeVariantIds.add(_elem206);
+                  String _elem214; // required
+                  _elem214 = iprot.readString();
+                  struct.excludeVariantIds.add(_elem214);
                 }
                 iprot.readSetEnd();
               }
@@ -1097,9 +1097,9 @@ public class AutocompleteRequest implements org.apache.thrift.TBase<Autocomplete
         oprot.writeFieldBegin(EXCLUDE_VARIANT_IDS_FIELD_DESC);
         {
           oprot.writeSetBegin(new org.apache.thrift.protocol.TSet(org.apache.thrift.protocol.TType.STRING, struct.excludeVariantIds.size()));
-          for (String _iter207 : struct.excludeVariantIds)
+          for (String _iter215 : struct.excludeVariantIds)
           {
-            oprot.writeString(_iter207);
+            oprot.writeString(_iter215);
           }
           oprot.writeSetEnd();
         }
@@ -1184,9 +1184,9 @@ public class AutocompleteRequest implements org.apache.thrift.TBase<Autocomplete
       if (struct.isSetExcludeVariantIds()) {
         {
           oprot.writeI32(struct.excludeVariantIds.size());
-          for (String _iter208 : struct.excludeVariantIds)
+          for (String _iter216 : struct.excludeVariantIds)
           {
-            oprot.writeString(_iter208);
+            oprot.writeString(_iter216);
           }
         }
       }
@@ -1229,13 +1229,13 @@ public class AutocompleteRequest implements org.apache.thrift.TBase<Autocomplete
       }
       if (incoming.get(5)) {
         {
-          org.apache.thrift.protocol.TSet _set209 = new org.apache.thrift.protocol.TSet(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-          struct.excludeVariantIds = new HashSet<String>(2*_set209.size);
-          for (int _i210 = 0; _i210 < _set209.size; ++_i210)
+          org.apache.thrift.protocol.TSet _set217 = new org.apache.thrift.protocol.TSet(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.excludeVariantIds = new HashSet<String>(2*_set217.size);
+          for (int _i218 = 0; _i218 < _set217.size; ++_i218)
           {
-            String _elem211; // required
-            _elem211 = iprot.readString();
-            struct.excludeVariantIds.add(_elem211);
+            String _elem219; // required
+            _elem219 = iprot.readString();
+            struct.excludeVariantIds.add(_elem219);
           }
         }
         struct.setExcludeVariantIdsIsSet(true);

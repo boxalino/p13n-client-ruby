@@ -1108,14 +1108,14 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
           case 4: // FILTERS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list16 = iprot.readListBegin();
-                struct.filters = new ArrayList<Filter>(_list16.size);
-                for (int _i17 = 0; _i17 < _list16.size; ++_i17)
+                org.apache.thrift.protocol.TList _list32 = iprot.readListBegin();
+                struct.filters = new ArrayList<Filter>(_list32.size);
+                for (int _i33 = 0; _i33 < _list32.size; ++_i33)
                 {
-                  Filter _elem18; // required
-                  _elem18 = new Filter();
-                  _elem18.read(iprot);
-                  struct.filters.add(_elem18);
+                  Filter _elem34; // required
+                  _elem34 = new Filter();
+                  _elem34.read(iprot);
+                  struct.filters.add(_elem34);
                 }
                 iprot.readListEnd();
               }
@@ -1135,14 +1135,14 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
           case 6: // FACET_REQUESTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list19 = iprot.readListBegin();
-                struct.facetRequests = new ArrayList<FacetRequest>(_list19.size);
-                for (int _i20 = 0; _i20 < _list19.size; ++_i20)
+                org.apache.thrift.protocol.TList _list35 = iprot.readListBegin();
+                struct.facetRequests = new ArrayList<FacetRequest>(_list35.size);
+                for (int _i36 = 0; _i36 < _list35.size; ++_i36)
                 {
-                  FacetRequest _elem21; // required
-                  _elem21 = new FacetRequest();
-                  _elem21.read(iprot);
-                  struct.facetRequests.add(_elem21);
+                  FacetRequest _elem37; // required
+                  _elem37 = new FacetRequest();
+                  _elem37.read(iprot);
+                  struct.facetRequests.add(_elem37);
                 }
                 iprot.readListEnd();
               }
@@ -1154,14 +1154,14 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
           case 7: // SORT_FIELDS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list22 = iprot.readListBegin();
-                struct.sortFields = new ArrayList<SortField>(_list22.size);
-                for (int _i23 = 0; _i23 < _list22.size; ++_i23)
+                org.apache.thrift.protocol.TList _list38 = iprot.readListBegin();
+                struct.sortFields = new ArrayList<SortField>(_list38.size);
+                for (int _i39 = 0; _i39 < _list38.size; ++_i39)
                 {
-                  SortField _elem24; // required
-                  _elem24 = new SortField();
-                  _elem24.read(iprot);
-                  struct.sortFields.add(_elem24);
+                  SortField _elem40; // required
+                  _elem40 = new SortField();
+                  _elem40.read(iprot);
+                  struct.sortFields.add(_elem40);
                 }
                 iprot.readListEnd();
               }
@@ -1189,13 +1189,13 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
           case 10: // RETURN_FIELDS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list25 = iprot.readListBegin();
-                struct.returnFields = new ArrayList<String>(_list25.size);
-                for (int _i26 = 0; _i26 < _list25.size; ++_i26)
+                org.apache.thrift.protocol.TList _list41 = iprot.readListBegin();
+                struct.returnFields = new ArrayList<String>(_list41.size);
+                for (int _i42 = 0; _i42 < _list41.size; ++_i42)
                 {
-                  String _elem27; // required
-                  _elem27 = iprot.readString();
-                  struct.returnFields.add(_elem27);
+                  String _elem43; // required
+                  _elem43 = iprot.readString();
+                  struct.returnFields.add(_elem43);
                 }
                 iprot.readListEnd();
               }
@@ -1238,9 +1238,9 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
         oprot.writeFieldBegin(FILTERS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.filters.size()));
-          for (Filter _iter28 : struct.filters)
+          for (Filter _iter44 : struct.filters)
           {
-            _iter28.write(oprot);
+            _iter44.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -1253,9 +1253,9 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
         oprot.writeFieldBegin(FACET_REQUESTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.facetRequests.size()));
-          for (FacetRequest _iter29 : struct.facetRequests)
+          for (FacetRequest _iter45 : struct.facetRequests)
           {
-            _iter29.write(oprot);
+            _iter45.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -1265,9 +1265,9 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
         oprot.writeFieldBegin(SORT_FIELDS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.sortFields.size()));
-          for (SortField _iter30 : struct.sortFields)
+          for (SortField _iter46 : struct.sortFields)
           {
-            _iter30.write(oprot);
+            _iter46.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -1283,9 +1283,9 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
         oprot.writeFieldBegin(RETURN_FIELDS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.returnFields.size()));
-          for (String _iter31 : struct.returnFields)
+          for (String _iter47 : struct.returnFields)
           {
-            oprot.writeString(_iter31);
+            oprot.writeString(_iter47);
           }
           oprot.writeListEnd();
         }
@@ -1352,9 +1352,9 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       if (struct.isSetFilters()) {
         {
           oprot.writeI32(struct.filters.size());
-          for (Filter _iter32 : struct.filters)
+          for (Filter _iter48 : struct.filters)
           {
-            _iter32.write(oprot);
+            _iter48.write(oprot);
           }
         }
       }
@@ -1364,18 +1364,18 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       if (struct.isSetFacetRequests()) {
         {
           oprot.writeI32(struct.facetRequests.size());
-          for (FacetRequest _iter33 : struct.facetRequests)
+          for (FacetRequest _iter49 : struct.facetRequests)
           {
-            _iter33.write(oprot);
+            _iter49.write(oprot);
           }
         }
       }
       if (struct.isSetSortFields()) {
         {
           oprot.writeI32(struct.sortFields.size());
-          for (SortField _iter34 : struct.sortFields)
+          for (SortField _iter50 : struct.sortFields)
           {
-            _iter34.write(oprot);
+            _iter50.write(oprot);
           }
         }
       }
@@ -1388,9 +1388,9 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       if (struct.isSetReturnFields()) {
         {
           oprot.writeI32(struct.returnFields.size());
-          for (String _iter35 : struct.returnFields)
+          for (String _iter51 : struct.returnFields)
           {
-            oprot.writeString(_iter35);
+            oprot.writeString(_iter51);
           }
         }
       }
@@ -1414,14 +1414,14 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       }
       if (incoming.get(3)) {
         {
-          org.apache.thrift.protocol.TList _list36 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.filters = new ArrayList<Filter>(_list36.size);
-          for (int _i37 = 0; _i37 < _list36.size; ++_i37)
+          org.apache.thrift.protocol.TList _list52 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.filters = new ArrayList<Filter>(_list52.size);
+          for (int _i53 = 0; _i53 < _list52.size; ++_i53)
           {
-            Filter _elem38; // required
-            _elem38 = new Filter();
-            _elem38.read(iprot);
-            struct.filters.add(_elem38);
+            Filter _elem54; // required
+            _elem54 = new Filter();
+            _elem54.read(iprot);
+            struct.filters.add(_elem54);
           }
         }
         struct.setFiltersIsSet(true);
@@ -1432,28 +1432,28 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       }
       if (incoming.get(5)) {
         {
-          org.apache.thrift.protocol.TList _list39 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.facetRequests = new ArrayList<FacetRequest>(_list39.size);
-          for (int _i40 = 0; _i40 < _list39.size; ++_i40)
+          org.apache.thrift.protocol.TList _list55 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.facetRequests = new ArrayList<FacetRequest>(_list55.size);
+          for (int _i56 = 0; _i56 < _list55.size; ++_i56)
           {
-            FacetRequest _elem41; // required
-            _elem41 = new FacetRequest();
-            _elem41.read(iprot);
-            struct.facetRequests.add(_elem41);
+            FacetRequest _elem57; // required
+            _elem57 = new FacetRequest();
+            _elem57.read(iprot);
+            struct.facetRequests.add(_elem57);
           }
         }
         struct.setFacetRequestsIsSet(true);
       }
       if (incoming.get(6)) {
         {
-          org.apache.thrift.protocol.TList _list42 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.sortFields = new ArrayList<SortField>(_list42.size);
-          for (int _i43 = 0; _i43 < _list42.size; ++_i43)
+          org.apache.thrift.protocol.TList _list58 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.sortFields = new ArrayList<SortField>(_list58.size);
+          for (int _i59 = 0; _i59 < _list58.size; ++_i59)
           {
-            SortField _elem44; // required
-            _elem44 = new SortField();
-            _elem44.read(iprot);
-            struct.sortFields.add(_elem44);
+            SortField _elem60; // required
+            _elem60 = new SortField();
+            _elem60.read(iprot);
+            struct.sortFields.add(_elem60);
           }
         }
         struct.setSortFieldsIsSet(true);
@@ -1468,13 +1468,13 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       }
       if (incoming.get(9)) {
         {
-          org.apache.thrift.protocol.TList _list45 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-          struct.returnFields = new ArrayList<String>(_list45.size);
-          for (int _i46 = 0; _i46 < _list45.size; ++_i46)
+          org.apache.thrift.protocol.TList _list61 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.returnFields = new ArrayList<String>(_list61.size);
+          for (int _i62 = 0; _i62 < _list61.size; ++_i62)
           {
-            String _elem47; // required
-            _elem47 = iprot.readString();
-            struct.returnFields.add(_elem47);
+            String _elem63; // required
+            _elem63 = iprot.readString();
+            struct.returnFields.add(_elem63);
           }
         }
         struct.setReturnFieldsIsSet(true);

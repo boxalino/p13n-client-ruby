@@ -339,14 +339,14 @@ public class ChoiceResponse implements org.apache.thrift.TBase<ChoiceResponse, C
           case 1: // VARIANTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list156 = iprot.readListBegin();
-                struct.variants = new ArrayList<Variant>(_list156.size);
-                for (int _i157 = 0; _i157 < _list156.size; ++_i157)
+                org.apache.thrift.protocol.TList _list164 = iprot.readListBegin();
+                struct.variants = new ArrayList<Variant>(_list164.size);
+                for (int _i165 = 0; _i165 < _list164.size; ++_i165)
                 {
-                  Variant _elem158; // required
-                  _elem158 = new Variant();
-                  _elem158.read(iprot);
-                  struct.variants.add(_elem158);
+                  Variant _elem166; // required
+                  _elem166 = new Variant();
+                  _elem166.read(iprot);
+                  struct.variants.add(_elem166);
                 }
                 iprot.readListEnd();
               }
@@ -374,9 +374,9 @@ public class ChoiceResponse implements org.apache.thrift.TBase<ChoiceResponse, C
         oprot.writeFieldBegin(VARIANTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.variants.size()));
-          for (Variant _iter159 : struct.variants)
+          for (Variant _iter167 : struct.variants)
           {
-            _iter159.write(oprot);
+            _iter167.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -407,9 +407,9 @@ public class ChoiceResponse implements org.apache.thrift.TBase<ChoiceResponse, C
       if (struct.isSetVariants()) {
         {
           oprot.writeI32(struct.variants.size());
-          for (Variant _iter160 : struct.variants)
+          for (Variant _iter168 : struct.variants)
           {
-            _iter160.write(oprot);
+            _iter168.write(oprot);
           }
         }
       }
@@ -421,14 +421,14 @@ public class ChoiceResponse implements org.apache.thrift.TBase<ChoiceResponse, C
       BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TList _list161 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.variants = new ArrayList<Variant>(_list161.size);
-          for (int _i162 = 0; _i162 < _list161.size; ++_i162)
+          org.apache.thrift.protocol.TList _list169 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.variants = new ArrayList<Variant>(_list169.size);
+          for (int _i170 = 0; _i170 < _list169.size; ++_i170)
           {
-            Variant _elem163; // required
-            _elem163 = new Variant();
-            _elem163.read(iprot);
-            struct.variants.add(_elem163);
+            Variant _elem171; // required
+            _elem171 = new Variant();
+            _elem171.read(iprot);
+            struct.variants.add(_elem171);
           }
         }
         struct.setVariantsIsSet(true);

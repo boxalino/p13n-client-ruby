@@ -45,6 +45,23 @@ enum FacetSortOrder {
   COLLATION = 2
 }
 
+struct FacetValue {
+# corresponding value of the facet
+  1: string stringValue,
+# if range facets lower bound (inclusive)
+  2: string rangeFromInclusive,
+# if range facets lower bound (inclusive)  
+  3: string rangeToExclusive,
+# number of hits found
+  4: i64 hitCount,
+# id of hierarchy if corresponding field is hierarchical
+  50: string hierarchyId,
+# hierarchy if corresponding field is hierarchical
+  60: list<string> hierarchy,
+# whether the facet value has been selected in corresponding FacetRequest
+  70: bool selected
+}
+
 struct FacetRequest {
 # name of the field to get facet for
   1: string fieldName,
@@ -61,7 +78,16 @@ struct FacetRequest {
 # sort order
   7: FacetSortOrder sortOrder,
 # whether the sort should be done ascending
-  8: bool sortAscending
+  8: bool sortAscending,
+# values selected from the facet.
+# Note that results will be filtered by these values, but the corresponding 
+# FacetResponse is as if this filter was not applied
+  90: list<FacetValue> selectedValues,
+# whether selectedValues should be considered in AND logic, 
+# meaning filter out those that don't contain ALL selected 
+# values - default is OR - include those contianing any of 
+# selectedValue
+  100: bool andSelectedValues = false
 }
 
 # field to be used for sorting 
@@ -147,21 +173,6 @@ struct ChoiceRequest {
   3: list<ChoiceInquiry> inquiries,
 # context of the request
   4: RequestContext requestContext
-}
-
-struct FacetValue {
-# corresponding value of the facet
-  1: string stringValue,
-# if range facets lower bound (inclusive)
-  2: string rangeFromInclusive,
-# if range facets lower bound (inclusive)  
-  3: string rangeToExclusive,
-# number of hits found
-  4: i64 hitCount,
-# id of hierarchy if corresponding field is hierarchical
-  50: string hierarchyId,
-# hierarchy if corresponding field is hierarchical
-  60: list<string> hierarchy
 }
 
 struct FacetResponse {

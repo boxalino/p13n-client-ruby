@@ -590,14 +590,14 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
           case 1: // HITS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list124 = iprot.readListBegin();
-                struct.hits = new ArrayList<Hit>(_list124.size);
-                for (int _i125 = 0; _i125 < _list124.size; ++_i125)
+                org.apache.thrift.protocol.TList _list132 = iprot.readListBegin();
+                struct.hits = new ArrayList<Hit>(_list132.size);
+                for (int _i133 = 0; _i133 < _list132.size; ++_i133)
                 {
-                  Hit _elem126; // required
-                  _elem126 = new Hit();
-                  _elem126.read(iprot);
-                  struct.hits.add(_elem126);
+                  Hit _elem134; // required
+                  _elem134 = new Hit();
+                  _elem134.read(iprot);
+                  struct.hits.add(_elem134);
                 }
                 iprot.readListEnd();
               }
@@ -609,14 +609,14 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
           case 2: // FACET_RESPONSES
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list127 = iprot.readListBegin();
-                struct.facetResponses = new ArrayList<FacetResponse>(_list127.size);
-                for (int _i128 = 0; _i128 < _list127.size; ++_i128)
+                org.apache.thrift.protocol.TList _list135 = iprot.readListBegin();
+                struct.facetResponses = new ArrayList<FacetResponse>(_list135.size);
+                for (int _i136 = 0; _i136 < _list135.size; ++_i136)
                 {
-                  FacetResponse _elem129; // required
-                  _elem129 = new FacetResponse();
-                  _elem129.read(iprot);
-                  struct.facetResponses.add(_elem129);
+                  FacetResponse _elem137; // required
+                  _elem137 = new FacetResponse();
+                  _elem137.read(iprot);
+                  struct.facetResponses.add(_elem137);
                 }
                 iprot.readListEnd();
               }
@@ -660,9 +660,9 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
         oprot.writeFieldBegin(HITS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.hits.size()));
-          for (Hit _iter130 : struct.hits)
+          for (Hit _iter138 : struct.hits)
           {
-            _iter130.write(oprot);
+            _iter138.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -672,9 +672,9 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
         oprot.writeFieldBegin(FACET_RESPONSES_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.facetResponses.size()));
-          for (FacetResponse _iter131 : struct.facetResponses)
+          for (FacetResponse _iter139 : struct.facetResponses)
           {
-            _iter131.write(oprot);
+            _iter139.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -722,18 +722,18 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
       if (struct.isSetHits()) {
         {
           oprot.writeI32(struct.hits.size());
-          for (Hit _iter132 : struct.hits)
+          for (Hit _iter140 : struct.hits)
           {
-            _iter132.write(oprot);
+            _iter140.write(oprot);
           }
         }
       }
       if (struct.isSetFacetResponses()) {
         {
           oprot.writeI32(struct.facetResponses.size());
-          for (FacetResponse _iter133 : struct.facetResponses)
+          for (FacetResponse _iter141 : struct.facetResponses)
           {
-            _iter133.write(oprot);
+            _iter141.write(oprot);
           }
         }
       }
@@ -751,28 +751,28 @@ public class SearchResult implements org.apache.thrift.TBase<SearchResult, Searc
       BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TList _list134 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.hits = new ArrayList<Hit>(_list134.size);
-          for (int _i135 = 0; _i135 < _list134.size; ++_i135)
+          org.apache.thrift.protocol.TList _list142 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.hits = new ArrayList<Hit>(_list142.size);
+          for (int _i143 = 0; _i143 < _list142.size; ++_i143)
           {
-            Hit _elem136; // required
-            _elem136 = new Hit();
-            _elem136.read(iprot);
-            struct.hits.add(_elem136);
+            Hit _elem144; // required
+            _elem144 = new Hit();
+            _elem144.read(iprot);
+            struct.hits.add(_elem144);
           }
         }
         struct.setHitsIsSet(true);
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list137 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.facetResponses = new ArrayList<FacetResponse>(_list137.size);
-          for (int _i138 = 0; _i138 < _list137.size; ++_i138)
+          org.apache.thrift.protocol.TList _list145 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.facetResponses = new ArrayList<FacetResponse>(_list145.size);
+          for (int _i146 = 0; _i146 < _list145.size; ++_i146)
           {
-            FacetResponse _elem139; // required
-            _elem139 = new FacetResponse();
-            _elem139.read(iprot);
-            struct.facetResponses.add(_elem139);
+            FacetResponse _elem147; // required
+            _elem147 = new FacetResponse();
+            _elem147.read(iprot);
+            struct.facetResponses.add(_elem147);
           }
         }
         struct.setFacetResponsesIsSet(true);

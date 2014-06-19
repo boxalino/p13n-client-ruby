@@ -39,6 +39,7 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
   private static final org.apache.thrift.protocol.TField HIT_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("hitCount", org.apache.thrift.protocol.TType.I64, (short)4);
   private static final org.apache.thrift.protocol.TField HIERARCHY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("hierarchyId", org.apache.thrift.protocol.TType.STRING, (short)50);
   private static final org.apache.thrift.protocol.TField HIERARCHY_FIELD_DESC = new org.apache.thrift.protocol.TField("hierarchy", org.apache.thrift.protocol.TType.LIST, (short)60);
+  private static final org.apache.thrift.protocol.TField SELECTED_FIELD_DESC = new org.apache.thrift.protocol.TField("selected", org.apache.thrift.protocol.TType.BOOL, (short)70);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -52,6 +53,7 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
   public long hitCount; // required
   public String hierarchyId; // required
   public List<String> hierarchy; // required
+  public boolean selected; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -60,7 +62,8 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     RANGE_TO_EXCLUSIVE((short)3, "rangeToExclusive"),
     HIT_COUNT((short)4, "hitCount"),
     HIERARCHY_ID((short)50, "hierarchyId"),
-    HIERARCHY((short)60, "hierarchy");
+    HIERARCHY((short)60, "hierarchy"),
+    SELECTED((short)70, "selected");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -87,6 +90,8 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
           return HIERARCHY_ID;
         case 60: // HIERARCHY
           return HIERARCHY;
+        case 70: // SELECTED
+          return SELECTED;
         default:
           return null;
       }
@@ -128,6 +133,7 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
 
   // isset id assignments
   private static final int __HITCOUNT_ISSET_ID = 0;
+  private static final int __SELECTED_ISSET_ID = 1;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -145,6 +151,8 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     tmpMap.put(_Fields.HIERARCHY, new org.apache.thrift.meta_data.FieldMetaData("hierarchy", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+    tmpMap.put(_Fields.SELECTED, new org.apache.thrift.meta_data.FieldMetaData("selected", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(FacetValue.class, metaDataMap);
   }
@@ -158,7 +166,8 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     String rangeToExclusive,
     long hitCount,
     String hierarchyId,
-    List<String> hierarchy)
+    List<String> hierarchy,
+    boolean selected)
   {
     this();
     this.stringValue = stringValue;
@@ -168,6 +177,8 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     setHitCountIsSet(true);
     this.hierarchyId = hierarchyId;
     this.hierarchy = hierarchy;
+    this.selected = selected;
+    setSelectedIsSet(true);
   }
 
   /**
@@ -195,6 +206,7 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       }
       this.hierarchy = __this__hierarchy;
     }
+    this.selected = other.selected;
   }
 
   public FacetValue deepCopy() {
@@ -210,6 +222,8 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     this.hitCount = 0;
     this.hierarchyId = null;
     this.hierarchy = null;
+    setSelectedIsSet(false);
+    this.selected = false;
   }
 
   public String getStringValue() {
@@ -370,6 +384,29 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     }
   }
 
+  public boolean isSelected() {
+    return this.selected;
+  }
+
+  public FacetValue setSelected(boolean selected) {
+    this.selected = selected;
+    setSelectedIsSet(true);
+    return this;
+  }
+
+  public void unsetSelected() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __SELECTED_ISSET_ID);
+  }
+
+  /** Returns true if field selected is set (has been assigned a value) and false otherwise */
+  public boolean isSetSelected() {
+    return EncodingUtils.testBit(__isset_bitfield, __SELECTED_ISSET_ID);
+  }
+
+  public void setSelectedIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SELECTED_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case STRING_VALUE:
@@ -420,6 +457,14 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       }
       break;
 
+    case SELECTED:
+      if (value == null) {
+        unsetSelected();
+      } else {
+        setSelected((Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -442,6 +487,9 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
 
     case HIERARCHY:
       return getHierarchy();
+
+    case SELECTED:
+      return Boolean.valueOf(isSelected());
 
     }
     throw new IllegalStateException();
@@ -466,6 +514,8 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       return isSetHierarchyId();
     case HIERARCHY:
       return isSetHierarchy();
+    case SELECTED:
+      return isSetSelected();
     }
     throw new IllegalStateException();
   }
@@ -534,6 +584,15 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       if (!(this_present_hierarchy && that_present_hierarchy))
         return false;
       if (!this.hierarchy.equals(that.hierarchy))
+        return false;
+    }
+
+    boolean this_present_selected = true;
+    boolean that_present_selected = true;
+    if (this_present_selected || that_present_selected) {
+      if (!(this_present_selected && that_present_selected))
+        return false;
+      if (this.selected != that.selected)
         return false;
     }
 
@@ -613,6 +672,16 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetSelected()).compareTo(typedOther.isSetSelected());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetSelected()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.selected, typedOther.selected);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -675,6 +744,10 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
     } else {
       sb.append(this.hierarchy);
     }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("selected:");
+    sb.append(this.selected);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -764,17 +837,25 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
           case 60: // HIERARCHY
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list90 = iprot.readListBegin();
-                struct.hierarchy = new ArrayList<String>(_list90.size);
-                for (int _i91 = 0; _i91 < _list90.size; ++_i91)
+                org.apache.thrift.protocol.TList _list16 = iprot.readListBegin();
+                struct.hierarchy = new ArrayList<String>(_list16.size);
+                for (int _i17 = 0; _i17 < _list16.size; ++_i17)
                 {
-                  String _elem92; // required
-                  _elem92 = iprot.readString();
-                  struct.hierarchy.add(_elem92);
+                  String _elem18; // required
+                  _elem18 = iprot.readString();
+                  struct.hierarchy.add(_elem18);
                 }
                 iprot.readListEnd();
               }
               struct.setHierarchyIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 70: // SELECTED
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.selected = iprot.readBool();
+              struct.setSelectedIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -821,14 +902,17 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
         oprot.writeFieldBegin(HIERARCHY_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.hierarchy.size()));
-          for (String _iter93 : struct.hierarchy)
+          for (String _iter19 : struct.hierarchy)
           {
-            oprot.writeString(_iter93);
+            oprot.writeString(_iter19);
           }
           oprot.writeListEnd();
         }
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(SELECTED_FIELD_DESC);
+      oprot.writeBool(struct.selected);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -865,7 +949,10 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       if (struct.isSetHierarchy()) {
         optionals.set(5);
       }
-      oprot.writeBitSet(optionals, 6);
+      if (struct.isSetSelected()) {
+        optionals.set(6);
+      }
+      oprot.writeBitSet(optionals, 7);
       if (struct.isSetStringValue()) {
         oprot.writeString(struct.stringValue);
       }
@@ -884,18 +971,21 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       if (struct.isSetHierarchy()) {
         {
           oprot.writeI32(struct.hierarchy.size());
-          for (String _iter94 : struct.hierarchy)
+          for (String _iter20 : struct.hierarchy)
           {
-            oprot.writeString(_iter94);
+            oprot.writeString(_iter20);
           }
         }
+      }
+      if (struct.isSetSelected()) {
+        oprot.writeBool(struct.selected);
       }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, FacetValue struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(6);
+      BitSet incoming = iprot.readBitSet(7);
       if (incoming.get(0)) {
         struct.stringValue = iprot.readString();
         struct.setStringValueIsSet(true);
@@ -918,16 +1008,20 @@ public class FacetValue implements org.apache.thrift.TBase<FacetValue, FacetValu
       }
       if (incoming.get(5)) {
         {
-          org.apache.thrift.protocol.TList _list95 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-          struct.hierarchy = new ArrayList<String>(_list95.size);
-          for (int _i96 = 0; _i96 < _list95.size; ++_i96)
+          org.apache.thrift.protocol.TList _list21 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.hierarchy = new ArrayList<String>(_list21.size);
+          for (int _i22 = 0; _i22 < _list21.size; ++_i22)
           {
-            String _elem97; // required
-            _elem97 = iprot.readString();
-            struct.hierarchy.add(_elem97);
+            String _elem23; // required
+            _elem23 = iprot.readString();
+            struct.hierarchy.add(_elem23);
           }
         }
         struct.setHierarchyIsSet(true);
+      }
+      if (incoming.get(6)) {
+        struct.selected = iprot.readBool();
+        struct.setSelectedIsSet(true);
       }
     }
   }

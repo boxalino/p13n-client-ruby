@@ -41,6 +41,8 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
   private static final org.apache.thrift.protocol.TField DATE_RANGE_GAP_FIELD_DESC = new org.apache.thrift.protocol.TField("dateRangeGap", org.apache.thrift.protocol.TType.I32, (short)6);
   private static final org.apache.thrift.protocol.TField SORT_ORDER_FIELD_DESC = new org.apache.thrift.protocol.TField("sortOrder", org.apache.thrift.protocol.TType.I32, (short)7);
   private static final org.apache.thrift.protocol.TField SORT_ASCENDING_FIELD_DESC = new org.apache.thrift.protocol.TField("sortAscending", org.apache.thrift.protocol.TType.BOOL, (short)8);
+  private static final org.apache.thrift.protocol.TField SELECTED_VALUES_FIELD_DESC = new org.apache.thrift.protocol.TField("selectedValues", org.apache.thrift.protocol.TType.LIST, (short)90);
+  private static final org.apache.thrift.protocol.TField AND_SELECTED_VALUES_FIELD_DESC = new org.apache.thrift.protocol.TField("andSelectedValues", org.apache.thrift.protocol.TType.BOOL, (short)100);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -64,6 +66,8 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
    */
   public FacetSortOrder sortOrder; // required
   public boolean sortAscending; // required
+  public List<FacetValue> selectedValues; // required
+  public boolean andSelectedValues; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -82,7 +86,9 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
      * @see FacetSortOrder
      */
     SORT_ORDER((short)7, "sortOrder"),
-    SORT_ASCENDING((short)8, "sortAscending");
+    SORT_ASCENDING((short)8, "sortAscending"),
+    SELECTED_VALUES((short)90, "selectedValues"),
+    AND_SELECTED_VALUES((short)100, "andSelectedValues");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -113,6 +119,10 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
           return SORT_ORDER;
         case 8: // SORT_ASCENDING
           return SORT_ASCENDING;
+        case 90: // SELECTED_VALUES
+          return SELECTED_VALUES;
+        case 100: // AND_SELECTED_VALUES
+          return AND_SELECTED_VALUES;
         default:
           return null;
       }
@@ -158,6 +168,7 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
   private static final int __MAXCOUNT_ISSET_ID = 2;
   private static final int __MINPOPULATION_ISSET_ID = 3;
   private static final int __SORTASCENDING_ISSET_ID = 4;
+  private static final int __ANDSELECTEDVALUES_ISSET_ID = 5;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -178,6 +189,11 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
         new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, FacetSortOrder.class)));
     tmpMap.put(_Fields.SORT_ASCENDING, new org.apache.thrift.meta_data.FieldMetaData("sortAscending", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+    tmpMap.put(_Fields.SELECTED_VALUES, new org.apache.thrift.meta_data.FieldMetaData("selectedValues", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, FacetValue.class))));
+    tmpMap.put(_Fields.AND_SELECTED_VALUES, new org.apache.thrift.meta_data.FieldMetaData("andSelectedValues", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(FacetRequest.class, metaDataMap);
   }
@@ -186,6 +202,8 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     this.maxCount = -1;
 
     this.minPopulation = 1;
+
+    this.andSelectedValues = false;
 
   }
 
@@ -197,7 +215,9 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     int minPopulation,
     DateRangeGap dateRangeGap,
     FacetSortOrder sortOrder,
-    boolean sortAscending)
+    boolean sortAscending,
+    List<FacetValue> selectedValues,
+    boolean andSelectedValues)
   {
     this();
     this.fieldName = fieldName;
@@ -213,6 +233,9 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     this.sortOrder = sortOrder;
     this.sortAscending = sortAscending;
     setSortAscendingIsSet(true);
+    this.selectedValues = selectedValues;
+    this.andSelectedValues = andSelectedValues;
+    setAndSelectedValuesIsSet(true);
   }
 
   /**
@@ -234,6 +257,14 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       this.sortOrder = other.sortOrder;
     }
     this.sortAscending = other.sortAscending;
+    if (other.isSetSelectedValues()) {
+      List<FacetValue> __this__selectedValues = new ArrayList<FacetValue>();
+      for (FacetValue other_element : other.selectedValues) {
+        __this__selectedValues.add(new FacetValue(other_element));
+      }
+      this.selectedValues = __this__selectedValues;
+    }
+    this.andSelectedValues = other.andSelectedValues;
   }
 
   public FacetRequest deepCopy() {
@@ -255,6 +286,9 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     this.sortOrder = null;
     setSortAscendingIsSet(false);
     this.sortAscending = false;
+    this.selectedValues = null;
+    this.andSelectedValues = false;
+
   }
 
   public String getFieldName() {
@@ -460,6 +494,68 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SORTASCENDING_ISSET_ID, value);
   }
 
+  public int getSelectedValuesSize() {
+    return (this.selectedValues == null) ? 0 : this.selectedValues.size();
+  }
+
+  public java.util.Iterator<FacetValue> getSelectedValuesIterator() {
+    return (this.selectedValues == null) ? null : this.selectedValues.iterator();
+  }
+
+  public void addToSelectedValues(FacetValue elem) {
+    if (this.selectedValues == null) {
+      this.selectedValues = new ArrayList<FacetValue>();
+    }
+    this.selectedValues.add(elem);
+  }
+
+  public List<FacetValue> getSelectedValues() {
+    return this.selectedValues;
+  }
+
+  public FacetRequest setSelectedValues(List<FacetValue> selectedValues) {
+    this.selectedValues = selectedValues;
+    return this;
+  }
+
+  public void unsetSelectedValues() {
+    this.selectedValues = null;
+  }
+
+  /** Returns true if field selectedValues is set (has been assigned a value) and false otherwise */
+  public boolean isSetSelectedValues() {
+    return this.selectedValues != null;
+  }
+
+  public void setSelectedValuesIsSet(boolean value) {
+    if (!value) {
+      this.selectedValues = null;
+    }
+  }
+
+  public boolean isAndSelectedValues() {
+    return this.andSelectedValues;
+  }
+
+  public FacetRequest setAndSelectedValues(boolean andSelectedValues) {
+    this.andSelectedValues = andSelectedValues;
+    setAndSelectedValuesIsSet(true);
+    return this;
+  }
+
+  public void unsetAndSelectedValues() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __ANDSELECTEDVALUES_ISSET_ID);
+  }
+
+  /** Returns true if field andSelectedValues is set (has been assigned a value) and false otherwise */
+  public boolean isSetAndSelectedValues() {
+    return EncodingUtils.testBit(__isset_bitfield, __ANDSELECTEDVALUES_ISSET_ID);
+  }
+
+  public void setAndSelectedValuesIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __ANDSELECTEDVALUES_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case FIELD_NAME:
@@ -526,6 +622,22 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       }
       break;
 
+    case SELECTED_VALUES:
+      if (value == null) {
+        unsetSelectedValues();
+      } else {
+        setSelectedValues((List<FacetValue>)value);
+      }
+      break;
+
+    case AND_SELECTED_VALUES:
+      if (value == null) {
+        unsetAndSelectedValues();
+      } else {
+        setAndSelectedValues((Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -555,6 +667,12 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     case SORT_ASCENDING:
       return Boolean.valueOf(isSortAscending());
 
+    case SELECTED_VALUES:
+      return getSelectedValues();
+
+    case AND_SELECTED_VALUES:
+      return Boolean.valueOf(isAndSelectedValues());
+
     }
     throw new IllegalStateException();
   }
@@ -582,6 +700,10 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       return isSetSortOrder();
     case SORT_ASCENDING:
       return isSetSortAscending();
+    case SELECTED_VALUES:
+      return isSetSelectedValues();
+    case AND_SELECTED_VALUES:
+      return isSetAndSelectedValues();
     }
     throw new IllegalStateException();
   }
@@ -668,6 +790,24 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       if (!(this_present_sortAscending && that_present_sortAscending))
         return false;
       if (this.sortAscending != that.sortAscending)
+        return false;
+    }
+
+    boolean this_present_selectedValues = true && this.isSetSelectedValues();
+    boolean that_present_selectedValues = true && that.isSetSelectedValues();
+    if (this_present_selectedValues || that_present_selectedValues) {
+      if (!(this_present_selectedValues && that_present_selectedValues))
+        return false;
+      if (!this.selectedValues.equals(that.selectedValues))
+        return false;
+    }
+
+    boolean this_present_andSelectedValues = true;
+    boolean that_present_andSelectedValues = true;
+    if (this_present_andSelectedValues || that_present_andSelectedValues) {
+      if (!(this_present_andSelectedValues && that_present_andSelectedValues))
+        return false;
+      if (this.andSelectedValues != that.andSelectedValues)
         return false;
     }
 
@@ -767,6 +907,26 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetSelectedValues()).compareTo(typedOther.isSetSelectedValues());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetSelectedValues()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.selectedValues, typedOther.selectedValues);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetAndSelectedValues()).compareTo(typedOther.isSetAndSelectedValues());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetAndSelectedValues()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.andSelectedValues, typedOther.andSelectedValues);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -829,6 +989,18 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
     if (!first) sb.append(", ");
     sb.append("sortAscending:");
     sb.append(this.sortAscending);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("selectedValues:");
+    if (this.selectedValues == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.selectedValues);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("andSelectedValues:");
+    sb.append(this.andSelectedValues);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -939,6 +1111,33 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 90: // SELECTED_VALUES
+            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+              {
+                org.apache.thrift.protocol.TList _list24 = iprot.readListBegin();
+                struct.selectedValues = new ArrayList<FacetValue>(_list24.size);
+                for (int _i25 = 0; _i25 < _list24.size; ++_i25)
+                {
+                  FacetValue _elem26; // required
+                  _elem26 = new FacetValue();
+                  _elem26.read(iprot);
+                  struct.selectedValues.add(_elem26);
+                }
+                iprot.readListEnd();
+              }
+              struct.setSelectedValuesIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 100: // AND_SELECTED_VALUES
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.andSelectedValues = iprot.readBool();
+              struct.setAndSelectedValuesIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -984,6 +1183,21 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       oprot.writeFieldBegin(SORT_ASCENDING_FIELD_DESC);
       oprot.writeBool(struct.sortAscending);
       oprot.writeFieldEnd();
+      if (struct.selectedValues != null) {
+        oprot.writeFieldBegin(SELECTED_VALUES_FIELD_DESC);
+        {
+          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.selectedValues.size()));
+          for (FacetValue _iter27 : struct.selectedValues)
+          {
+            _iter27.write(oprot);
+          }
+          oprot.writeListEnd();
+        }
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldBegin(AND_SELECTED_VALUES_FIELD_DESC);
+      oprot.writeBool(struct.andSelectedValues);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -1026,7 +1240,13 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       if (struct.isSetSortAscending()) {
         optionals.set(7);
       }
-      oprot.writeBitSet(optionals, 8);
+      if (struct.isSetSelectedValues()) {
+        optionals.set(8);
+      }
+      if (struct.isSetAndSelectedValues()) {
+        optionals.set(9);
+      }
+      oprot.writeBitSet(optionals, 10);
       if (struct.isSetFieldName()) {
         oprot.writeString(struct.fieldName);
       }
@@ -1051,12 +1271,24 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       if (struct.isSetSortAscending()) {
         oprot.writeBool(struct.sortAscending);
       }
+      if (struct.isSetSelectedValues()) {
+        {
+          oprot.writeI32(struct.selectedValues.size());
+          for (FacetValue _iter28 : struct.selectedValues)
+          {
+            _iter28.write(oprot);
+          }
+        }
+      }
+      if (struct.isSetAndSelectedValues()) {
+        oprot.writeBool(struct.andSelectedValues);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, FacetRequest struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(8);
+      BitSet incoming = iprot.readBitSet(10);
       if (incoming.get(0)) {
         struct.fieldName = iprot.readString();
         struct.setFieldNameIsSet(true);
@@ -1088,6 +1320,24 @@ public class FacetRequest implements org.apache.thrift.TBase<FacetRequest, Facet
       if (incoming.get(7)) {
         struct.sortAscending = iprot.readBool();
         struct.setSortAscendingIsSet(true);
+      }
+      if (incoming.get(8)) {
+        {
+          org.apache.thrift.protocol.TList _list29 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.selectedValues = new ArrayList<FacetValue>(_list29.size);
+          for (int _i30 = 0; _i30 < _list29.size; ++_i30)
+          {
+            FacetValue _elem31; // required
+            _elem31 = new FacetValue();
+            _elem31.read(iprot);
+            struct.selectedValues.add(_elem31);
+          }
+        }
+        struct.setSelectedValuesIsSet(true);
+      }
+      if (incoming.get(9)) {
+        struct.andSelectedValues = iprot.readBool();
+        struct.setAndSelectedValuesIsSet(true);
       }
     }
   }

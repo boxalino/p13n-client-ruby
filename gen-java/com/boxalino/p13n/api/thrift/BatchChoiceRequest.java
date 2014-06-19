@@ -703,13 +703,13 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
           case 4: // PROFILE_IDS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list164 = iprot.readListBegin();
-                struct.profileIds = new ArrayList<String>(_list164.size);
-                for (int _i165 = 0; _i165 < _list164.size; ++_i165)
+                org.apache.thrift.protocol.TList _list172 = iprot.readListBegin();
+                struct.profileIds = new ArrayList<String>(_list172.size);
+                for (int _i173 = 0; _i173 < _list172.size; ++_i173)
                 {
-                  String _elem166; // required
-                  _elem166 = iprot.readString();
-                  struct.profileIds.add(_elem166);
+                  String _elem174; // required
+                  _elem174 = iprot.readString();
+                  struct.profileIds.add(_elem174);
                 }
                 iprot.readListEnd();
               }
@@ -721,14 +721,14 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
           case 5: // CHOICE_INQUIRIES
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list167 = iprot.readListBegin();
-                struct.choiceInquiries = new ArrayList<ChoiceInquiry>(_list167.size);
-                for (int _i168 = 0; _i168 < _list167.size; ++_i168)
+                org.apache.thrift.protocol.TList _list175 = iprot.readListBegin();
+                struct.choiceInquiries = new ArrayList<ChoiceInquiry>(_list175.size);
+                for (int _i176 = 0; _i176 < _list175.size; ++_i176)
                 {
-                  ChoiceInquiry _elem169; // required
-                  _elem169 = new ChoiceInquiry();
-                  _elem169.read(iprot);
-                  struct.choiceInquiries.add(_elem169);
+                  ChoiceInquiry _elem177; // required
+                  _elem177 = new ChoiceInquiry();
+                  _elem177.read(iprot);
+                  struct.choiceInquiries.add(_elem177);
                 }
                 iprot.readListEnd();
               }
@@ -771,9 +771,9 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
         oprot.writeFieldBegin(PROFILE_IDS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.profileIds.size()));
-          for (String _iter170 : struct.profileIds)
+          for (String _iter178 : struct.profileIds)
           {
-            oprot.writeString(_iter170);
+            oprot.writeString(_iter178);
           }
           oprot.writeListEnd();
         }
@@ -783,9 +783,9 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
         oprot.writeFieldBegin(CHOICE_INQUIRIES_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.choiceInquiries.size()));
-          for (ChoiceInquiry _iter171 : struct.choiceInquiries)
+          for (ChoiceInquiry _iter179 : struct.choiceInquiries)
           {
-            _iter171.write(oprot);
+            _iter179.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -837,18 +837,18 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       if (struct.isSetProfileIds()) {
         {
           oprot.writeI32(struct.profileIds.size());
-          for (String _iter172 : struct.profileIds)
+          for (String _iter180 : struct.profileIds)
           {
-            oprot.writeString(_iter172);
+            oprot.writeString(_iter180);
           }
         }
       }
       if (struct.isSetChoiceInquiries()) {
         {
           oprot.writeI32(struct.choiceInquiries.size());
-          for (ChoiceInquiry _iter173 : struct.choiceInquiries)
+          for (ChoiceInquiry _iter181 : struct.choiceInquiries)
           {
-            _iter173.write(oprot);
+            _iter181.write(oprot);
           }
         }
       }
@@ -875,27 +875,27 @@ public class BatchChoiceRequest implements org.apache.thrift.TBase<BatchChoiceRe
       }
       if (incoming.get(3)) {
         {
-          org.apache.thrift.protocol.TList _list174 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-          struct.profileIds = new ArrayList<String>(_list174.size);
-          for (int _i175 = 0; _i175 < _list174.size; ++_i175)
+          org.apache.thrift.protocol.TList _list182 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.profileIds = new ArrayList<String>(_list182.size);
+          for (int _i183 = 0; _i183 < _list182.size; ++_i183)
           {
-            String _elem176; // required
-            _elem176 = iprot.readString();
-            struct.profileIds.add(_elem176);
+            String _elem184; // required
+            _elem184 = iprot.readString();
+            struct.profileIds.add(_elem184);
           }
         }
         struct.setProfileIdsIsSet(true);
       }
       if (incoming.get(4)) {
         {
-          org.apache.thrift.protocol.TList _list177 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.choiceInquiries = new ArrayList<ChoiceInquiry>(_list177.size);
-          for (int _i178 = 0; _i178 < _list177.size; ++_i178)
+          org.apache.thrift.protocol.TList _list185 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.choiceInquiries = new ArrayList<ChoiceInquiry>(_list185.size);
+          for (int _i186 = 0; _i186 < _list185.size; ++_i186)
           {
-            ChoiceInquiry _elem179; // required
-            _elem179 = new ChoiceInquiry();
-            _elem179.read(iprot);
-            struct.choiceInquiries.add(_elem179);
+            ChoiceInquiry _elem187; // required
+            _elem187 = new ChoiceInquiry();
+            _elem187.read(iprot);
+            struct.choiceInquiries.add(_elem187);
           }
         }
         struct.setChoiceInquiriesIsSet(true);

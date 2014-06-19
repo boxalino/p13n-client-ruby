@@ -842,14 +842,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
           case 3: // CONTEXT_ITEMS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list48 = iprot.readListBegin();
-                struct.contextItems = new ArrayList<ContextItem>(_list48.size);
-                for (int _i49 = 0; _i49 < _list48.size; ++_i49)
+                org.apache.thrift.protocol.TList _list64 = iprot.readListBegin();
+                struct.contextItems = new ArrayList<ContextItem>(_list64.size);
+                for (int _i65 = 0; _i65 < _list64.size; ++_i65)
                 {
-                  ContextItem _elem50; // required
-                  _elem50 = new ContextItem();
-                  _elem50.read(iprot);
-                  struct.contextItems.add(_elem50);
+                  ContextItem _elem66; // required
+                  _elem66 = new ContextItem();
+                  _elem66.read(iprot);
+                  struct.contextItems.add(_elem66);
                 }
                 iprot.readListEnd();
               }
@@ -869,13 +869,13 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
           case 5: // EXCLUDE_VARIANT_IDS
             if (schemeField.type == org.apache.thrift.protocol.TType.SET) {
               {
-                org.apache.thrift.protocol.TSet _set51 = iprot.readSetBegin();
-                struct.excludeVariantIds = new HashSet<String>(2*_set51.size);
-                for (int _i52 = 0; _i52 < _set51.size; ++_i52)
+                org.apache.thrift.protocol.TSet _set67 = iprot.readSetBegin();
+                struct.excludeVariantIds = new HashSet<String>(2*_set67.size);
+                for (int _i68 = 0; _i68 < _set67.size; ++_i68)
                 {
-                  String _elem53; // required
-                  _elem53 = iprot.readString();
-                  struct.excludeVariantIds.add(_elem53);
+                  String _elem69; // required
+                  _elem69 = iprot.readString();
+                  struct.excludeVariantIds.add(_elem69);
                 }
                 iprot.readSetEnd();
               }
@@ -929,9 +929,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         oprot.writeFieldBegin(CONTEXT_ITEMS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.contextItems.size()));
-          for (ContextItem _iter54 : struct.contextItems)
+          for (ContextItem _iter70 : struct.contextItems)
           {
-            _iter54.write(oprot);
+            _iter70.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -944,9 +944,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
         oprot.writeFieldBegin(EXCLUDE_VARIANT_IDS_FIELD_DESC);
         {
           oprot.writeSetBegin(new org.apache.thrift.protocol.TSet(org.apache.thrift.protocol.TType.STRING, struct.excludeVariantIds.size()));
-          for (String _iter55 : struct.excludeVariantIds)
+          for (String _iter71 : struct.excludeVariantIds)
           {
-            oprot.writeString(_iter55);
+            oprot.writeString(_iter71);
           }
           oprot.writeSetEnd();
         }
@@ -1009,9 +1009,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (struct.isSetContextItems()) {
         {
           oprot.writeI32(struct.contextItems.size());
-          for (ContextItem _iter56 : struct.contextItems)
+          for (ContextItem _iter72 : struct.contextItems)
           {
-            _iter56.write(oprot);
+            _iter72.write(oprot);
           }
         }
       }
@@ -1021,9 +1021,9 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       if (struct.isSetExcludeVariantIds()) {
         {
           oprot.writeI32(struct.excludeVariantIds.size());
-          for (String _iter57 : struct.excludeVariantIds)
+          for (String _iter73 : struct.excludeVariantIds)
           {
-            oprot.writeString(_iter57);
+            oprot.writeString(_iter73);
           }
         }
       }
@@ -1050,14 +1050,14 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TList _list58 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.contextItems = new ArrayList<ContextItem>(_list58.size);
-          for (int _i59 = 0; _i59 < _list58.size; ++_i59)
+          org.apache.thrift.protocol.TList _list74 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.contextItems = new ArrayList<ContextItem>(_list74.size);
+          for (int _i75 = 0; _i75 < _list74.size; ++_i75)
           {
-            ContextItem _elem60; // required
-            _elem60 = new ContextItem();
-            _elem60.read(iprot);
-            struct.contextItems.add(_elem60);
+            ContextItem _elem76; // required
+            _elem76 = new ContextItem();
+            _elem76.read(iprot);
+            struct.contextItems.add(_elem76);
           }
         }
         struct.setContextItemsIsSet(true);
@@ -1068,13 +1068,13 @@ public class ChoiceInquiry implements org.apache.thrift.TBase<ChoiceInquiry, Cho
       }
       if (incoming.get(4)) {
         {
-          org.apache.thrift.protocol.TSet _set61 = new org.apache.thrift.protocol.TSet(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-          struct.excludeVariantIds = new HashSet<String>(2*_set61.size);
-          for (int _i62 = 0; _i62 < _set61.size; ++_i62)
+          org.apache.thrift.protocol.TSet _set77 = new org.apache.thrift.protocol.TSet(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
+          struct.excludeVariantIds = new HashSet<String>(2*_set77.size);
+          for (int _i78 = 0; _i78 < _set77.size; ++_i78)
           {
-            String _elem63; // required
-            _elem63 = iprot.readString();
-            struct.excludeVariantIds.add(_elem63);
+            String _elem79; // required
+            _elem79 = iprot.readString();
+            struct.excludeVariantIds.add(_elem79);
           }
         }
         struct.setExcludeVariantIdsIsSet(true);

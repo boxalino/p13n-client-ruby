@@ -352,6 +352,224 @@ class Filter {
 
 }
 
+class FacetValue {
+  static $_TSPEC;
+
+  public $stringValue = null;
+  public $rangeFromInclusive = null;
+  public $rangeToExclusive = null;
+  public $hitCount = null;
+  public $hierarchyId = null;
+  public $hierarchy = null;
+  public $selected = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 'stringValue',
+          'type' => TType::STRING,
+          ),
+        2 => array(
+          'var' => 'rangeFromInclusive',
+          'type' => TType::STRING,
+          ),
+        3 => array(
+          'var' => 'rangeToExclusive',
+          'type' => TType::STRING,
+          ),
+        4 => array(
+          'var' => 'hitCount',
+          'type' => TType::I64,
+          ),
+        50 => array(
+          'var' => 'hierarchyId',
+          'type' => TType::STRING,
+          ),
+        60 => array(
+          'var' => 'hierarchy',
+          'type' => TType::LST,
+          'etype' => TType::STRING,
+          'elem' => array(
+            'type' => TType::STRING,
+            ),
+          ),
+        70 => array(
+          'var' => 'selected',
+          'type' => TType::BOOL,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['stringValue'])) {
+        $this->stringValue = $vals['stringValue'];
+      }
+      if (isset($vals['rangeFromInclusive'])) {
+        $this->rangeFromInclusive = $vals['rangeFromInclusive'];
+      }
+      if (isset($vals['rangeToExclusive'])) {
+        $this->rangeToExclusive = $vals['rangeToExclusive'];
+      }
+      if (isset($vals['hitCount'])) {
+        $this->hitCount = $vals['hitCount'];
+      }
+      if (isset($vals['hierarchyId'])) {
+        $this->hierarchyId = $vals['hierarchyId'];
+      }
+      if (isset($vals['hierarchy'])) {
+        $this->hierarchy = $vals['hierarchy'];
+      }
+      if (isset($vals['selected'])) {
+        $this->selected = $vals['selected'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'FacetValue';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->stringValue);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->rangeFromInclusive);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->rangeToExclusive);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 4:
+          if ($ftype == TType::I64) {
+            $xfer += $input->readI64($this->hitCount);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 50:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->hierarchyId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 60:
+          if ($ftype == TType::LST) {
+            $this->hierarchy = array();
+            $_size14 = 0;
+            $_etype17 = 0;
+            $xfer += $input->readListBegin($_etype17, $_size14);
+            for ($_i18 = 0; $_i18 < $_size14; ++$_i18)
+            {
+              $elem19 = null;
+              $xfer += $input->readString($elem19);
+              $this->hierarchy []= $elem19;
+            }
+            $xfer += $input->readListEnd();
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 70:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->selected);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('FacetValue');
+    if ($this->stringValue !== null) {
+      $xfer += $output->writeFieldBegin('stringValue', TType::STRING, 1);
+      $xfer += $output->writeString($this->stringValue);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->rangeFromInclusive !== null) {
+      $xfer += $output->writeFieldBegin('rangeFromInclusive', TType::STRING, 2);
+      $xfer += $output->writeString($this->rangeFromInclusive);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->rangeToExclusive !== null) {
+      $xfer += $output->writeFieldBegin('rangeToExclusive', TType::STRING, 3);
+      $xfer += $output->writeString($this->rangeToExclusive);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->hitCount !== null) {
+      $xfer += $output->writeFieldBegin('hitCount', TType::I64, 4);
+      $xfer += $output->writeI64($this->hitCount);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->hierarchyId !== null) {
+      $xfer += $output->writeFieldBegin('hierarchyId', TType::STRING, 50);
+      $xfer += $output->writeString($this->hierarchyId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->hierarchy !== null) {
+      if (!is_array($this->hierarchy)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('hierarchy', TType::LST, 60);
+      {
+        $output->writeListBegin(TType::STRING, count($this->hierarchy));
+        {
+          foreach ($this->hierarchy as $iter20)
+          {
+            $xfer += $output->writeString($iter20);
+          }
+        }
+        $output->writeListEnd();
+      }
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->selected !== null) {
+      $xfer += $output->writeFieldBegin('selected', TType::BOOL, 70);
+      $xfer += $output->writeBool($this->selected);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
 class FacetRequest {
   static $_TSPEC;
 
@@ -363,6 +581,8 @@ class FacetRequest {
   public $dateRangeGap = null;
   public $sortOrder = null;
   public $sortAscending = null;
+  public $selectedValues = null;
+  public $andSelectedValues = false;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -399,6 +619,19 @@ class FacetRequest {
           'var' => 'sortAscending',
           'type' => TType::BOOL,
           ),
+        90 => array(
+          'var' => 'selectedValues',
+          'type' => TType::LST,
+          'etype' => TType::STRUCT,
+          'elem' => array(
+            'type' => TType::STRUCT,
+            'class' => '\com\boxalino\p13n\api\thrift\FacetValue',
+            ),
+          ),
+        100 => array(
+          'var' => 'andSelectedValues',
+          'type' => TType::BOOL,
+          ),
         );
     }
     if (is_array($vals)) {
@@ -425,6 +658,12 @@ class FacetRequest {
       }
       if (isset($vals['sortAscending'])) {
         $this->sortAscending = $vals['sortAscending'];
+      }
+      if (isset($vals['selectedValues'])) {
+        $this->selectedValues = $vals['selectedValues'];
+      }
+      if (isset($vals['andSelectedValues'])) {
+        $this->andSelectedValues = $vals['andSelectedValues'];
       }
     }
   }
@@ -504,6 +743,31 @@ class FacetRequest {
             $xfer += $input->skip($ftype);
           }
           break;
+        case 90:
+          if ($ftype == TType::LST) {
+            $this->selectedValues = array();
+            $_size21 = 0;
+            $_etype24 = 0;
+            $xfer += $input->readListBegin($_etype24, $_size21);
+            for ($_i25 = 0; $_i25 < $_size21; ++$_i25)
+            {
+              $elem26 = null;
+              $elem26 = new \com\boxalino\p13n\api\thrift\FacetValue();
+              $xfer += $elem26->read($input);
+              $this->selectedValues []= $elem26;
+            }
+            $xfer += $input->readListEnd();
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 100:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->andSelectedValues);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
         default:
           $xfer += $input->skip($ftype);
           break;
@@ -555,6 +819,28 @@ class FacetRequest {
     if ($this->sortAscending !== null) {
       $xfer += $output->writeFieldBegin('sortAscending', TType::BOOL, 8);
       $xfer += $output->writeBool($this->sortAscending);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->selectedValues !== null) {
+      if (!is_array($this->selectedValues)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('selectedValues', TType::LST, 90);
+      {
+        $output->writeListBegin(TType::STRUCT, count($this->selectedValues));
+        {
+          foreach ($this->selectedValues as $iter27)
+          {
+            $xfer += $iter27->write($output);
+          }
+        }
+        $output->writeListEnd();
+      }
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->andSelectedValues !== null) {
+      $xfer += $output->writeFieldBegin('andSelectedValues', TType::BOOL, 100);
+      $xfer += $output->writeBool($this->andSelectedValues);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
@@ -811,15 +1097,15 @@ class SimpleSearchQuery {
         case 4:
           if ($ftype == TType::LST) {
             $this->filters = array();
-            $_size14 = 0;
-            $_etype17 = 0;
-            $xfer += $input->readListBegin($_etype17, $_size14);
-            for ($_i18 = 0; $_i18 < $_size14; ++$_i18)
+            $_size28 = 0;
+            $_etype31 = 0;
+            $xfer += $input->readListBegin($_etype31, $_size28);
+            for ($_i32 = 0; $_i32 < $_size28; ++$_i32)
             {
-              $elem19 = null;
-              $elem19 = new \com\boxalino\p13n\api\thrift\Filter();
-              $xfer += $elem19->read($input);
-              $this->filters []= $elem19;
+              $elem33 = null;
+              $elem33 = new \com\boxalino\p13n\api\thrift\Filter();
+              $xfer += $elem33->read($input);
+              $this->filters []= $elem33;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -836,15 +1122,15 @@ class SimpleSearchQuery {
         case 6:
           if ($ftype == TType::LST) {
             $this->facetRequests = array();
-            $_size20 = 0;
-            $_etype23 = 0;
-            $xfer += $input->readListBegin($_etype23, $_size20);
-            for ($_i24 = 0; $_i24 < $_size20; ++$_i24)
+            $_size34 = 0;
+            $_etype37 = 0;
+            $xfer += $input->readListBegin($_etype37, $_size34);
+            for ($_i38 = 0; $_i38 < $_size34; ++$_i38)
             {
-              $elem25 = null;
-              $elem25 = new \com\boxalino\p13n\api\thrift\FacetRequest();
-              $xfer += $elem25->read($input);
-              $this->facetRequests []= $elem25;
+              $elem39 = null;
+              $elem39 = new \com\boxalino\p13n\api\thrift\FacetRequest();
+              $xfer += $elem39->read($input);
+              $this->facetRequests []= $elem39;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -854,15 +1140,15 @@ class SimpleSearchQuery {
         case 7:
           if ($ftype == TType::LST) {
             $this->sortFields = array();
-            $_size26 = 0;
-            $_etype29 = 0;
-            $xfer += $input->readListBegin($_etype29, $_size26);
-            for ($_i30 = 0; $_i30 < $_size26; ++$_i30)
+            $_size40 = 0;
+            $_etype43 = 0;
+            $xfer += $input->readListBegin($_etype43, $_size40);
+            for ($_i44 = 0; $_i44 < $_size40; ++$_i44)
             {
-              $elem31 = null;
-              $elem31 = new \com\boxalino\p13n\api\thrift\SortField();
-              $xfer += $elem31->read($input);
-              $this->sortFields []= $elem31;
+              $elem45 = null;
+              $elem45 = new \com\boxalino\p13n\api\thrift\SortField();
+              $xfer += $elem45->read($input);
+              $this->sortFields []= $elem45;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -886,14 +1172,14 @@ class SimpleSearchQuery {
         case 10:
           if ($ftype == TType::LST) {
             $this->returnFields = array();
-            $_size32 = 0;
-            $_etype35 = 0;
-            $xfer += $input->readListBegin($_etype35, $_size32);
-            for ($_i36 = 0; $_i36 < $_size32; ++$_i36)
+            $_size46 = 0;
+            $_etype49 = 0;
+            $xfer += $input->readListBegin($_etype49, $_size46);
+            for ($_i50 = 0; $_i50 < $_size46; ++$_i50)
             {
-              $elem37 = null;
-              $xfer += $input->readString($elem37);
-              $this->returnFields []= $elem37;
+              $elem51 = null;
+              $xfer += $input->readString($elem51);
+              $this->returnFields []= $elem51;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -936,9 +1222,9 @@ class SimpleSearchQuery {
       {
         $output->writeListBegin(TType::STRUCT, count($this->filters));
         {
-          foreach ($this->filters as $iter38)
+          foreach ($this->filters as $iter52)
           {
-            $xfer += $iter38->write($output);
+            $xfer += $iter52->write($output);
           }
         }
         $output->writeListEnd();
@@ -958,9 +1244,9 @@ class SimpleSearchQuery {
       {
         $output->writeListBegin(TType::STRUCT, count($this->facetRequests));
         {
-          foreach ($this->facetRequests as $iter39)
+          foreach ($this->facetRequests as $iter53)
           {
-            $xfer += $iter39->write($output);
+            $xfer += $iter53->write($output);
           }
         }
         $output->writeListEnd();
@@ -975,9 +1261,9 @@ class SimpleSearchQuery {
       {
         $output->writeListBegin(TType::STRUCT, count($this->sortFields));
         {
-          foreach ($this->sortFields as $iter40)
+          foreach ($this->sortFields as $iter54)
           {
-            $xfer += $iter40->write($output);
+            $xfer += $iter54->write($output);
           }
         }
         $output->writeListEnd();
@@ -1002,9 +1288,9 @@ class SimpleSearchQuery {
       {
         $output->writeListBegin(TType::STRING, count($this->returnFields));
         {
-          foreach ($this->returnFields as $iter41)
+          foreach ($this->returnFields as $iter55)
           {
-            $xfer += $output->writeString($iter41);
+            $xfer += $output->writeString($iter55);
           }
         }
         $output->writeListEnd();
@@ -1266,15 +1552,15 @@ class ChoiceInquiry {
         case 3:
           if ($ftype == TType::LST) {
             $this->contextItems = array();
-            $_size42 = 0;
-            $_etype45 = 0;
-            $xfer += $input->readListBegin($_etype45, $_size42);
-            for ($_i46 = 0; $_i46 < $_size42; ++$_i46)
+            $_size56 = 0;
+            $_etype59 = 0;
+            $xfer += $input->readListBegin($_etype59, $_size56);
+            for ($_i60 = 0; $_i60 < $_size56; ++$_i60)
             {
-              $elem47 = null;
-              $elem47 = new \com\boxalino\p13n\api\thrift\ContextItem();
-              $xfer += $elem47->read($input);
-              $this->contextItems []= $elem47;
+              $elem61 = null;
+              $elem61 = new \com\boxalino\p13n\api\thrift\ContextItem();
+              $xfer += $elem61->read($input);
+              $this->contextItems []= $elem61;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -1291,17 +1577,17 @@ class ChoiceInquiry {
         case 5:
           if ($ftype == TType::SET) {
             $this->excludeVariantIds = array();
-            $_size48 = 0;
-            $_etype51 = 0;
-            $xfer += $input->readSetBegin($_etype51, $_size48);
-            for ($_i52 = 0; $_i52 < $_size48; ++$_i52)
+            $_size62 = 0;
+            $_etype65 = 0;
+            $xfer += $input->readSetBegin($_etype65, $_size62);
+            for ($_i66 = 0; $_i66 < $_size62; ++$_i66)
             {
-              $elem53 = null;
-              $xfer += $input->readString($elem53);
-              if (is_scalar($elem53)) {
-                $this->excludeVariantIds[$elem53] = true;
+              $elem67 = null;
+              $xfer += $input->readString($elem67);
+              if (is_scalar($elem67)) {
+                $this->excludeVariantIds[$elem67] = true;
               } else {
-                $this->excludeVariantIds []= $elem53;
+                $this->excludeVariantIds []= $elem67;
               }
             }
             $xfer += $input->readSetEnd();
@@ -1357,9 +1643,9 @@ class ChoiceInquiry {
       {
         $output->writeListBegin(TType::STRUCT, count($this->contextItems));
         {
-          foreach ($this->contextItems as $iter54)
+          foreach ($this->contextItems as $iter68)
           {
-            $xfer += $iter54->write($output);
+            $xfer += $iter68->write($output);
           }
         }
         $output->writeListEnd();
@@ -1379,12 +1665,12 @@ class ChoiceInquiry {
       {
         $output->writeSetBegin(TType::STRING, count($this->excludeVariantIds));
         {
-          foreach ($this->excludeVariantIds as $iter55 => $iter56)
+          foreach ($this->excludeVariantIds as $iter69 => $iter70)
           {
-            if (is_scalar($iter56)) {
-            $xfer += $output->writeString($iter55);
+            if (is_scalar($iter70)) {
+            $xfer += $output->writeString($iter69);
             } else {
-            $xfer += $output->writeString($iter56);
+            $xfer += $output->writeString($iter70);
             }
           }
         }
@@ -1464,27 +1750,27 @@ class RequestContext {
         case 1:
           if ($ftype == TType::MAP) {
             $this->parameters = array();
-            $_size57 = 0;
-            $_ktype58 = 0;
-            $_vtype59 = 0;
-            $xfer += $input->readMapBegin($_ktype58, $_vtype59, $_size57);
-            for ($_i61 = 0; $_i61 < $_size57; ++$_i61)
+            $_size71 = 0;
+            $_ktype72 = 0;
+            $_vtype73 = 0;
+            $xfer += $input->readMapBegin($_ktype72, $_vtype73, $_size71);
+            for ($_i75 = 0; $_i75 < $_size71; ++$_i75)
             {
-              $key62 = '';
-              $val63 = array();
-              $xfer += $input->readString($key62);
-              $val63 = array();
-              $_size64 = 0;
-              $_etype67 = 0;
-              $xfer += $input->readListBegin($_etype67, $_size64);
-              for ($_i68 = 0; $_i68 < $_size64; ++$_i68)
+              $key76 = '';
+              $val77 = array();
+              $xfer += $input->readString($key76);
+              $val77 = array();
+              $_size78 = 0;
+              $_etype81 = 0;
+              $xfer += $input->readListBegin($_etype81, $_size78);
+              for ($_i82 = 0; $_i82 < $_size78; ++$_i82)
               {
-                $elem69 = null;
-                $xfer += $input->readString($elem69);
-                $val63 []= $elem69;
+                $elem83 = null;
+                $xfer += $input->readString($elem83);
+                $val77 []= $elem83;
               }
               $xfer += $input->readListEnd();
-              $this->parameters[$key62] = $val63;
+              $this->parameters[$key76] = $val77;
             }
             $xfer += $input->readMapEnd();
           } else {
@@ -1512,15 +1798,15 @@ class RequestContext {
       {
         $output->writeMapBegin(TType::STRING, TType::LST, count($this->parameters));
         {
-          foreach ($this->parameters as $kiter70 => $viter71)
+          foreach ($this->parameters as $kiter84 => $viter85)
           {
-            $xfer += $output->writeString($kiter70);
+            $xfer += $output->writeString($kiter84);
             {
-              $output->writeListBegin(TType::STRING, count($viter71));
+              $output->writeListBegin(TType::STRING, count($viter85));
               {
-                foreach ($viter71 as $iter72)
+                foreach ($viter85 as $iter86)
                 {
-                  $xfer += $output->writeString($iter72);
+                  $xfer += $output->writeString($iter86);
                 }
               }
               $output->writeListEnd();
@@ -1699,15 +1985,15 @@ class ChoiceRequest {
         case 3:
           if ($ftype == TType::LST) {
             $this->inquiries = array();
-            $_size73 = 0;
-            $_etype76 = 0;
-            $xfer += $input->readListBegin($_etype76, $_size73);
-            for ($_i77 = 0; $_i77 < $_size73; ++$_i77)
+            $_size87 = 0;
+            $_etype90 = 0;
+            $xfer += $input->readListBegin($_etype90, $_size87);
+            for ($_i91 = 0; $_i91 < $_size87; ++$_i91)
             {
-              $elem78 = null;
-              $elem78 = new \com\boxalino\p13n\api\thrift\ChoiceInquiry();
-              $xfer += $elem78->read($input);
-              $this->inquiries []= $elem78;
+              $elem92 = null;
+              $elem92 = new \com\boxalino\p13n\api\thrift\ChoiceInquiry();
+              $xfer += $elem92->read($input);
+              $this->inquiries []= $elem92;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -1756,9 +2042,9 @@ class ChoiceRequest {
       {
         $output->writeListBegin(TType::STRUCT, count($this->inquiries));
         {
-          foreach ($this->inquiries as $iter79)
+          foreach ($this->inquiries as $iter93)
           {
-            $xfer += $iter79->write($output);
+            $xfer += $iter93->write($output);
           }
         }
         $output->writeListEnd();
@@ -1771,204 +2057,6 @@ class ChoiceRequest {
       }
       $xfer += $output->writeFieldBegin('requestContext', TType::STRUCT, 4);
       $xfer += $this->requestContext->write($output);
-      $xfer += $output->writeFieldEnd();
-    }
-    $xfer += $output->writeFieldStop();
-    $xfer += $output->writeStructEnd();
-    return $xfer;
-  }
-
-}
-
-class FacetValue {
-  static $_TSPEC;
-
-  public $stringValue = null;
-  public $rangeFromInclusive = null;
-  public $rangeToExclusive = null;
-  public $hitCount = null;
-  public $hierarchyId = null;
-  public $hierarchy = null;
-
-  public function __construct($vals=null) {
-    if (!isset(self::$_TSPEC)) {
-      self::$_TSPEC = array(
-        1 => array(
-          'var' => 'stringValue',
-          'type' => TType::STRING,
-          ),
-        2 => array(
-          'var' => 'rangeFromInclusive',
-          'type' => TType::STRING,
-          ),
-        3 => array(
-          'var' => 'rangeToExclusive',
-          'type' => TType::STRING,
-          ),
-        4 => array(
-          'var' => 'hitCount',
-          'type' => TType::I64,
-          ),
-        50 => array(
-          'var' => 'hierarchyId',
-          'type' => TType::STRING,
-          ),
-        60 => array(
-          'var' => 'hierarchy',
-          'type' => TType::LST,
-          'etype' => TType::STRING,
-          'elem' => array(
-            'type' => TType::STRING,
-            ),
-          ),
-        );
-    }
-    if (is_array($vals)) {
-      if (isset($vals['stringValue'])) {
-        $this->stringValue = $vals['stringValue'];
-      }
-      if (isset($vals['rangeFromInclusive'])) {
-        $this->rangeFromInclusive = $vals['rangeFromInclusive'];
-      }
-      if (isset($vals['rangeToExclusive'])) {
-        $this->rangeToExclusive = $vals['rangeToExclusive'];
-      }
-      if (isset($vals['hitCount'])) {
-        $this->hitCount = $vals['hitCount'];
-      }
-      if (isset($vals['hierarchyId'])) {
-        $this->hierarchyId = $vals['hierarchyId'];
-      }
-      if (isset($vals['hierarchy'])) {
-        $this->hierarchy = $vals['hierarchy'];
-      }
-    }
-  }
-
-  public function getName() {
-    return 'FacetValue';
-  }
-
-  public function read($input)
-  {
-    $xfer = 0;
-    $fname = null;
-    $ftype = 0;
-    $fid = 0;
-    $xfer += $input->readStructBegin($fname);
-    while (true)
-    {
-      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
-      if ($ftype == TType::STOP) {
-        break;
-      }
-      switch ($fid)
-      {
-        case 1:
-          if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->stringValue);
-          } else {
-            $xfer += $input->skip($ftype);
-          }
-          break;
-        case 2:
-          if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->rangeFromInclusive);
-          } else {
-            $xfer += $input->skip($ftype);
-          }
-          break;
-        case 3:
-          if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->rangeToExclusive);
-          } else {
-            $xfer += $input->skip($ftype);
-          }
-          break;
-        case 4:
-          if ($ftype == TType::I64) {
-            $xfer += $input->readI64($this->hitCount);
-          } else {
-            $xfer += $input->skip($ftype);
-          }
-          break;
-        case 50:
-          if ($ftype == TType::STRING) {
-            $xfer += $input->readString($this->hierarchyId);
-          } else {
-            $xfer += $input->skip($ftype);
-          }
-          break;
-        case 60:
-          if ($ftype == TType::LST) {
-            $this->hierarchy = array();
-            $_size80 = 0;
-            $_etype83 = 0;
-            $xfer += $input->readListBegin($_etype83, $_size80);
-            for ($_i84 = 0; $_i84 < $_size80; ++$_i84)
-            {
-              $elem85 = null;
-              $xfer += $input->readString($elem85);
-              $this->hierarchy []= $elem85;
-            }
-            $xfer += $input->readListEnd();
-          } else {
-            $xfer += $input->skip($ftype);
-          }
-          break;
-        default:
-          $xfer += $input->skip($ftype);
-          break;
-      }
-      $xfer += $input->readFieldEnd();
-    }
-    $xfer += $input->readStructEnd();
-    return $xfer;
-  }
-
-  public function write($output) {
-    $xfer = 0;
-    $xfer += $output->writeStructBegin('FacetValue');
-    if ($this->stringValue !== null) {
-      $xfer += $output->writeFieldBegin('stringValue', TType::STRING, 1);
-      $xfer += $output->writeString($this->stringValue);
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->rangeFromInclusive !== null) {
-      $xfer += $output->writeFieldBegin('rangeFromInclusive', TType::STRING, 2);
-      $xfer += $output->writeString($this->rangeFromInclusive);
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->rangeToExclusive !== null) {
-      $xfer += $output->writeFieldBegin('rangeToExclusive', TType::STRING, 3);
-      $xfer += $output->writeString($this->rangeToExclusive);
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->hitCount !== null) {
-      $xfer += $output->writeFieldBegin('hitCount', TType::I64, 4);
-      $xfer += $output->writeI64($this->hitCount);
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->hierarchyId !== null) {
-      $xfer += $output->writeFieldBegin('hierarchyId', TType::STRING, 50);
-      $xfer += $output->writeString($this->hierarchyId);
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->hierarchy !== null) {
-      if (!is_array($this->hierarchy)) {
-        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
-      }
-      $xfer += $output->writeFieldBegin('hierarchy', TType::LST, 60);
-      {
-        $output->writeListBegin(TType::STRING, count($this->hierarchy));
-        {
-          foreach ($this->hierarchy as $iter86)
-          {
-            $xfer += $output->writeString($iter86);
-          }
-        }
-        $output->writeListEnd();
-      }
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
@@ -2041,15 +2129,15 @@ class FacetResponse {
         case 2:
           if ($ftype == TType::LST) {
             $this->values = array();
-            $_size87 = 0;
-            $_etype90 = 0;
-            $xfer += $input->readListBegin($_etype90, $_size87);
-            for ($_i91 = 0; $_i91 < $_size87; ++$_i91)
+            $_size94 = 0;
+            $_etype97 = 0;
+            $xfer += $input->readListBegin($_etype97, $_size94);
+            for ($_i98 = 0; $_i98 < $_size94; ++$_i98)
             {
-              $elem92 = null;
-              $elem92 = new \com\boxalino\p13n\api\thrift\FacetValue();
-              $xfer += $elem92->read($input);
-              $this->values []= $elem92;
+              $elem99 = null;
+              $elem99 = new \com\boxalino\p13n\api\thrift\FacetValue();
+              $xfer += $elem99->read($input);
+              $this->values []= $elem99;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -2082,9 +2170,9 @@ class FacetResponse {
       {
         $output->writeListBegin(TType::STRUCT, count($this->values));
         {
-          foreach ($this->values as $iter93)
+          foreach ($this->values as $iter100)
           {
-            $xfer += $iter93->write($output);
+            $xfer += $iter100->write($output);
           }
         }
         $output->writeListEnd();
@@ -2161,27 +2249,27 @@ class Hit {
         case 1:
           if ($ftype == TType::MAP) {
             $this->values = array();
-            $_size94 = 0;
-            $_ktype95 = 0;
-            $_vtype96 = 0;
-            $xfer += $input->readMapBegin($_ktype95, $_vtype96, $_size94);
-            for ($_i98 = 0; $_i98 < $_size94; ++$_i98)
+            $_size101 = 0;
+            $_ktype102 = 0;
+            $_vtype103 = 0;
+            $xfer += $input->readMapBegin($_ktype102, $_vtype103, $_size101);
+            for ($_i105 = 0; $_i105 < $_size101; ++$_i105)
             {
-              $key99 = '';
-              $val100 = array();
-              $xfer += $input->readString($key99);
-              $val100 = array();
-              $_size101 = 0;
-              $_etype104 = 0;
-              $xfer += $input->readListBegin($_etype104, $_size101);
-              for ($_i105 = 0; $_i105 < $_size101; ++$_i105)
+              $key106 = '';
+              $val107 = array();
+              $xfer += $input->readString($key106);
+              $val107 = array();
+              $_size108 = 0;
+              $_etype111 = 0;
+              $xfer += $input->readListBegin($_etype111, $_size108);
+              for ($_i112 = 0; $_i112 < $_size108; ++$_i112)
               {
-                $elem106 = null;
-                $xfer += $input->readString($elem106);
-                $val100 []= $elem106;
+                $elem113 = null;
+                $xfer += $input->readString($elem113);
+                $val107 []= $elem113;
               }
               $xfer += $input->readListEnd();
-              $this->values[$key99] = $val100;
+              $this->values[$key106] = $val107;
             }
             $xfer += $input->readMapEnd();
           } else {
@@ -2216,15 +2304,15 @@ class Hit {
       {
         $output->writeMapBegin(TType::STRING, TType::LST, count($this->values));
         {
-          foreach ($this->values as $kiter107 => $viter108)
+          foreach ($this->values as $kiter114 => $viter115)
           {
-            $xfer += $output->writeString($kiter107);
+            $xfer += $output->writeString($kiter114);
             {
-              $output->writeListBegin(TType::STRING, count($viter108));
+              $output->writeListBegin(TType::STRING, count($viter115));
               {
-                foreach ($viter108 as $iter109)
+                foreach ($viter115 as $iter116)
                 {
-                  $xfer += $output->writeString($iter109);
+                  $xfer += $output->writeString($iter116);
                 }
               }
               $output->writeListEnd();
@@ -2324,15 +2412,15 @@ class SearchResult {
         case 1:
           if ($ftype == TType::LST) {
             $this->hits = array();
-            $_size110 = 0;
-            $_etype113 = 0;
-            $xfer += $input->readListBegin($_etype113, $_size110);
-            for ($_i114 = 0; $_i114 < $_size110; ++$_i114)
+            $_size117 = 0;
+            $_etype120 = 0;
+            $xfer += $input->readListBegin($_etype120, $_size117);
+            for ($_i121 = 0; $_i121 < $_size117; ++$_i121)
             {
-              $elem115 = null;
-              $elem115 = new \com\boxalino\p13n\api\thrift\Hit();
-              $xfer += $elem115->read($input);
-              $this->hits []= $elem115;
+              $elem122 = null;
+              $elem122 = new \com\boxalino\p13n\api\thrift\Hit();
+              $xfer += $elem122->read($input);
+              $this->hits []= $elem122;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -2342,15 +2430,15 @@ class SearchResult {
         case 2:
           if ($ftype == TType::LST) {
             $this->facetResponses = array();
-            $_size116 = 0;
-            $_etype119 = 0;
-            $xfer += $input->readListBegin($_etype119, $_size116);
-            for ($_i120 = 0; $_i120 < $_size116; ++$_i120)
+            $_size123 = 0;
+            $_etype126 = 0;
+            $xfer += $input->readListBegin($_etype126, $_size123);
+            for ($_i127 = 0; $_i127 < $_size123; ++$_i127)
             {
-              $elem121 = null;
-              $elem121 = new \com\boxalino\p13n\api\thrift\FacetResponse();
-              $xfer += $elem121->read($input);
-              $this->facetResponses []= $elem121;
+              $elem128 = null;
+              $elem128 = new \com\boxalino\p13n\api\thrift\FacetResponse();
+              $xfer += $elem128->read($input);
+              $this->facetResponses []= $elem128;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -2392,9 +2480,9 @@ class SearchResult {
       {
         $output->writeListBegin(TType::STRUCT, count($this->hits));
         {
-          foreach ($this->hits as $iter122)
+          foreach ($this->hits as $iter129)
           {
-            $xfer += $iter122->write($output);
+            $xfer += $iter129->write($output);
           }
         }
         $output->writeListEnd();
@@ -2409,9 +2497,9 @@ class SearchResult {
       {
         $output->writeListBegin(TType::STRUCT, count($this->facetResponses));
         {
-          foreach ($this->facetResponses as $iter123)
+          foreach ($this->facetResponses as $iter130)
           {
-            $xfer += $iter123->write($output);
+            $xfer += $iter130->write($output);
           }
         }
         $output->writeListEnd();
@@ -2496,15 +2584,15 @@ class SearchRelaxation {
         case 10:
           if ($ftype == TType::LST) {
             $this->suggestionsResults = array();
-            $_size124 = 0;
-            $_etype127 = 0;
-            $xfer += $input->readListBegin($_etype127, $_size124);
-            for ($_i128 = 0; $_i128 < $_size124; ++$_i128)
+            $_size131 = 0;
+            $_etype134 = 0;
+            $xfer += $input->readListBegin($_etype134, $_size131);
+            for ($_i135 = 0; $_i135 < $_size131; ++$_i135)
             {
-              $elem129 = null;
-              $elem129 = new \com\boxalino\p13n\api\thrift\SearchResult();
-              $xfer += $elem129->read($input);
-              $this->suggestionsResults []= $elem129;
+              $elem136 = null;
+              $elem136 = new \com\boxalino\p13n\api\thrift\SearchResult();
+              $xfer += $elem136->read($input);
+              $this->suggestionsResults []= $elem136;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -2514,15 +2602,15 @@ class SearchRelaxation {
         case 20:
           if ($ftype == TType::LST) {
             $this->subphrasesResults = array();
-            $_size130 = 0;
-            $_etype133 = 0;
-            $xfer += $input->readListBegin($_etype133, $_size130);
-            for ($_i134 = 0; $_i134 < $_size130; ++$_i134)
+            $_size137 = 0;
+            $_etype140 = 0;
+            $xfer += $input->readListBegin($_etype140, $_size137);
+            for ($_i141 = 0; $_i141 < $_size137; ++$_i141)
             {
-              $elem135 = null;
-              $elem135 = new \com\boxalino\p13n\api\thrift\SearchResult();
-              $xfer += $elem135->read($input);
-              $this->subphrasesResults []= $elem135;
+              $elem142 = null;
+              $elem142 = new \com\boxalino\p13n\api\thrift\SearchResult();
+              $xfer += $elem142->read($input);
+              $this->subphrasesResults []= $elem142;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -2550,9 +2638,9 @@ class SearchRelaxation {
       {
         $output->writeListBegin(TType::STRUCT, count($this->suggestionsResults));
         {
-          foreach ($this->suggestionsResults as $iter136)
+          foreach ($this->suggestionsResults as $iter143)
           {
-            $xfer += $iter136->write($output);
+            $xfer += $iter143->write($output);
           }
         }
         $output->writeListEnd();
@@ -2567,9 +2655,9 @@ class SearchRelaxation {
       {
         $output->writeListBegin(TType::STRUCT, count($this->subphrasesResults));
         {
-          foreach ($this->subphrasesResults as $iter137)
+          foreach ($this->subphrasesResults as $iter144)
           {
-            $xfer += $iter137->write($output);
+            $xfer += $iter144->write($output);
           }
         }
         $output->writeListEnd();
@@ -2793,15 +2881,15 @@ class ChoiceResponse {
         case 1:
           if ($ftype == TType::LST) {
             $this->variants = array();
-            $_size138 = 0;
-            $_etype141 = 0;
-            $xfer += $input->readListBegin($_etype141, $_size138);
-            for ($_i142 = 0; $_i142 < $_size138; ++$_i142)
+            $_size145 = 0;
+            $_etype148 = 0;
+            $xfer += $input->readListBegin($_etype148, $_size145);
+            for ($_i149 = 0; $_i149 < $_size145; ++$_i149)
             {
-              $elem143 = null;
-              $elem143 = new \com\boxalino\p13n\api\thrift\Variant();
-              $xfer += $elem143->read($input);
-              $this->variants []= $elem143;
+              $elem150 = null;
+              $elem150 = new \com\boxalino\p13n\api\thrift\Variant();
+              $xfer += $elem150->read($input);
+              $this->variants []= $elem150;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -2829,9 +2917,9 @@ class ChoiceResponse {
       {
         $output->writeListBegin(TType::STRUCT, count($this->variants));
         {
-          foreach ($this->variants as $iter144)
+          foreach ($this->variants as $iter151)
           {
-            $xfer += $iter144->write($output);
+            $xfer += $iter151->write($output);
           }
         }
         $output->writeListEnd();
@@ -3088,14 +3176,14 @@ class BatchChoiceRequest {
         case 4:
           if ($ftype == TType::LST) {
             $this->profileIds = array();
-            $_size145 = 0;
-            $_etype148 = 0;
-            $xfer += $input->readListBegin($_etype148, $_size145);
-            for ($_i149 = 0; $_i149 < $_size145; ++$_i149)
+            $_size152 = 0;
+            $_etype155 = 0;
+            $xfer += $input->readListBegin($_etype155, $_size152);
+            for ($_i156 = 0; $_i156 < $_size152; ++$_i156)
             {
-              $elem150 = null;
-              $xfer += $input->readString($elem150);
-              $this->profileIds []= $elem150;
+              $elem157 = null;
+              $xfer += $input->readString($elem157);
+              $this->profileIds []= $elem157;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -3105,15 +3193,15 @@ class BatchChoiceRequest {
         case 5:
           if ($ftype == TType::LST) {
             $this->choiceInquiries = array();
-            $_size151 = 0;
-            $_etype154 = 0;
-            $xfer += $input->readListBegin($_etype154, $_size151);
-            for ($_i155 = 0; $_i155 < $_size151; ++$_i155)
+            $_size158 = 0;
+            $_etype161 = 0;
+            $xfer += $input->readListBegin($_etype161, $_size158);
+            for ($_i162 = 0; $_i162 < $_size158; ++$_i162)
             {
-              $elem156 = null;
-              $elem156 = new \com\boxalino\p13n\api\thrift\ChoiceInquiry();
-              $xfer += $elem156->read($input);
-              $this->choiceInquiries []= $elem156;
+              $elem163 = null;
+              $elem163 = new \com\boxalino\p13n\api\thrift\ChoiceInquiry();
+              $xfer += $elem163->read($input);
+              $this->choiceInquiries []= $elem163;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -3165,9 +3253,9 @@ class BatchChoiceRequest {
       {
         $output->writeListBegin(TType::STRING, count($this->profileIds));
         {
-          foreach ($this->profileIds as $iter157)
+          foreach ($this->profileIds as $iter164)
           {
-            $xfer += $output->writeString($iter157);
+            $xfer += $output->writeString($iter164);
           }
         }
         $output->writeListEnd();
@@ -3182,9 +3270,9 @@ class BatchChoiceRequest {
       {
         $output->writeListBegin(TType::STRUCT, count($this->choiceInquiries));
         {
-          foreach ($this->choiceInquiries as $iter158)
+          foreach ($this->choiceInquiries as $iter165)
           {
-            $xfer += $iter158->write($output);
+            $xfer += $iter165->write($output);
           }
         }
         $output->writeListEnd();
@@ -3263,15 +3351,15 @@ class BatchChoiceResponse {
         case 1:
           if ($ftype == TType::LST) {
             $this->variants = array();
-            $_size159 = 0;
-            $_etype162 = 0;
-            $xfer += $input->readListBegin($_etype162, $_size159);
-            for ($_i163 = 0; $_i163 < $_size159; ++$_i163)
+            $_size166 = 0;
+            $_etype169 = 0;
+            $xfer += $input->readListBegin($_etype169, $_size166);
+            for ($_i170 = 0; $_i170 < $_size166; ++$_i170)
             {
-              $elem164 = null;
-              $elem164 = new \com\boxalino\p13n\api\thrift\Variant();
-              $xfer += $elem164->read($input);
-              $this->variants []= $elem164;
+              $elem171 = null;
+              $elem171 = new \com\boxalino\p13n\api\thrift\Variant();
+              $xfer += $elem171->read($input);
+              $this->variants []= $elem171;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -3281,25 +3369,25 @@ class BatchChoiceResponse {
         case 2:
           if ($ftype == TType::LST) {
             $this->selectedVariants = array();
-            $_size165 = 0;
-            $_etype168 = 0;
-            $xfer += $input->readListBegin($_etype168, $_size165);
-            for ($_i169 = 0; $_i169 < $_size165; ++$_i169)
+            $_size172 = 0;
+            $_etype175 = 0;
+            $xfer += $input->readListBegin($_etype175, $_size172);
+            for ($_i176 = 0; $_i176 < $_size172; ++$_i176)
             {
-              $elem170 = null;
-              $elem170 = array();
-              $_size171 = 0;
-              $_etype174 = 0;
-              $xfer += $input->readListBegin($_etype174, $_size171);
-              for ($_i175 = 0; $_i175 < $_size171; ++$_i175)
+              $elem177 = null;
+              $elem177 = array();
+              $_size178 = 0;
+              $_etype181 = 0;
+              $xfer += $input->readListBegin($_etype181, $_size178);
+              for ($_i182 = 0; $_i182 < $_size178; ++$_i182)
               {
-                $elem176 = null;
-                $elem176 = new \com\boxalino\p13n\api\thrift\Variant();
-                $xfer += $elem176->read($input);
-                $elem170 []= $elem176;
+                $elem183 = null;
+                $elem183 = new \com\boxalino\p13n\api\thrift\Variant();
+                $xfer += $elem183->read($input);
+                $elem177 []= $elem183;
               }
               $xfer += $input->readListEnd();
-              $this->selectedVariants []= $elem170;
+              $this->selectedVariants []= $elem177;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -3327,9 +3415,9 @@ class BatchChoiceResponse {
       {
         $output->writeListBegin(TType::STRUCT, count($this->variants));
         {
-          foreach ($this->variants as $iter177)
+          foreach ($this->variants as $iter184)
           {
-            $xfer += $iter177->write($output);
+            $xfer += $iter184->write($output);
           }
         }
         $output->writeListEnd();
@@ -3344,14 +3432,14 @@ class BatchChoiceResponse {
       {
         $output->writeListBegin(TType::LST, count($this->selectedVariants));
         {
-          foreach ($this->selectedVariants as $iter178)
+          foreach ($this->selectedVariants as $iter185)
           {
             {
-              $output->writeListBegin(TType::STRUCT, count($iter178));
+              $output->writeListBegin(TType::STRUCT, count($iter185));
               {
-                foreach ($iter178 as $iter179)
+                foreach ($iter185 as $iter186)
                 {
-                  $xfer += $iter179->write($output);
+                  $xfer += $iter186->write($output);
                 }
               }
               $output->writeListEnd();
@@ -3850,17 +3938,17 @@ class AutocompleteRequest {
         case 61:
           if ($ftype == TType::SET) {
             $this->excludeVariantIds = array();
-            $_size180 = 0;
-            $_etype183 = 0;
-            $xfer += $input->readSetBegin($_etype183, $_size180);
-            for ($_i184 = 0; $_i184 < $_size180; ++$_i184)
+            $_size187 = 0;
+            $_etype190 = 0;
+            $xfer += $input->readSetBegin($_etype190, $_size187);
+            for ($_i191 = 0; $_i191 < $_size187; ++$_i191)
             {
-              $elem185 = null;
-              $xfer += $input->readString($elem185);
-              if (is_scalar($elem185)) {
-                $this->excludeVariantIds[$elem185] = true;
+              $elem192 = null;
+              $xfer += $input->readString($elem192);
+              if (is_scalar($elem192)) {
+                $this->excludeVariantIds[$elem192] = true;
               } else {
-                $this->excludeVariantIds []= $elem185;
+                $this->excludeVariantIds []= $elem192;
               }
             }
             $xfer += $input->readSetEnd();
@@ -3943,12 +4031,12 @@ class AutocompleteRequest {
       {
         $output->writeSetBegin(TType::STRING, count($this->excludeVariantIds));
         {
-          foreach ($this->excludeVariantIds as $iter186 => $iter187)
+          foreach ($this->excludeVariantIds as $iter193 => $iter194)
           {
-            if (is_scalar($iter187)) {
-            $xfer += $output->writeString($iter186);
+            if (is_scalar($iter194)) {
+            $xfer += $output->writeString($iter193);
             } else {
-            $xfer += $output->writeString($iter187);
+            $xfer += $output->writeString($iter194);
             }
           }
         }
@@ -4041,15 +4129,15 @@ class AutocompleteResponse {
         case 11:
           if ($ftype == TType::LST) {
             $this->hits = array();
-            $_size188 = 0;
-            $_etype191 = 0;
-            $xfer += $input->readListBegin($_etype191, $_size188);
-            for ($_i192 = 0; $_i192 < $_size188; ++$_i192)
+            $_size195 = 0;
+            $_etype198 = 0;
+            $xfer += $input->readListBegin($_etype198, $_size195);
+            for ($_i199 = 0; $_i199 < $_size195; ++$_i199)
             {
-              $elem193 = null;
-              $elem193 = new \com\boxalino\p13n\api\thrift\AutocompleteHit();
-              $xfer += $elem193->read($input);
-              $this->hits []= $elem193;
+              $elem200 = null;
+              $elem200 = new \com\boxalino\p13n\api\thrift\AutocompleteHit();
+              $xfer += $elem200->read($input);
+              $this->hits []= $elem200;
             }
             $xfer += $input->readListEnd();
           } else {
@@ -4085,9 +4173,9 @@ class AutocompleteResponse {
       {
         $output->writeListBegin(TType::STRUCT, count($this->hits));
         {
-          foreach ($this->hits as $iter194)
+          foreach ($this->hits as $iter201)
           {
-            $xfer += $iter194->write($output);
+            $xfer += $iter201->write($output);
           }
         }
         $output->writeListEnd();

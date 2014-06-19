@@ -593,14 +593,14 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
           case 3: // INQUIRIES
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list82 = iprot.readListBegin();
-                struct.inquiries = new ArrayList<ChoiceInquiry>(_list82.size);
-                for (int _i83 = 0; _i83 < _list82.size; ++_i83)
+                org.apache.thrift.protocol.TList _list98 = iprot.readListBegin();
+                struct.inquiries = new ArrayList<ChoiceInquiry>(_list98.size);
+                for (int _i99 = 0; _i99 < _list98.size; ++_i99)
                 {
-                  ChoiceInquiry _elem84; // required
-                  _elem84 = new ChoiceInquiry();
-                  _elem84.read(iprot);
-                  struct.inquiries.add(_elem84);
+                  ChoiceInquiry _elem100; // required
+                  _elem100 = new ChoiceInquiry();
+                  _elem100.read(iprot);
+                  struct.inquiries.add(_elem100);
                 }
                 iprot.readListEnd();
               }
@@ -647,9 +647,9 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
         oprot.writeFieldBegin(INQUIRIES_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.inquiries.size()));
-          for (ChoiceInquiry _iter85 : struct.inquiries)
+          for (ChoiceInquiry _iter101 : struct.inquiries)
           {
-            _iter85.write(oprot);
+            _iter101.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -700,9 +700,9 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
       if (struct.isSetInquiries()) {
         {
           oprot.writeI32(struct.inquiries.size());
-          for (ChoiceInquiry _iter86 : struct.inquiries)
+          for (ChoiceInquiry _iter102 : struct.inquiries)
           {
-            _iter86.write(oprot);
+            _iter102.write(oprot);
           }
         }
       }
@@ -726,14 +726,14 @@ public class ChoiceRequest implements org.apache.thrift.TBase<ChoiceRequest, Cho
       }
       if (incoming.get(2)) {
         {
-          org.apache.thrift.protocol.TList _list87 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.inquiries = new ArrayList<ChoiceInquiry>(_list87.size);
-          for (int _i88 = 0; _i88 < _list87.size; ++_i88)
+          org.apache.thrift.protocol.TList _list103 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.inquiries = new ArrayList<ChoiceInquiry>(_list103.size);
+          for (int _i104 = 0; _i104 < _list103.size; ++_i104)
           {
-            ChoiceInquiry _elem89; // required
-            _elem89 = new ChoiceInquiry();
-            _elem89.read(iprot);
-            struct.inquiries.add(_elem89);
+            ChoiceInquiry _elem105; // required
+            _elem105 = new ChoiceInquiry();
+            _elem105.read(iprot);
+            struct.inquiries.add(_elem105);
           }
         }
         struct.setInquiriesIsSet(true);
