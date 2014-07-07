@@ -43,6 +43,11 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
   private static final org.apache.thrift.protocol.TField OFFSET_FIELD_DESC = new org.apache.thrift.protocol.TField("offset", org.apache.thrift.protocol.TType.I64, (short)8);
   private static final org.apache.thrift.protocol.TField HIT_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("hitCount", org.apache.thrift.protocol.TType.I32, (short)9);
   private static final org.apache.thrift.protocol.TField RETURN_FIELDS_FIELD_DESC = new org.apache.thrift.protocol.TField("returnFields", org.apache.thrift.protocol.TType.LIST, (short)10);
+  private static final org.apache.thrift.protocol.TField GROUP_BY_FIELD_DESC = new org.apache.thrift.protocol.TField("groupBy", org.apache.thrift.protocol.TType.STRING, (short)20);
+  private static final org.apache.thrift.protocol.TField GROUP_FACETS_FIELD_DESC = new org.apache.thrift.protocol.TField("groupFacets", org.apache.thrift.protocol.TType.BOOL, (short)30);
+  private static final org.apache.thrift.protocol.TField GROUP_ITEMS_COUNT_FIELD_DESC = new org.apache.thrift.protocol.TField("groupItemsCount", org.apache.thrift.protocol.TType.I32, (short)40);
+  private static final org.apache.thrift.protocol.TField GROUP_ITEMS_SORT_FIELD_DESC = new org.apache.thrift.protocol.TField("groupItemsSort", org.apache.thrift.protocol.TType.STRING, (short)50);
+  private static final org.apache.thrift.protocol.TField GROUP_ITEMS_SORT_ASCENDING_FIELD_DESC = new org.apache.thrift.protocol.TField("groupItemsSortAscending", org.apache.thrift.protocol.TType.BOOL, (short)60);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -60,6 +65,11 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
   public long offset; // required
   public int hitCount; // required
   public List<String> returnFields; // required
+  public String groupBy; // required
+  public boolean groupFacets; // required
+  public int groupItemsCount; // required
+  public String groupItemsSort; // required
+  public boolean groupItemsSortAscending; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -72,7 +82,12 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
     SORT_FIELDS((short)7, "sortFields"),
     OFFSET((short)8, "offset"),
     HIT_COUNT((short)9, "hitCount"),
-    RETURN_FIELDS((short)10, "returnFields");
+    RETURN_FIELDS((short)10, "returnFields"),
+    GROUP_BY((short)20, "groupBy"),
+    GROUP_FACETS((short)30, "groupFacets"),
+    GROUP_ITEMS_COUNT((short)40, "groupItemsCount"),
+    GROUP_ITEMS_SORT((short)50, "groupItemsSort"),
+    GROUP_ITEMS_SORT_ASCENDING((short)60, "groupItemsSortAscending");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -107,6 +122,16 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
           return HIT_COUNT;
         case 10: // RETURN_FIELDS
           return RETURN_FIELDS;
+        case 20: // GROUP_BY
+          return GROUP_BY;
+        case 30: // GROUP_FACETS
+          return GROUP_FACETS;
+        case 40: // GROUP_ITEMS_COUNT
+          return GROUP_ITEMS_COUNT;
+        case 50: // GROUP_ITEMS_SORT
+          return GROUP_ITEMS_SORT;
+        case 60: // GROUP_ITEMS_SORT_ASCENDING
+          return GROUP_ITEMS_SORT_ASCENDING;
         default:
           return null;
       }
@@ -150,6 +175,9 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
   private static final int __ORFILTERS_ISSET_ID = 0;
   private static final int __OFFSET_ISSET_ID = 1;
   private static final int __HITCOUNT_ISSET_ID = 2;
+  private static final int __GROUPFACETS_ISSET_ID = 3;
+  private static final int __GROUPITEMSCOUNT_ISSET_ID = 4;
+  private static final int __GROUPITEMSSORTASCENDING_ISSET_ID = 5;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -178,11 +206,29 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
     tmpMap.put(_Fields.RETURN_FIELDS, new org.apache.thrift.meta_data.FieldMetaData("returnFields", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+    tmpMap.put(_Fields.GROUP_BY, new org.apache.thrift.meta_data.FieldMetaData("groupBy", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.GROUP_FACETS, new org.apache.thrift.meta_data.FieldMetaData("groupFacets", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+    tmpMap.put(_Fields.GROUP_ITEMS_COUNT, new org.apache.thrift.meta_data.FieldMetaData("groupItemsCount", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+    tmpMap.put(_Fields.GROUP_ITEMS_SORT, new org.apache.thrift.meta_data.FieldMetaData("groupItemsSort", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.GROUP_ITEMS_SORT_ASCENDING, new org.apache.thrift.meta_data.FieldMetaData("groupItemsSortAscending", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(SimpleSearchQuery.class, metaDataMap);
   }
 
   public SimpleSearchQuery() {
+    this.groupFacets = true;
+
+    this.groupItemsCount = 1;
+
+    this.groupItemsSort = "score";
+
+    this.groupItemsSortAscending = false;
+
   }
 
   public SimpleSearchQuery(
@@ -195,7 +241,12 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
     List<SortField> sortFields,
     long offset,
     int hitCount,
-    List<String> returnFields)
+    List<String> returnFields,
+    String groupBy,
+    boolean groupFacets,
+    int groupItemsCount,
+    String groupItemsSort,
+    boolean groupItemsSortAscending)
   {
     this();
     this.indexId = indexId;
@@ -211,6 +262,14 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
     this.hitCount = hitCount;
     setHitCountIsSet(true);
     this.returnFields = returnFields;
+    this.groupBy = groupBy;
+    this.groupFacets = groupFacets;
+    setGroupFacetsIsSet(true);
+    this.groupItemsCount = groupItemsCount;
+    setGroupItemsCountIsSet(true);
+    this.groupItemsSort = groupItemsSort;
+    this.groupItemsSortAscending = groupItemsSortAscending;
+    setGroupItemsSortAscendingIsSet(true);
   }
 
   /**
@@ -258,6 +317,15 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       }
       this.returnFields = __this__returnFields;
     }
+    if (other.isSetGroupBy()) {
+      this.groupBy = other.groupBy;
+    }
+    this.groupFacets = other.groupFacets;
+    this.groupItemsCount = other.groupItemsCount;
+    if (other.isSetGroupItemsSort()) {
+      this.groupItemsSort = other.groupItemsSort;
+    }
+    this.groupItemsSortAscending = other.groupItemsSortAscending;
   }
 
   public SimpleSearchQuery deepCopy() {
@@ -279,6 +347,15 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
     setHitCountIsSet(false);
     this.hitCount = 0;
     this.returnFields = null;
+    this.groupBy = null;
+    this.groupFacets = true;
+
+    this.groupItemsCount = 1;
+
+    this.groupItemsSort = "score";
+
+    this.groupItemsSortAscending = false;
+
   }
 
   public String getIndexId() {
@@ -578,6 +655,123 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
     }
   }
 
+  public String getGroupBy() {
+    return this.groupBy;
+  }
+
+  public SimpleSearchQuery setGroupBy(String groupBy) {
+    this.groupBy = groupBy;
+    return this;
+  }
+
+  public void unsetGroupBy() {
+    this.groupBy = null;
+  }
+
+  /** Returns true if field groupBy is set (has been assigned a value) and false otherwise */
+  public boolean isSetGroupBy() {
+    return this.groupBy != null;
+  }
+
+  public void setGroupByIsSet(boolean value) {
+    if (!value) {
+      this.groupBy = null;
+    }
+  }
+
+  public boolean isGroupFacets() {
+    return this.groupFacets;
+  }
+
+  public SimpleSearchQuery setGroupFacets(boolean groupFacets) {
+    this.groupFacets = groupFacets;
+    setGroupFacetsIsSet(true);
+    return this;
+  }
+
+  public void unsetGroupFacets() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __GROUPFACETS_ISSET_ID);
+  }
+
+  /** Returns true if field groupFacets is set (has been assigned a value) and false otherwise */
+  public boolean isSetGroupFacets() {
+    return EncodingUtils.testBit(__isset_bitfield, __GROUPFACETS_ISSET_ID);
+  }
+
+  public void setGroupFacetsIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __GROUPFACETS_ISSET_ID, value);
+  }
+
+  public int getGroupItemsCount() {
+    return this.groupItemsCount;
+  }
+
+  public SimpleSearchQuery setGroupItemsCount(int groupItemsCount) {
+    this.groupItemsCount = groupItemsCount;
+    setGroupItemsCountIsSet(true);
+    return this;
+  }
+
+  public void unsetGroupItemsCount() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __GROUPITEMSCOUNT_ISSET_ID);
+  }
+
+  /** Returns true if field groupItemsCount is set (has been assigned a value) and false otherwise */
+  public boolean isSetGroupItemsCount() {
+    return EncodingUtils.testBit(__isset_bitfield, __GROUPITEMSCOUNT_ISSET_ID);
+  }
+
+  public void setGroupItemsCountIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __GROUPITEMSCOUNT_ISSET_ID, value);
+  }
+
+  public String getGroupItemsSort() {
+    return this.groupItemsSort;
+  }
+
+  public SimpleSearchQuery setGroupItemsSort(String groupItemsSort) {
+    this.groupItemsSort = groupItemsSort;
+    return this;
+  }
+
+  public void unsetGroupItemsSort() {
+    this.groupItemsSort = null;
+  }
+
+  /** Returns true if field groupItemsSort is set (has been assigned a value) and false otherwise */
+  public boolean isSetGroupItemsSort() {
+    return this.groupItemsSort != null;
+  }
+
+  public void setGroupItemsSortIsSet(boolean value) {
+    if (!value) {
+      this.groupItemsSort = null;
+    }
+  }
+
+  public boolean isGroupItemsSortAscending() {
+    return this.groupItemsSortAscending;
+  }
+
+  public SimpleSearchQuery setGroupItemsSortAscending(boolean groupItemsSortAscending) {
+    this.groupItemsSortAscending = groupItemsSortAscending;
+    setGroupItemsSortAscendingIsSet(true);
+    return this;
+  }
+
+  public void unsetGroupItemsSortAscending() {
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __GROUPITEMSSORTASCENDING_ISSET_ID);
+  }
+
+  /** Returns true if field groupItemsSortAscending is set (has been assigned a value) and false otherwise */
+  public boolean isSetGroupItemsSortAscending() {
+    return EncodingUtils.testBit(__isset_bitfield, __GROUPITEMSSORTASCENDING_ISSET_ID);
+  }
+
+  public void setGroupItemsSortAscendingIsSet(boolean value) {
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __GROUPITEMSSORTASCENDING_ISSET_ID, value);
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case INDEX_ID:
@@ -660,6 +854,46 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       }
       break;
 
+    case GROUP_BY:
+      if (value == null) {
+        unsetGroupBy();
+      } else {
+        setGroupBy((String)value);
+      }
+      break;
+
+    case GROUP_FACETS:
+      if (value == null) {
+        unsetGroupFacets();
+      } else {
+        setGroupFacets((Boolean)value);
+      }
+      break;
+
+    case GROUP_ITEMS_COUNT:
+      if (value == null) {
+        unsetGroupItemsCount();
+      } else {
+        setGroupItemsCount((Integer)value);
+      }
+      break;
+
+    case GROUP_ITEMS_SORT:
+      if (value == null) {
+        unsetGroupItemsSort();
+      } else {
+        setGroupItemsSort((String)value);
+      }
+      break;
+
+    case GROUP_ITEMS_SORT_ASCENDING:
+      if (value == null) {
+        unsetGroupItemsSortAscending();
+      } else {
+        setGroupItemsSortAscending((Boolean)value);
+      }
+      break;
+
     }
   }
 
@@ -695,6 +929,21 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
     case RETURN_FIELDS:
       return getReturnFields();
 
+    case GROUP_BY:
+      return getGroupBy();
+
+    case GROUP_FACETS:
+      return Boolean.valueOf(isGroupFacets());
+
+    case GROUP_ITEMS_COUNT:
+      return Integer.valueOf(getGroupItemsCount());
+
+    case GROUP_ITEMS_SORT:
+      return getGroupItemsSort();
+
+    case GROUP_ITEMS_SORT_ASCENDING:
+      return Boolean.valueOf(isGroupItemsSortAscending());
+
     }
     throw new IllegalStateException();
   }
@@ -726,6 +975,16 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       return isSetHitCount();
     case RETURN_FIELDS:
       return isSetReturnFields();
+    case GROUP_BY:
+      return isSetGroupBy();
+    case GROUP_FACETS:
+      return isSetGroupFacets();
+    case GROUP_ITEMS_COUNT:
+      return isSetGroupItemsCount();
+    case GROUP_ITEMS_SORT:
+      return isSetGroupItemsSort();
+    case GROUP_ITEMS_SORT_ASCENDING:
+      return isSetGroupItemsSortAscending();
     }
     throw new IllegalStateException();
   }
@@ -830,6 +1089,51 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       if (!(this_present_returnFields && that_present_returnFields))
         return false;
       if (!this.returnFields.equals(that.returnFields))
+        return false;
+    }
+
+    boolean this_present_groupBy = true && this.isSetGroupBy();
+    boolean that_present_groupBy = true && that.isSetGroupBy();
+    if (this_present_groupBy || that_present_groupBy) {
+      if (!(this_present_groupBy && that_present_groupBy))
+        return false;
+      if (!this.groupBy.equals(that.groupBy))
+        return false;
+    }
+
+    boolean this_present_groupFacets = true;
+    boolean that_present_groupFacets = true;
+    if (this_present_groupFacets || that_present_groupFacets) {
+      if (!(this_present_groupFacets && that_present_groupFacets))
+        return false;
+      if (this.groupFacets != that.groupFacets)
+        return false;
+    }
+
+    boolean this_present_groupItemsCount = true;
+    boolean that_present_groupItemsCount = true;
+    if (this_present_groupItemsCount || that_present_groupItemsCount) {
+      if (!(this_present_groupItemsCount && that_present_groupItemsCount))
+        return false;
+      if (this.groupItemsCount != that.groupItemsCount)
+        return false;
+    }
+
+    boolean this_present_groupItemsSort = true && this.isSetGroupItemsSort();
+    boolean that_present_groupItemsSort = true && that.isSetGroupItemsSort();
+    if (this_present_groupItemsSort || that_present_groupItemsSort) {
+      if (!(this_present_groupItemsSort && that_present_groupItemsSort))
+        return false;
+      if (!this.groupItemsSort.equals(that.groupItemsSort))
+        return false;
+    }
+
+    boolean this_present_groupItemsSortAscending = true;
+    boolean that_present_groupItemsSortAscending = true;
+    if (this_present_groupItemsSortAscending || that_present_groupItemsSortAscending) {
+      if (!(this_present_groupItemsSortAscending && that_present_groupItemsSortAscending))
+        return false;
+      if (this.groupItemsSortAscending != that.groupItemsSortAscending)
         return false;
     }
 
@@ -949,6 +1253,56 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetGroupBy()).compareTo(typedOther.isSetGroupBy());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetGroupBy()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.groupBy, typedOther.groupBy);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetGroupFacets()).compareTo(typedOther.isSetGroupFacets());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetGroupFacets()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.groupFacets, typedOther.groupFacets);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetGroupItemsCount()).compareTo(typedOther.isSetGroupItemsCount());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetGroupItemsCount()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.groupItemsCount, typedOther.groupItemsCount);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetGroupItemsSort()).compareTo(typedOther.isSetGroupItemsSort());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetGroupItemsSort()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.groupItemsSort, typedOther.groupItemsSort);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetGroupItemsSortAscending()).compareTo(typedOther.isSetGroupItemsSortAscending());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetGroupItemsSortAscending()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.groupItemsSortAscending, typedOther.groupItemsSortAscending);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -1035,6 +1389,34 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
     } else {
       sb.append(this.returnFields);
     }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("groupBy:");
+    if (this.groupBy == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.groupBy);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("groupFacets:");
+    sb.append(this.groupFacets);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("groupItemsCount:");
+    sb.append(this.groupItemsCount);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("groupItemsSort:");
+    if (this.groupItemsSort == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.groupItemsSort);
+    }
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("groupItemsSortAscending:");
+    sb.append(this.groupItemsSortAscending);
     first = false;
     sb.append(")");
     return sb.toString();
@@ -1204,6 +1586,46 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 20: // GROUP_BY
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.groupBy = iprot.readString();
+              struct.setGroupByIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 30: // GROUP_FACETS
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.groupFacets = iprot.readBool();
+              struct.setGroupFacetsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 40: // GROUP_ITEMS_COUNT
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.groupItemsCount = iprot.readI32();
+              struct.setGroupItemsCountIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 50: // GROUP_ITEMS_SORT
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.groupItemsSort = iprot.readString();
+              struct.setGroupItemsSortIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
+          case 60: // GROUP_ITEMS_SORT_ASCENDING
+            if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+              struct.groupItemsSortAscending = iprot.readBool();
+              struct.setGroupItemsSortAscendingIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -1291,6 +1713,25 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
         }
         oprot.writeFieldEnd();
       }
+      if (struct.groupBy != null) {
+        oprot.writeFieldBegin(GROUP_BY_FIELD_DESC);
+        oprot.writeString(struct.groupBy);
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldBegin(GROUP_FACETS_FIELD_DESC);
+      oprot.writeBool(struct.groupFacets);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(GROUP_ITEMS_COUNT_FIELD_DESC);
+      oprot.writeI32(struct.groupItemsCount);
+      oprot.writeFieldEnd();
+      if (struct.groupItemsSort != null) {
+        oprot.writeFieldBegin(GROUP_ITEMS_SORT_FIELD_DESC);
+        oprot.writeString(struct.groupItemsSort);
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldBegin(GROUP_ITEMS_SORT_ASCENDING_FIELD_DESC);
+      oprot.writeBool(struct.groupItemsSortAscending);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -1339,7 +1780,22 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
       if (struct.isSetReturnFields()) {
         optionals.set(9);
       }
-      oprot.writeBitSet(optionals, 10);
+      if (struct.isSetGroupBy()) {
+        optionals.set(10);
+      }
+      if (struct.isSetGroupFacets()) {
+        optionals.set(11);
+      }
+      if (struct.isSetGroupItemsCount()) {
+        optionals.set(12);
+      }
+      if (struct.isSetGroupItemsSort()) {
+        optionals.set(13);
+      }
+      if (struct.isSetGroupItemsSortAscending()) {
+        optionals.set(14);
+      }
+      oprot.writeBitSet(optionals, 15);
       if (struct.isSetIndexId()) {
         oprot.writeString(struct.indexId);
       }
@@ -1394,12 +1850,27 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
           }
         }
       }
+      if (struct.isSetGroupBy()) {
+        oprot.writeString(struct.groupBy);
+      }
+      if (struct.isSetGroupFacets()) {
+        oprot.writeBool(struct.groupFacets);
+      }
+      if (struct.isSetGroupItemsCount()) {
+        oprot.writeI32(struct.groupItemsCount);
+      }
+      if (struct.isSetGroupItemsSort()) {
+        oprot.writeString(struct.groupItemsSort);
+      }
+      if (struct.isSetGroupItemsSortAscending()) {
+        oprot.writeBool(struct.groupItemsSortAscending);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, SimpleSearchQuery struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(10);
+      BitSet incoming = iprot.readBitSet(15);
       if (incoming.get(0)) {
         struct.indexId = iprot.readString();
         struct.setIndexIdIsSet(true);
@@ -1478,6 +1949,26 @@ public class SimpleSearchQuery implements org.apache.thrift.TBase<SimpleSearchQu
           }
         }
         struct.setReturnFieldsIsSet(true);
+      }
+      if (incoming.get(10)) {
+        struct.groupBy = iprot.readString();
+        struct.setGroupByIsSet(true);
+      }
+      if (incoming.get(11)) {
+        struct.groupFacets = iprot.readBool();
+        struct.setGroupFacetsIsSet(true);
+      }
+      if (incoming.get(12)) {
+        struct.groupItemsCount = iprot.readI32();
+        struct.setGroupItemsCountIsSet(true);
+      }
+      if (incoming.get(13)) {
+        struct.groupItemsSort = iprot.readString();
+        struct.setGroupItemsSortIsSet(true);
+      }
+      if (incoming.get(14)) {
+        struct.groupItemsSortAscending = iprot.readBool();
+        struct.setGroupItemsSortAscendingIsSet(true);
       }
     }
   }

@@ -118,7 +118,17 @@ struct SimpleSearchQuery {
 # how many hits to return
   9: i32 hitCount,
 # which index fields to be returned 
- 10: list<string> returnFields
+ 10: list<string> returnFields,
+# field name of the field to do grouping by
+ 20: string groupBy,
+# whether facets counts should contain number of groups
+ 30: bool groupFacets = true,
+# how many hits in each group to return
+ 40: i32 groupItemsCount = 1,
+# how to sort items within the group, default is score
+ 50: string groupItemsSort = "score",
+# whether to sort items within the group ascending
+ 60: bool groupItemsSortAscending = false
 }
 
 struct ContextItem {
@@ -182,13 +192,23 @@ struct FacetResponse {
   2: list<FacetValue> values
 }
 
-# found items' values
+# item found
 struct Hit {
 # map containing name of the field and list of values as strings
 # if index contains no value for a field, empty array will be returned.
   1: map<string, list<string>> values,
 # index score of the hit
   2: double score
+}
+
+# grouped item found
+struct HitsGroup {
+# value of the groupBy field
+  10: string groupValue,
+# total hits count within the group 
+  20: i64 totalHitCount,
+# group hits
+  30: list<Hit> hits
 }
 
 struct SearchResult {
@@ -199,7 +219,9 @@ struct SearchResult {
 # total number of hits
   3: i64 totalHitCount,
 # relaxation query text for relaxation results or requested queryText for a regular SearchResult
-  40: string queryText
+  40: string queryText,
+# grouped hits; not null when corresponding SimplSearchQuery has groupBy!=null 
+  50: list<HitsGroup> hitsGroups
 }
 
 struct SearchRelaxation {

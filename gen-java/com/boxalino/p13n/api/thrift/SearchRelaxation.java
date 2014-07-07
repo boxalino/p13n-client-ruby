@@ -436,14 +436,14 @@ public class SearchRelaxation implements org.apache.thrift.TBase<SearchRelaxatio
           case 10: // SUGGESTIONS_RESULTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list148 = iprot.readListBegin();
-                struct.suggestionsResults = new ArrayList<SearchResult>(_list148.size);
-                for (int _i149 = 0; _i149 < _list148.size; ++_i149)
+                org.apache.thrift.protocol.TList _list164 = iprot.readListBegin();
+                struct.suggestionsResults = new ArrayList<SearchResult>(_list164.size);
+                for (int _i165 = 0; _i165 < _list164.size; ++_i165)
                 {
-                  SearchResult _elem150; // required
-                  _elem150 = new SearchResult();
-                  _elem150.read(iprot);
-                  struct.suggestionsResults.add(_elem150);
+                  SearchResult _elem166; // required
+                  _elem166 = new SearchResult();
+                  _elem166.read(iprot);
+                  struct.suggestionsResults.add(_elem166);
                 }
                 iprot.readListEnd();
               }
@@ -455,14 +455,14 @@ public class SearchRelaxation implements org.apache.thrift.TBase<SearchRelaxatio
           case 20: // SUBPHRASES_RESULTS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list151 = iprot.readListBegin();
-                struct.subphrasesResults = new ArrayList<SearchResult>(_list151.size);
-                for (int _i152 = 0; _i152 < _list151.size; ++_i152)
+                org.apache.thrift.protocol.TList _list167 = iprot.readListBegin();
+                struct.subphrasesResults = new ArrayList<SearchResult>(_list167.size);
+                for (int _i168 = 0; _i168 < _list167.size; ++_i168)
                 {
-                  SearchResult _elem153; // required
-                  _elem153 = new SearchResult();
-                  _elem153.read(iprot);
-                  struct.subphrasesResults.add(_elem153);
+                  SearchResult _elem169; // required
+                  _elem169 = new SearchResult();
+                  _elem169.read(iprot);
+                  struct.subphrasesResults.add(_elem169);
                 }
                 iprot.readListEnd();
               }
@@ -490,9 +490,9 @@ public class SearchRelaxation implements org.apache.thrift.TBase<SearchRelaxatio
         oprot.writeFieldBegin(SUGGESTIONS_RESULTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.suggestionsResults.size()));
-          for (SearchResult _iter154 : struct.suggestionsResults)
+          for (SearchResult _iter170 : struct.suggestionsResults)
           {
-            _iter154.write(oprot);
+            _iter170.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -502,9 +502,9 @@ public class SearchRelaxation implements org.apache.thrift.TBase<SearchRelaxatio
         oprot.writeFieldBegin(SUBPHRASES_RESULTS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.subphrasesResults.size()));
-          for (SearchResult _iter155 : struct.subphrasesResults)
+          for (SearchResult _iter171 : struct.subphrasesResults)
           {
-            _iter155.write(oprot);
+            _iter171.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -538,18 +538,18 @@ public class SearchRelaxation implements org.apache.thrift.TBase<SearchRelaxatio
       if (struct.isSetSuggestionsResults()) {
         {
           oprot.writeI32(struct.suggestionsResults.size());
-          for (SearchResult _iter156 : struct.suggestionsResults)
+          for (SearchResult _iter172 : struct.suggestionsResults)
           {
-            _iter156.write(oprot);
+            _iter172.write(oprot);
           }
         }
       }
       if (struct.isSetSubphrasesResults()) {
         {
           oprot.writeI32(struct.subphrasesResults.size());
-          for (SearchResult _iter157 : struct.subphrasesResults)
+          for (SearchResult _iter173 : struct.subphrasesResults)
           {
-            _iter157.write(oprot);
+            _iter173.write(oprot);
           }
         }
       }
@@ -561,28 +561,28 @@ public class SearchRelaxation implements org.apache.thrift.TBase<SearchRelaxatio
       BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
         {
-          org.apache.thrift.protocol.TList _list158 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.suggestionsResults = new ArrayList<SearchResult>(_list158.size);
-          for (int _i159 = 0; _i159 < _list158.size; ++_i159)
+          org.apache.thrift.protocol.TList _list174 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.suggestionsResults = new ArrayList<SearchResult>(_list174.size);
+          for (int _i175 = 0; _i175 < _list174.size; ++_i175)
           {
-            SearchResult _elem160; // required
-            _elem160 = new SearchResult();
-            _elem160.read(iprot);
-            struct.suggestionsResults.add(_elem160);
+            SearchResult _elem176; // required
+            _elem176 = new SearchResult();
+            _elem176.read(iprot);
+            struct.suggestionsResults.add(_elem176);
           }
         }
         struct.setSuggestionsResultsIsSet(true);
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list161 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.subphrasesResults = new ArrayList<SearchResult>(_list161.size);
-          for (int _i162 = 0; _i162 < _list161.size; ++_i162)
+          org.apache.thrift.protocol.TList _list177 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.subphrasesResults = new ArrayList<SearchResult>(_list177.size);
+          for (int _i178 = 0; _i178 < _list177.size; ++_i178)
           {
-            SearchResult _elem163; // required
-            _elem163 = new SearchResult();
-            _elem163.read(iprot);
-            struct.subphrasesResults.add(_elem163);
+            SearchResult _elem179; // required
+            _elem179 = new SearchResult();
+            _elem179.read(iprot);
+            struct.subphrasesResults.add(_elem179);
           }
         }
         struct.setSubphrasesResultsIsSet(true);
