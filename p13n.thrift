@@ -198,7 +198,9 @@ struct Hit {
 # if index contains no value for a field, empty array will be returned.
   1: map<string, list<string>> values,
 # index score of the hit
-  2: double score
+  2: double score,
+# source scenarioId in case of mixed recommendations modes
+ 30: string scenarioId
 }
 
 # grouped item found

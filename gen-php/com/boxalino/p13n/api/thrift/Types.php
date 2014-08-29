@@ -2291,6 +2291,7 @@ class Hit {
 
   public $values = null;
   public $score = null;
+  public $scenarioId = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -2315,6 +2316,10 @@ class Hit {
           'var' => 'score',
           'type' => TType::DOUBLE,
           ),
+        30 => array(
+          'var' => 'scenarioId',
+          'type' => TType::STRING,
+          ),
         );
     }
     if (is_array($vals)) {
@@ -2323,6 +2328,9 @@ class Hit {
       }
       if (isset($vals['score'])) {
         $this->score = $vals['score'];
+      }
+      if (isset($vals['scenarioId'])) {
+        $this->scenarioId = $vals['scenarioId'];
       }
     }
   }
@@ -2383,6 +2391,13 @@ class Hit {
             $xfer += $input->skip($ftype);
           }
           break;
+        case 30:
+          if ($ftype == TType::STRING) {
+            $xfer += $input->readString($this->scenarioId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
         default:
           $xfer += $input->skip($ftype);
           break;
@@ -2426,6 +2441,11 @@ class Hit {
     if ($this->score !== null) {
       $xfer += $output->writeFieldBegin('score', TType::DOUBLE, 2);
       $xfer += $output->writeDouble($this->score);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->scenarioId !== null) {
+      $xfer += $output->writeFieldBegin('scenarioId', TType::STRING, 30);
+      $xfer += $output->writeString($this->scenarioId);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();

@@ -35,6 +35,7 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
 
   private static final org.apache.thrift.protocol.TField VALUES_FIELD_DESC = new org.apache.thrift.protocol.TField("values", org.apache.thrift.protocol.TType.MAP, (short)1);
   private static final org.apache.thrift.protocol.TField SCORE_FIELD_DESC = new org.apache.thrift.protocol.TField("score", org.apache.thrift.protocol.TType.DOUBLE, (short)2);
+  private static final org.apache.thrift.protocol.TField SCENARIO_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("scenarioId", org.apache.thrift.protocol.TType.STRING, (short)30);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -44,11 +45,13 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
 
   public Map<String,List<String>> values; // required
   public double score; // required
+  public String scenarioId; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     VALUES((short)1, "values"),
-    SCORE((short)2, "score");
+    SCORE((short)2, "score"),
+    SCENARIO_ID((short)30, "scenarioId");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -67,6 +70,8 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
           return VALUES;
         case 2: // SCORE
           return SCORE;
+        case 30: // SCENARIO_ID
+          return SCENARIO_ID;
         default:
           return null;
       }
@@ -119,6 +124,8 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
                 new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)))));
     tmpMap.put(_Fields.SCORE, new org.apache.thrift.meta_data.FieldMetaData("score", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
+    tmpMap.put(_Fields.SCENARIO_ID, new org.apache.thrift.meta_data.FieldMetaData("scenarioId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Hit.class, metaDataMap);
   }
@@ -128,12 +135,14 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
 
   public Hit(
     Map<String,List<String>> values,
-    double score)
+    double score,
+    String scenarioId)
   {
     this();
     this.values = values;
     this.score = score;
     setScoreIsSet(true);
+    this.scenarioId = scenarioId;
   }
 
   /**
@@ -160,6 +169,9 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
       this.values = __this__values;
     }
     this.score = other.score;
+    if (other.isSetScenarioId()) {
+      this.scenarioId = other.scenarioId;
+    }
   }
 
   public Hit deepCopy() {
@@ -171,6 +183,7 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
     this.values = null;
     setScoreIsSet(false);
     this.score = 0.0;
+    this.scenarioId = null;
   }
 
   public int getValuesSize() {
@@ -231,6 +244,30 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __SCORE_ISSET_ID, value);
   }
 
+  public String getScenarioId() {
+    return this.scenarioId;
+  }
+
+  public Hit setScenarioId(String scenarioId) {
+    this.scenarioId = scenarioId;
+    return this;
+  }
+
+  public void unsetScenarioId() {
+    this.scenarioId = null;
+  }
+
+  /** Returns true if field scenarioId is set (has been assigned a value) and false otherwise */
+  public boolean isSetScenarioId() {
+    return this.scenarioId != null;
+  }
+
+  public void setScenarioIdIsSet(boolean value) {
+    if (!value) {
+      this.scenarioId = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case VALUES:
@@ -249,6 +286,14 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
       }
       break;
 
+    case SCENARIO_ID:
+      if (value == null) {
+        unsetScenarioId();
+      } else {
+        setScenarioId((String)value);
+      }
+      break;
+
     }
   }
 
@@ -259,6 +304,9 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
 
     case SCORE:
       return Double.valueOf(getScore());
+
+    case SCENARIO_ID:
+      return getScenarioId();
 
     }
     throw new IllegalStateException();
@@ -275,6 +323,8 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
       return isSetValues();
     case SCORE:
       return isSetScore();
+    case SCENARIO_ID:
+      return isSetScenarioId();
     }
     throw new IllegalStateException();
   }
@@ -307,6 +357,15 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
       if (!(this_present_score && that_present_score))
         return false;
       if (this.score != that.score)
+        return false;
+    }
+
+    boolean this_present_scenarioId = true && this.isSetScenarioId();
+    boolean that_present_scenarioId = true && that.isSetScenarioId();
+    if (this_present_scenarioId || that_present_scenarioId) {
+      if (!(this_present_scenarioId && that_present_scenarioId))
+        return false;
+      if (!this.scenarioId.equals(that.scenarioId))
         return false;
     }
 
@@ -346,6 +405,16 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
         return lastComparison;
       }
     }
+    lastComparison = Boolean.valueOf(isSetScenarioId()).compareTo(typedOther.isSetScenarioId());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetScenarioId()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.scenarioId, typedOther.scenarioId);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
     return 0;
   }
 
@@ -376,6 +445,14 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
     if (!first) sb.append(", ");
     sb.append("score:");
     sb.append(this.score);
+    first = false;
+    if (!first) sb.append(", ");
+    sb.append("scenarioId:");
+    if (this.scenarioId == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.scenarioId);
+    }
     first = false;
     sb.append(")");
     return sb.toString();
@@ -460,6 +537,14 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 30: // SCENARIO_ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.scenarioId = iprot.readString();
+              struct.setScenarioIdIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -498,6 +583,11 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
       oprot.writeFieldBegin(SCORE_FIELD_DESC);
       oprot.writeDouble(struct.score);
       oprot.writeFieldEnd();
+      if (struct.scenarioId != null) {
+        oprot.writeFieldBegin(SCENARIO_ID_FIELD_DESC);
+        oprot.writeString(struct.scenarioId);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -522,7 +612,10 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
       if (struct.isSetScore()) {
         optionals.set(1);
       }
-      oprot.writeBitSet(optionals, 2);
+      if (struct.isSetScenarioId()) {
+        optionals.set(2);
+      }
+      oprot.writeBitSet(optionals, 3);
       if (struct.isSetValues()) {
         {
           oprot.writeI32(struct.values.size());
@@ -542,12 +635,15 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
       if (struct.isSetScore()) {
         oprot.writeDouble(struct.score);
       }
+      if (struct.isSetScenarioId()) {
+        oprot.writeString(struct.scenarioId);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, Hit struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(2);
+      BitSet incoming = iprot.readBitSet(3);
       if (incoming.get(0)) {
         {
           org.apache.thrift.protocol.TMap _map125 = new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING, org.apache.thrift.protocol.TType.LIST, iprot.readI32());
@@ -575,6 +671,10 @@ public class Hit implements org.apache.thrift.TBase<Hit, Hit._Fields>, java.io.S
       if (incoming.get(1)) {
         struct.score = iprot.readDouble();
         struct.setScoreIsSet(true);
+      }
+      if (incoming.get(2)) {
+        struct.scenarioId = iprot.readString();
+        struct.setScenarioIdIsSet(true);
       }
     }
   }
