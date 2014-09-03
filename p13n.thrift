@@ -218,7 +218,7 @@ struct SearchResult {
   1: list<Hit> hits,
 # list of requested facets or null if none requested
   2: list<FacetResponse> facetResponses,
-# total number of hits
+# total number of hits; -1 in case of mixed recommendation strategy
   3: i64 totalHitCount,
 # relaxation query text for relaxation results or requested queryText for a regular SearchResult
   40: string queryText,
