@@ -241,6 +241,15 @@ class HttpP13n
 		) {
 			if ($request->requestContext === null) {
 				$request->requestContext = $this->getRequestContext();
+			} else {
+				$requestContext = $this->getRequestContext();
+				foreach ($requestContext->parameters as $parameterName => $parameterValues) {
+					if (isset($request->requestContext->parameters[$parameterName])) {
+						continue;
+					}
+					
+					$request->requestContext->parameters[$parameterName] = $parameterValues;
+				}
 			}
 		}
 
