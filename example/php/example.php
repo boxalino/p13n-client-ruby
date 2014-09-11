@@ -2,7 +2,7 @@
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'Thrift' . DIRECTORY_SEPARATOR . 'HttpP13n.php';
 
-$p13nHost     = 'c1.bx-cloud.com';
+$p13nHost     = 'cdn.bx-cloud.com';
 $p13nAccount  = 'example-account';
 $p13nUsername = 'example-username';
 $p13nPassword = 'example-password';
