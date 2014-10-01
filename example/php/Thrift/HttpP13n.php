@@ -33,6 +33,10 @@ class HttpP13n
 	public function __call($name, $arguments)
 	{
 		if (method_exists($this->getClient(), $name)) {
+			if (isset($arguments[0])) {
+				$arguments[0] = $this->addRequestContext($arguments[0]);
+			}
+
 			return call_user_func_array(array($this->getClient(), $name), $arguments);
 		} else {
 			throw new Exception("Method $name not supported in P13nService");
@@ -54,46 +58,9 @@ class HttpP13n
 		$choiceRequest->userRecord = $userRecord;
 
 		// Setup request context
-		$clientip    = @$_SERVER['HTTP_CLIENT_IP'];
-		$forwardedip = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-		if(filter_var($clientip, FILTER_VALIDATE_IP)) {
-			$ip = $clientip;
-		} elseif(filter_var($forwardedip, FILTER_VALIDATE_IP)) {
-			$ip = $forwardedip;
-		} else {
-			$ip = @$_SERVER['REMOTE_ADDR'];
-		}
-
-		if(empty($_COOKIE['cems'])) {
-			$sessionid = session_id();
-			if(empty($sessionid)) {
-				session_start();
-				$sessionid = session_id();
-			}
-		} else {
-			$sessionid = $_COOKIE['cems'];
-		}
-
-		if(empty($_COOKIE['cemv'])) {
-			$profileid = '';
-			if(function_exists('openssl_random_pseudo_bytes')) {
-				$profileid = bin2hex(openssl_random_pseudo_bytes(16));
-			}
-			if(empty($profileid)) {
-				$profileid = uniqid('', true);
-			}
-		} else {
-			$profileid = $_COOKIE['cemv'];
-		}
-
-		$requestContext = new \com\boxalino\p13n\api\thrift\RequestContext();
-		$requestContext->parameters = array(
-			'User-Agent'     => @$_SERVER['HTTP_USER_AGENT'],
-			'User-Host'      => $ip,
-			'User-SessionId' => $sessionid,
-			'User-Referer'   => @$_SERVER['HTTP_REFERER'],
-		);
-		$choiceRequest->RequestContext = $requestContext;
+		$sessionid = $this->getSessionId();
+		$profileid = $this->getVisitorId();
+		
 		$choiceRequest->profileId = $profileid;
 
 		// Refresh cookies
@@ -172,4 +139,121 @@ class HttpP13n
 			require_once __DIR__ . DIRECTORY_SEPARATOR . $dependency;
 		}
 	}
+
+	/**
+	 * @return \com\boxalino\p13n\api\thrift\RequestContext
+	 */
+	protected function getRequestContext() 
+	{
+		$requestContext = new \com\boxalino\p13n\api\thrift\RequestContext();
+		$requestContext->parameters = array(
+			'User-Agent'     => array(@$_SERVER['HTTP_USER_AGENT']),
+			'User-Host'      => array($this->getIP()),
+			'User-SessionId' => array($this->getSessionId()),
+			'User-Referer'   => array(@$_SERVER['HTTP_REFERER']),
+			'User-URL'       => array($this->getCurrentURL())
+		);
+		
+		return $requestContext;
+	}
+	
+	/**
+	 * @return string
+	 */
+	protected function getIP()
+	{
+		$ip = null;
+		$clientip = @$_SERVER['HTTP_CLIENT_IP'];
+		$forwardedip = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+		if (filter_var($clientip, FILTER_VALIDATE_IP)) {
+			$ip = $clientip;
+		} elseif (filter_var($forwardedip, FILTER_VALIDATE_IP)) {
+			$ip = $forwardedip;
+		} else {
+			$ip = @$_SERVER['REMOTE_ADDR'];
+		}
+
+		return $ip;
+	}
+	
+	/**
+	 * @return string
+	 */
+	protected function getSessionId()
+	{
+		$sessionid = null;
+		if (empty($_COOKIE['cems'])) {
+			$sessionid = session_id();
+			if (empty($sessionid)) {
+				session_start();
+				$sessionid = session_id();
+			}
+		} else {
+			$sessionid = $_COOKIE['cems'];
+		}
+
+		return $sessionid;
+	}
+	
+	/**
+	 * @return string
+	 */
+	protected function getVisitorId()
+	{
+		$profileid = null;
+		if (empty($_COOKIE['cemv'])) {
+			$profileid = '';
+			if (function_exists('openssl_random_pseudo_bytes')) {
+				$profileid = bin2hex(openssl_random_pseudo_bytes(16));
+			}
+			if (empty($profileid)) {
+				$profileid = uniqid('', true);
+			}
+		} else {
+			$profileid = $_COOKIE['cemv'];
+		}
+
+		return $profileid;
+	}
+	
+	/**
+	 * @return string
+	 */
+	protected function getCurrentURL()
+	{
+		$protocol = strpos(strtolower(@$_SERVER['SERVER_PROTOCOL']), 'https') === false ? 'http' : 'https';
+		$hostname = @$_SERVER['HTTP_HOST'];
+		$requesturi = @$_SERVER['REQUEST_URI'];
+		
+		return $protocol . '://' . $hostname . $requesturi;
+	}
+	
+	/**
+	 * @param \com\boxalino\p13n\api\thrift\AutocompleteRequest|\com\boxalino\p13n\api\thrift\ChoiceRequest|\com\boxalino\p13n\api\thrift\BatchChoiceRequest $request
+	 * @return \com\boxalino\p13n\api\thrift\AutocompleteRequest|\com\boxalino\p13n\api\thrift\ChoiceRequest|\com\boxalino\p13n\api\thrift\BatchChoiceRequest
+	 */
+	private function addRequestContext($request)
+	{
+		if (
+			$request instanceof \com\boxalino\p13n\api\thrift\AutocompleteRequest ||
+			$request instanceof \com\boxalino\p13n\api\thrift\ChoiceRequest ||
+			$request instanceof \com\boxalino\p13n\api\thrift\BatchChoiceRequest
+		) {
+			if ($request->requestContext === null) {
+				$request->requestContext = $this->getRequestContext();
+			} else {
+				$requestContext = $this->getRequestContext();
+				foreach ($requestContext->parameters as $parameterName => $parameterValues) {
+					if (isset($request->requestContext->parameters[$parameterName])) {
+						continue;
+					}
+					
+					$request->requestContext->parameters[$parameterName] = $parameterValues;
+				}
+			}
+		}
+
+		return $request;
+	}
+
 }
