@@ -15,5 +15,6 @@ exception P13nServiceException {
 service P13nAdminService {
   binary uploadChoiceConfiguration(binary xmlPayload) throws (1: P13nServiceException p13nServiceException),
   i32 saveProfileProperties(list<ProfilePropertyValue> profilePropertyValues) throws (1: P13nServiceException p13nServiceException),
+  i32 replaceProfileProperties(list<ProfilePropertyValue> profilePropertyValues) throws (1: P13nServiceException p13nServiceException),
   string command(string command) throws (1: P13nServiceException p13nServiceException),
 }
