@@ -1,0 +1,576 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link href="style.css" rel="stylesheet" type="text/css"/>
+<title>Thrift module: p13n</title></head><body>
+<div class="container-fluid">
+<h1>Thrift module: p13n</h1>
+<table class="table-bordered table-striped table-condensed"><thead><th>Module</th><th>Services</th><th>Data types</th><th>Constants</th></thead>
+<tr>
+<td>p13n</td><td><a href="#Svc_P13nService">P13nService</a><br/>
+<ul>
+<li><a href="#Fn_P13nService_autocomplete">autocomplete</a></li>
+<li><a href="#Fn_P13nService_batchChoose">batchChoose</a></li>
+<li><a href="#Fn_P13nService_choose">choose</a></li>
+</ul>
+</td>
+<td><a href="#Struct_AutocompleteHit">AutocompleteHit</a><br/>
+<a href="#Struct_AutocompleteQuery">AutocompleteQuery</a><br/>
+<a href="#Struct_AutocompleteRequest">AutocompleteRequest</a><br/>
+<a href="#Struct_AutocompleteResponse">AutocompleteResponse</a><br/>
+<a href="#Struct_BatchChoiceRequest">BatchChoiceRequest</a><br/>
+<a href="#Struct_BatchChoiceResponse">BatchChoiceResponse</a><br/>
+<a href="#Struct_ChoiceInquiry">ChoiceInquiry</a><br/>
+<a href="#Struct_ChoiceRequest">ChoiceRequest</a><br/>
+<a href="#Struct_ChoiceResponse">ChoiceResponse</a><br/>
+<a href="#Struct_ContextItem">ContextItem</a><br/>
+<a href="#Enum_DateRangeGap">DateRangeGap</a><br/>
+<a href="#Struct_FacetRequest">FacetRequest</a><br/>
+<a href="#Struct_FacetResponse">FacetResponse</a><br/>
+<a href="#Enum_FacetSortOrder">FacetSortOrder</a><br/>
+<a href="#Struct_FacetValue">FacetValue</a><br/>
+<a href="#Struct_Filter">Filter</a><br/>
+<a href="#Struct_Hit">Hit</a><br/>
+<a href="#Struct_HitsGroup">HitsGroup</a><br/>
+<a href="#Struct_P13nServiceException">P13nServiceException</a><br/>
+<a href="#Struct_ProfilePropertyValue">ProfilePropertyValue</a><br/>
+<a href="#Struct_RequestContext">RequestContext</a><br/>
+<a href="#Struct_SearchRelaxation">SearchRelaxation</a><br/>
+<a href="#Struct_SearchResult">SearchResult</a><br/>
+<a href="#Struct_SimpleSearchQuery">SimpleSearchQuery</a><br/>
+<a href="#Struct_SortField">SortField</a><br/>
+<a href="#Struct_UserRecord">UserRecord</a><br/>
+<a href="#Struct_Variant">Variant</a><br/>
+</td>
+<td></code></td>
+</tr></table>
+<hr/><h2 id="Enumerations">Enumerations</h2>
+<div class="definition"><h3 id="Enum_DateRangeGap">Enumeration: DateRangeGap</h3>
+Used for date facets
+<br/><br/><table class="table-bordered table-striped table-condensed">
+<tr><td><code>SECOND</code></td><td><code>1</code></td><td>
+</td></tr>
+<tr><td><code>MINUTE</code></td><td><code>2</code></td><td>
+</td></tr>
+<tr><td><code>HOUR</code></td><td><code>3</code></td><td>
+</td></tr>
+<tr><td><code>DAY</code></td><td><code>4</code></td><td>
+</td></tr>
+<tr><td><code>WEEK</code></td><td><code>5</code></td><td>
+</td></tr>
+<tr><td><code>MONTH</code></td><td><code>6</code></td><td>
+</td></tr>
+<tr><td><code>YEAR</code></td><td><code>7</code></td><td>
+</td></tr>
+<tr><td><code>DECADE</code></td><td><code>8</code></td><td>
+</td></tr>
+<tr><td><code>CENTURY</code></td><td><code>9</code></td><td>
+</td></tr>
+</table></div>
+<div class="definition"><h3 id="Enum_FacetSortOrder">Enumeration: FacetSortOrder</h3>
+Whether facets should be order by population descending or by collation
+<br/><br/><table class="table-bordered table-striped table-condensed">
+<tr><td><code>POPULATION</code></td><td><code>1</code></td><td>
+</td></tr>
+<tr><td><code>COLLATION</code></td><td><code>2</code></td><td>
+</td></tr>
+</table></div>
+<hr/><h2 id="Structs">Data structures</h2>
+<div class="definition"><h3 id="Struct_Filter">Struct: Filter</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>negative</td><td><code>bool</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>fieldName</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>stringValues</td><td><code>list&lt;<code>string</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>4</td><td>prefix</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>41</td><td>hierarchyId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>5</td><td>hierarchy</td><td><code>list&lt;<code>string</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>6</td><td>rangeFrom</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>7</td><td>rangeFromInclusive</td><td><code>bool</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>8</td><td>rangeTo</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>9</td><td>rangeToInclusive</td><td><code>bool</code></td><td></td><td>default</td><td></td></tr>
+</table><br/>Filter to be used in query. Note that type of generated filter depends on first non-null and non-empty value in order of preference. Values of lower priority are ignored:
+stringValues!=null && simpleValues.size()&gt;0 =&gt; simple match, prefix!=null =&gt; prefix match, hierarchy!=null && hierarchy.size()&gt;0 =&gt; hierarchy filter, else range filter
+
+<dl>
+<dt>negative</dt>
+<dd>whether the filter is negative (boolean NOT)</dd>
+
+<dt>fieldName</dt>
+<dd>field name to apply filter to</dd>
+
+<dt>stringValues</dt>
+<dd>values for simple match</dd>
+
+<dt>prefix</dt>
+<dd>prefix match</dd>
+
+<dt>hierarchyId</dt>
+<dd>hierarchy filter - when corresponding hierarchical field has encoded id</dd>
+
+<dt>hierarchy</dt>
+<dd>hierarchy filter - for example categories path in top-down order</dd>
+
+<dt>rangeFrom</dt>
+<dd>lower bound for range filter</dd>
+
+<dt>rangeFromInclusive</dt>
+<dd>whether the lower bound is inclusive</dd>
+
+<dt>rangeTo</dt>
+<dd>upper bound for range filter</dd>
+
+<dt>rangeToInclusive</dt>
+<dd>whether the upper bound is inclusive</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_FacetValue">Struct: FacetValue</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>stringValue</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>rangeFromInclusive</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>rangeToExclusive</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>4</td><td>hitCount</td><td><code>i64</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>50</td><td>hierarchyId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>60</td><td>hierarchy</td><td><code>list&lt;<code>string</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>70</td><td>selected</td><td><code>bool</code></td><td></td><td>default</td><td></td></tr>
+</table><br/><dl>
+<dt>stringValue</dt>
+<dd>corresponding value of the facet</dd>
+
+<dt>rangeFromInclusive</dt>
+<dd>if range facets lower bound (inclusive)</dd>
+
+<dt>rangeToExclusive</dt>
+<dd>if range facets upper bound (inclusive)</dd>
+
+<dt>hitCount</dt>
+<dd>number of hits found</dd>
+
+<dt>hierarchyId</dt>
+<dd>id of hierarchy if corresponding field is hierarchical</dd>
+
+<dt>hierarchy</dt>
+<dd>hierarchy if corresponding field is hierarchical</dd>
+
+<dt>selected</dt>
+<dd>whether the facet value has been selected in corresponding FacetRequest</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_FacetRequest">Struct: FacetRequest</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>fieldName</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>numerical</td><td><code>bool</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>range</td><td><code>bool</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>4</td><td>maxCount</td><td><code>i32</code></td><td></td><td>default</td><td><code>-1</code></td></tr>
+<tr><td>5</td><td>minPopulation</td><td><code>i32</code></td><td></td><td>default</td><td><code>1</code></td></tr>
+<tr><td>6</td><td>dateRangeGap</td><td><code><a href="p13n.html#Enum_DateRangeGap">DateRangeGap</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>7</td><td>sortOrder</td><td><code><a href="p13n.html#Enum_FacetSortOrder">FacetSortOrder</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>8</td><td>sortAscending</td><td><code>bool</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>90</td><td>selectedValues</td><td><code>list&lt;<code><a href="p13n.html#Struct_FacetValue">FacetValue</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>100</td><td>andSelectedValues</td><td><code>bool</code></td><td></td><td>default</td><td><code>false</code></td></tr>
+</table><br/><dl>
+<dt>fieldName</dt>
+<dd>name of the field to get facet for</dd>
+
+<dt>numerical</dt>
+<dd>whether the facet is numerical</dd>
+
+<dt>range</dt>
+<dd>whether the facet is range facet</dd>
+
+<dt>maxCount</dt>
+<dd>maximum number of facets to return by given order, -1 for all of them</dd>
+
+<dt>minPopulation</dt>
+<dd>minimum facet population to return</dd>
+
+<dt>dateRangeGap</dt>
+<dd>if the corresponding field is date then the gap to be used for facet</dd>
+
+<dt>sortOrder</dt>
+<dd>sort order</dd>
+
+<dt>sortAscending</dt>
+<dd>whether the sort should be done ascending</dd>
+
+<dt>selectedValues</dt>
+<dd>values selected from the facet.</dd>
+<dd>Note that results will be filtered by these values, but the corresponding
+FacetResponse is as if this filter was not applied</dd>
+
+<dt>andSelectedValues</dt>
+<dd>whether selectedValues should be considered in AND logic, meaning filter
+out those that don't contain ALL selected values - default is OR - include
+those contianing any of selectedValue</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_SortField">Struct: SortField</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>fieldName</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>reverse</td><td><code>bool</code></td><td></td><td>default</td><td></td></tr>
+</table><br/>field to be used for sorting
+<br/></div><div class="definition"><h3 id="Struct_SimpleSearchQuery">Struct: SimpleSearchQuery</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>indexId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>language</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>queryText</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>4</td><td>filters</td><td><code>list&lt;<code><a href="p13n.html#Struct_Filter">Filter</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>5</td><td>orFilters</td><td><code>bool</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>6</td><td>facetRequests</td><td><code>list&lt;<code><a href="p13n.html#Struct_FacetRequest">FacetRequest</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>7</td><td>sortFields</td><td><code>list&lt;<code><a href="p13n.html#Struct_SortField">SortField</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>8</td><td>offset</td><td><code>i64</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>9</td><td>hitCount</td><td><code>i32</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>10</td><td>returnFields</td><td><code>list&lt;<code>string</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>20</td><td>groupBy</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>30</td><td>groupFacets</td><td><code>bool</code></td><td></td><td>default</td><td><code>true</code></td></tr>
+<tr><td>40</td><td>groupItemsCount</td><td><code>i32</code></td><td></td><td>default</td><td><code>1</code></td></tr>
+<tr><td>50</td><td>groupItemsSort</td><td><code>string</code></td><td></td><td>default</td><td><code>"score"</code></td></tr>
+<tr><td>60</td><td>groupItemsSortAscending</td><td><code>bool</code></td><td></td><td>default</td><td><code>false</code></td></tr>
+</table><br/><dl>
+<dt>indexId</dt>
+<dd>indexId to be used for search</dd>
+
+<dt>language</dt>
+<dd>language for localization</dd>
+
+<dt>queryText</dt>
+<dd>main search query</dd>
+
+<dt>filters</dt>
+<dd>list of filters to apply</dd>
+
+<dt>orFilters</dt>
+<dd>whether boolean OR should be aplied to the given list of filters if false
+boolean AND will be applied</dd>
+
+<dt>facetRequests</dt>
+<dd>list of facets to be returned</dd>
+
+<dt>sortFields</dt>
+<dd>optional list of sort fields for hardcoded sorting. If not given,
+relevance sort order will be used</dd>
+
+<dt>offset</dt>
+<dd>from which hit to return result</dd>
+
+<dt>hitCount</dt>
+<dd>how many hits to return</dd>
+
+<dt>returnFields</dt>
+<dd>which index fields to be returned</dd>
+
+<dt>groupBy</dt>
+<dd>field name of the field to do grouping by</dd>
+
+<dt>groupFacets</dt>
+<dd>whether facets counts should contain number of groups</dd>
+
+<dt>groupItemsCount</dt>
+<dd>how many hits in each group to return</dd>
+
+<dt>groupItemsSort</dt>
+<dd>how to sort items within the group, default is score</dd>
+
+<dt>groupItemsSortAscending</dt>
+<dd>whether to sort items within the group ascending</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_ContextItem">Struct: ContextItem</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>indexId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>fieldName</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>contextItemId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>4</td><td>role</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+</table><br/><dl>
+<dt>indexId</dt>
+<dd>id of the index to fetch context item data from</dd>
+
+<dt>fieldName</dt>
+<dd>the field name of the item's unique identifier within the items index</dd>
+<dd>for example: 'sku' for items 'products'</dd>
+
+<dt>contextItemId</dt>
+<dd>actual item's identifier</dd>
+<dd>for example: actual sku of the product</dd>
+
+<dt>role</dt>
+<dd>role of the item within the context, used to address the item in the
+recommendation script.</dd>
+<dd>for example: 'main product' for recommendations within product detail
+page</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_ChoiceInquiry">Struct: ChoiceInquiry</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>choiceId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>simpleSearchQuery</td><td><code><a href="p13n.html#Struct_SimpleSearchQuery">SimpleSearchQuery</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>contextItems</td><td><code>list&lt;<code><a href="p13n.html#Struct_ContextItem">ContextItem</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>4</td><td>minHitCount</td><td><code>i32</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>5</td><td>excludeVariantIds</td><td><code>set&lt;<code>string</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>6</td><td>scope</td><td><code>string</code></td><td></td><td>default</td><td><code>"system_rec"</code></td></tr>
+<tr><td>70</td><td>withRelaxation</td><td><code>bool</code></td><td></td><td>default</td><td><code>false</code></td></tr>
+</table><br/><dl>
+<dt>choiceId</dt>
+<dd>personalization choice identificator</dd>
+
+<dt>simpleSearchQuery</dt>
+<dd>search query in a case of recommendation and search inquiries</dd>
+
+<dt>contextItems</dt>
+<dd>context items for recommendations</dd>
+
+<dt>minHitCount</dt>
+<dd>minimal hit count to return for recommendations.</dd>
+<dd>if higher priority recommendation strategy yields less results, next
+strategy is tried</dd>
+
+<dt>excludeVariantIds</dt>
+<dd>set of variantIds to be excluded from result</dd>
+
+<dt>scope</dt>
+<dd>choice source to be used</dd>
+
+<dt>withRelaxation</dt>
+<dd>if search relaxation should be used</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_RequestContext">Struct: RequestContext</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>parameters</td><td><code>map&lt;<code>string</code>, <code>list&lt;<code>string</code>&gt;</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+</table><br/>parameters of request context. Usually browser, platform, etc.
+<br/></div><div class="definition"><h3 id="Struct_UserRecord">Struct: UserRecord</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>username</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+</table><br/>unique identifier of the customer
+<br/></div><div class="definition"><h3 id="Struct_ChoiceRequest">Struct: ChoiceRequest</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>userRecord</td><td><code><a href="p13n.html#Struct_UserRecord">UserRecord</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>profileId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>inquiries</td><td><code>list&lt;<code><a href="p13n.html#Struct_ChoiceInquiry">ChoiceInquiry</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>4</td><td>requestContext</td><td><code><a href="p13n.html#Struct_RequestContext">RequestContext</a></code></td><td></td><td>default</td><td></td></tr>
+</table><br/><dl>
+<dt>profileId</dt>
+<dd>profile (visitor) identificator</dd>
+
+<dt>inquiries</dt>
+<dd>list of inquiries to be executed sequentially.</dd>
+<dd>Inquiries with higher index may depend from those with lower index.</dd>
+
+<dt>requestContext</dt>
+<dd>context of the request</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_FacetResponse">Struct: FacetResponse</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>fieldName</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>values</td><td><code>list&lt;<code><a href="p13n.html#Struct_FacetValue">FacetValue</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+</table><br/><dl>
+<dt>fieldName</dt>
+<dd>name of the facet field</dd>
+
+<dt>values</dt>
+<dd>list of facet values</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_Hit">Struct: Hit</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>values</td><td><code>map&lt;<code>string</code>, <code>list&lt;<code>string</code>&gt;</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>score</td><td><code>double</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>30</td><td>scenarioId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+</table><br/>item found
+
+<dl>
+<dt>values</dt>
+<dd>map containing name of the field and list of values as strings</dd>
+<dd>if index contains no value for a field, empty array will be returned.</dd>
+
+<dt>score</dt>
+<dd>index score of the hit</dd>
+
+<dt>scenarioId</dt>
+<dd>source scenarioId in case of mixed recommendations modes</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_HitsGroup">Struct: HitsGroup</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>10</td><td>groupValue</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>20</td><td>totalHitCount</td><td><code>i64</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>30</td><td>hits</td><td><code>list&lt;<code><a href="p13n.html#Struct_Hit">Hit</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+</table><br/>grouped item found
+
+<dl>
+<dt>groupValue</dt>
+<dd>value of the groupBy field</dd>
+
+<dt>totalHitCount</dt>
+<dd>total hits count within the group</dd>
+
+<dt>hits</dt>
+<dd>group hits</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_SearchResult">Struct: SearchResult</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>hits</td><td><code>list&lt;<code><a href="p13n.html#Struct_Hit">Hit</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>facetResponses</td><td><code>list&lt;<code><a href="p13n.html#Struct_FacetResponse">FacetResponse</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>totalHitCount</td><td><code>i64</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>40</td><td>queryText</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>50</td><td>hitsGroups</td><td><code>list&lt;<code><a href="p13n.html#Struct_HitsGroup">HitsGroup</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+</table><br/><dl>
+<dt>hits</dt>
+<dd>list of hits found for given SimpleSearchQuery</dd>
+
+<dt>facetResponses</dt>
+<dd>list of requested facets or null if none requested</dd>
+
+<dt>totalHitCount</dt>
+<dd>total number of hits; -1 in case of mixed recommendation strategy</dd>
+
+<dt>queryText</dt>
+<dd>relaxation query text for relaxation results or requested queryText for a
+regular SearchResult</dd>
+
+<dt>hitsGroups</dt>
+<dd>grouped hits; not null when corresponding SimplSearchQuery has
+groupBy!=null </dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_SearchRelaxation">Struct: SearchRelaxation</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>10</td><td>suggestionsResults</td><td><code>list&lt;<code><a href="p13n.html#Struct_SearchResult">SearchResult</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>20</td><td>subphrasesResults</td><td><code>list&lt;<code><a href="p13n.html#Struct_SearchResult">SearchResult</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+</table><br/></div><div class="definition"><h3 id="Struct_Variant">Struct: Variant</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>variantId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>scenarioId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>searchResult</td><td><code><a href="p13n.html#Struct_SearchResult">SearchResult</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>4</td><td>searchResultTitle</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>50</td><td>searchRelaxation</td><td><code><a href="p13n.html#Struct_SearchRelaxation">SearchRelaxation</a></code></td><td></td><td>default</td><td></td></tr>
+</table><br/><dl>
+<dt>variantId</dt>
+<dd>id of the personalized variant</dd>
+
+<dt>scenarioId</dt>
+<dd>scenario identificator used to produce recommendation result or search
+result personalization</dd>
+
+<dt>searchResult</dt>
+<dd>result of the search request for recommendations and search requests</dd>
+
+<dt>searchResultTitle</dt>
+<dd>recommendation's result title localized in language requested in
+corresponding SimpleSearchQuery</dd>
+
+<dt>searchRelaxation</dt>
+<dd>When the service considers queryText invalid, it will evaluate and return
+relaxations if it is requested in corresponding ChoiceInquiry and if
+relaxations could be found.</dd>
+<dd>Note that original query still could yield some results; it is up to the
+client to decide whether searchRelaxations should be used (with displaying
+appropriate message) or not.</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_ChoiceResponse">Struct: ChoiceResponse</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>variants</td><td><code>list&lt;<code><a href="p13n.html#Struct_Variant">Variant</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+</table><br/>list of personalized variants. Item's index corresponds to the index of the
+ChoiceInquiry
+<br/></div><div class="definition"><h3 id="Struct_ProfilePropertyValue">Struct: ProfilePropertyValue</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>profileId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>propertyName</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>propertyValue</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>4</td><td>confidence</td><td><code>i32</code></td><td></td><td>default</td><td></td></tr>
+</table><br/></div><div class="definition"><h3 id="Struct_BatchChoiceRequest">Struct: BatchChoiceRequest</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>userRecord</td><td><code><a href="p13n.html#Struct_UserRecord">UserRecord</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>choiceInquiry</td><td><code><a href="p13n.html#Struct_ChoiceInquiry">ChoiceInquiry</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>3</td><td>requestContext</td><td><code><a href="p13n.html#Struct_RequestContext">RequestContext</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>4</td><td>profileIds</td><td><code>list&lt;<code>string</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>5</td><td>choiceInquiries</td><td><code>list&lt;<code><a href="p13n.html#Struct_ChoiceInquiry">ChoiceInquiry</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+</table><br/><dl>
+<dt>choiceInquiry</dt>
+<dd><b>deprecated</b> - use choiceInquiries instead.</dd>
+<dd>If choiceInquiries is given this field will be ignored</dd>
+
+<dt>choiceInquiries</dt>
+<dd>list of ChoiceInquiries to be executed sequentially.</dd>
+<dd>Note that list items can depend of items before in list</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_BatchChoiceResponse">Struct: BatchChoiceResponse</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>variants</td><td><code>list&lt;<code><a href="p13n.html#Struct_Variant">Variant</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>2</td><td>selectedVariants</td><td><code>list&lt;<code>list&lt;<code><a href="p13n.html#Struct_Variant">Variant</a></code>&gt;</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+</table><br/><dl>
+<dt>variants</dt>
+<dd><b>deprecated</b> - contains non-null value only if
+corresponding BatchChoiceRequest had only one ChoiceInquiry</dd>
+
+<dt>selectedVariants</dt>
+<dd>outer list corresponds to profileIds given in BatchChoiceRequest, while
+inner list corresponds to list of ChoiceInquiries from BatchChoiceRequest</dd>
+</dl>
+<br/></div><div class="definition"><h3 id="Struct_AutocompleteHit">Struct: AutocompleteHit</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>11</td><td>suggestion</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>21</td><td>highlighted</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>31</td><td>searchResult</td><td><code><a href="p13n.html#Struct_SearchResult">SearchResult</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>41</td><td>score</td><td><code>double</code></td><td></td><td>default</td><td></td></tr>
+</table><br/></div><div class="definition"><h3 id="Struct_AutocompleteQuery">Struct: AutocompleteQuery</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>11</td><td>indexId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>21</td><td>language</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>31</td><td>queryText</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>41</td><td>suggestionsHitCount</td><td><code>i32</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>51</td><td>highlight</td><td><code>bool</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>61</td><td>highlightPre</td><td><code>string</code></td><td></td><td>default</td><td><code>"&lt;em&gt;"</code></td></tr>
+<tr><td>71</td><td>highlightPost</td><td><code>string</code></td><td></td><td>default</td><td><code>"&lt;/em&gt;"</code></td></tr>
+</table><br/></div><div class="definition"><h3 id="Struct_AutocompleteRequest">Struct: AutocompleteRequest</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>11</td><td>userRecord</td><td><code><a href="p13n.html#Struct_UserRecord">UserRecord</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>21</td><td>scope</td><td><code>string</code></td><td></td><td>default</td><td><code>"system_rec"</code></td></tr>
+<tr><td>31</td><td>choiceId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>41</td><td>profileId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>51</td><td>requestContext</td><td><code><a href="p13n.html#Struct_RequestContext">RequestContext</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>61</td><td>excludeVariantIds</td><td><code>set&lt;<code>string</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>71</td><td>autocompleteQuery</td><td><code><a href="p13n.html#Struct_AutocompleteQuery">AutocompleteQuery</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>81</td><td>searchChoiceId</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>91</td><td>searchQuery</td><td><code><a href="p13n.html#Struct_SimpleSearchQuery">SimpleSearchQuery</a></code></td><td></td><td>default</td><td></td></tr>
+</table><br/></div><div class="definition"><h3 id="Struct_AutocompleteResponse">Struct: AutocompleteResponse</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>11</td><td>hits</td><td><code>list&lt;<code><a href="p13n.html#Struct_AutocompleteHit">AutocompleteHit</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
+<tr><td>21</td><td>prefixSearchResult</td><td><code><a href="p13n.html#Struct_SearchResult">SearchResult</a></code></td><td></td><td>default</td><td></td></tr>
+</table><br/></div><div class="definition"><h3 id="Struct_P13nServiceException">Exception: P13nServiceException</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>1</td><td>message</td><td><code>string</code></td><td></td><td>required</td><td></td></tr>
+</table><br/></div><hr/><h2 id="Services">Services</h2>
+<h3 id="Svc_P13nService">Service: P13nService</h3>
+<div class="definition"><h4 id="Fn_P13nService_choose">Function: P13nService.choose</h4>
+<pre><code><a href="p13n.html#Struct_ChoiceResponse">ChoiceResponse</a></code> choose(<code><a href="p13n.html#Struct_ChoiceRequest">ChoiceRequest</a></code> choiceRequest)
+    throws <code><a href="p13n.html#Struct_P13nServiceException">P13nServiceException</a></code>
+</pre><dl>
+<dt>@param choiceRequest</dt>
+<dd>the ChoiceRequest object containing your request</dd>
+
+<dt>@return</dt>
+<dd>a ChoiceResponse object containing the list of variants</dd>
+
+<dt>@throws P13nServiceException</dt>
+<dd>an exception containing an error message</dd>
+</dl>
+<br/></div><div class="definition"><h4 id="Fn_P13nService_batchChoose">Function: P13nService.batchChoose</h4>
+<pre><code><a href="p13n.html#Struct_BatchChoiceResponse">BatchChoiceResponse</a></code> batchChoose(<code><a href="p13n.html#Struct_BatchChoiceRequest">BatchChoiceRequest</a></code> batchChoiceRequest)
+    throws <code><a href="p13n.html#Struct_P13nServiceException">P13nServiceException</a></code>
+</pre><dl>
+<dt>@param batchChoiceRequest</dt>
+<dd>the BatchChoiceRequest object containing your requests</dd>
+
+<dt>@return</dt>
+<dd>a BatchChoiceResponse object containing the list of variants for each request</dd>
+
+<dt>@throws P13nServiceException</dt>
+<dd>an exception containing an error message</dd>
+</dl>
+<br/></div><div class="definition"><h4 id="Fn_P13nService_autocomplete">Function: P13nService.autocomplete</h4>
+<pre><code><a href="p13n.html#Struct_AutocompleteResponse">AutocompleteResponse</a></code> autocomplete(<code><a href="p13n.html#Struct_AutocompleteRequest">AutocompleteRequest</a></code> request)
+    throws <code><a href="p13n.html#Struct_P13nServiceException">P13nServiceException</a></code>
+</pre><dl>
+<dt>@param request</dt>
+<dd>the AutocompleteRequest object containing your request</dd>
+
+<dt>@return</dt>
+<dd>a AutocompleteResponse object containing the list of hits</dd>
+
+<dt>@throws P13nServiceException</dt>
+<dd>an exception containing an error message</dd>
+</dl>
+<br/></div></div></body></html>
