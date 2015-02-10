@@ -1,4 +1,4 @@
-boxalino Personalization client for Java
+boxalino Personalization client for Ruby
 ========================================
 
 Overview
@@ -9,7 +9,7 @@ This library provides access to various functions of the boxalino Personalizatio
 Usage
 -----
 
-To use the Personalization client in your Java project, take the following steps:
+To use the Personalization client in your Ruby project, take the following steps:
 
-#1) Add lib/libthrift-0.9.1.jar to your classpath
-#2) Copy lib/com into your Java codebase
+#1) Copy lib/ into your Ruby codebase
+#2) require 'p13n_service'

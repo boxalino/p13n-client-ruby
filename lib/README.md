@@ -1,4 +1,4 @@
-Thrift Java Software Library
+Thrift Ruby Software Library
 ============================
 
 License
@@ -21,9 +21,9 @@ KIND, either express or implied. See the License for the
 specific language governing permissions and limitations
 under the License.
 
-Using Thrift with Java
+Using Thrift with Ruby
 ----------------------
 
-To include Thrift in your applications simply add libthrift-0.9.1.jar to your
-classpath, or install if in your default system classpath of choice.
+Either use the files provided in this library folder or install the thrift gem:
 
+  $ gem install thrift
