@@ -450,7 +450,7 @@ struct Variant {
   3: SearchResult searchResult,
   4: string searchResultTitle,
   50: SearchRelaxation searchRelaxation,
-  60: List<SearchResult> semanticFilteringResults
+  60: list<SearchResult> semanticFilteringResults
 }
 
 /**

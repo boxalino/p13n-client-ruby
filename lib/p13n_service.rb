@@ -59,6 +59,22 @@ module P13nService
       raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'autocomplete failed: unknown result')
     end
 
+    def updateChoice(choiceUpdateRequest)
+      send_updateChoice(choiceUpdateRequest)
+      return recv_updateChoice()
+    end
+
+    def send_updateChoice(choiceUpdateRequest)
+      send_message('updateChoice', UpdateChoice_args, :choiceUpdateRequest => choiceUpdateRequest)
+    end
+
+    def recv_updateChoice()
+      result = receive_message(UpdateChoice_result)
+      return result.success unless result.success.nil?
+      raise result.p13nServiceException unless result.p13nServiceException.nil?
+      raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'updateChoice failed: unknown result')
+    end
+
   end
 
   class Processor
@@ -95,6 +111,17 @@ module P13nService
         result.p13nServiceException = p13nServiceException
       end
       write_result(result, oprot, 'autocomplete', seqid)
+    end
+
+    def process_updateChoice(seqid, iprot, oprot)
+      args = read_args(iprot, UpdateChoice_args)
+      result = UpdateChoice_result.new()
+      begin
+        result.success = @handler.updateChoice(args.choiceUpdateRequest)
+      rescue ::P13nServiceException => p13nServiceException
+        result.p13nServiceException = p13nServiceException
+      end
+      write_result(result, oprot, 'updateChoice', seqid)
     end
 
   end
@@ -192,6 +219,40 @@ module P13nService
 
     FIELDS = {
       SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::AutocompleteResponse},
+      P13NSERVICEEXCEPTION => {:type => ::Thrift::Types::STRUCT, :name => 'p13nServiceException', :class => ::P13nServiceException}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class UpdateChoice_args
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    CHOICEUPDATEREQUEST = -1
+
+    FIELDS = {
+      CHOICEUPDATEREQUEST => {:type => ::Thrift::Types::STRUCT, :name => 'choiceUpdateRequest', :class => ::ChoiceUpdateRequest}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class UpdateChoice_result
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    SUCCESS = 0
+    P13NSERVICEEXCEPTION = 1
+
+    FIELDS = {
+      SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::ChoiceUpdateResponse},
       P13NSERVICEEXCEPTION => {:type => ::Thrift::Types::STRUCT, :name => 'p13nServiceException', :class => ::P13nServiceException}
     }
 

@@ -404,6 +404,7 @@ class ChoiceInquiry
   EXCLUDEVARIANTIDS = 5
   SCOPE = 6
   WITHRELAXATION = 70
+  WITHSEMANTICFILTERING = 80
 
   FIELDS = {
     CHOICEID => {:type => ::Thrift::Types::STRING, :name => 'choiceId'},
@@ -412,7 +413,8 @@ class ChoiceInquiry
     MINHITCOUNT => {:type => ::Thrift::Types::I32, :name => 'minHitCount'},
     EXCLUDEVARIANTIDS => {:type => ::Thrift::Types::SET, :name => 'excludeVariantIds', :element => {:type => ::Thrift::Types::STRING}},
     SCOPE => {:type => ::Thrift::Types::STRING, :name => 'scope', :default => %q"system_rec"},
-    WITHRELAXATION => {:type => ::Thrift::Types::BOOL, :name => 'withRelaxation', :default => false}
+    WITHRELAXATION => {:type => ::Thrift::Types::BOOL, :name => 'withRelaxation', :default => false},
+    WITHSEMANTICFILTERING => {:type => ::Thrift::Types::BOOL, :name => 'withSemanticFiltering', :default => false}
   }
 
   def struct_fields; FIELDS; end
@@ -670,13 +672,15 @@ class Variant
   SEARCHRESULT = 3
   SEARCHRESULTTITLE = 4
   SEARCHRELAXATION = 50
+  SEMANTICFILTERINGRESULTS = 60
 
   FIELDS = {
     VARIANTID => {:type => ::Thrift::Types::STRING, :name => 'variantId'},
     SCENARIOID => {:type => ::Thrift::Types::STRING, :name => 'scenarioId'},
     SEARCHRESULT => {:type => ::Thrift::Types::STRUCT, :name => 'searchResult', :class => ::SearchResult},
     SEARCHRESULTTITLE => {:type => ::Thrift::Types::STRING, :name => 'searchResultTitle'},
-    SEARCHRELAXATION => {:type => ::Thrift::Types::STRUCT, :name => 'searchRelaxation', :class => ::SearchRelaxation}
+    SEARCHRELAXATION => {:type => ::Thrift::Types::STRUCT, :name => 'searchRelaxation', :class => ::SearchRelaxation},
+    SEMANTICFILTERINGRESULTS => {:type => ::Thrift::Types::LIST, :name => 'semanticFilteringResults', :element => {:type => ::Thrift::Types::STRUCT, :class => ::SearchResult}}
   }
 
   def struct_fields; FIELDS; end
@@ -877,6 +881,53 @@ class AutocompleteResponse
   FIELDS = {
     HITS => {:type => ::Thrift::Types::LIST, :name => 'hits', :element => {:type => ::Thrift::Types::STRUCT, :class => ::AutocompleteHit}},
     PREFIXSEARCHRESULT => {:type => ::Thrift::Types::STRUCT, :name => 'prefixSearchResult', :class => ::SearchResult}
+  }
+
+  def struct_fields; FIELDS; end
+
+  def validate
+  end
+
+  ::Thrift::Struct.generate_accessors self
+end
+
+# Request object for changing the choice, that is changing possible variants
+# or their random distribution
+class ChoiceUpdateRequest
+  include ::Thrift::Struct, ::Thrift::Struct_Union
+  USERRECORD = 11
+  CHOICEID = 21
+  VARIANTIDS = 31
+
+  FIELDS = {
+    # user record identifying the client
+    USERRECORD => {:type => ::Thrift::Types::STRUCT, :name => 'userRecord', :class => ::UserRecord},
+    # Identifier of the choice to be changed. If it is not given, a new choice will be created
+    CHOICEID => {:type => ::Thrift::Types::STRING, :name => 'choiceId'},
+    # Map containing variant identifier and corresponding positive integer weight.
+# If for a choice there is no learned rule which can be applied, weights of
+# variants will be used for variants random distribution.
+# Higher weight makes corresponding variant more probable.
+    VARIANTIDS => {:type => ::Thrift::Types::MAP, :name => 'variantIds', :key => {:type => ::Thrift::Types::STRING}, :value => {:type => ::Thrift::Types::I32}}
+  }
+
+  def struct_fields; FIELDS; end
+
+  def validate
+  end
+
+  ::Thrift::Struct.generate_accessors self
+end
+
+# Server response for one ChoiceUpdateRequest
+class ChoiceUpdateResponse
+  include ::Thrift::Struct, ::Thrift::Struct_Union
+  CHOICEID = 11
+
+  FIELDS = {
+    # Identifier of the changed choice. If no id is given in corresponding
+# ChoiceUpdateRequest, new choice (and new id) will be created and retuned.
+    CHOICEID => {:type => ::Thrift::Types::STRING, :name => 'choiceId'}
   }
 
   def struct_fields; FIELDS; end

@@ -14,6 +14,7 @@
 <li><a href="#Fn_P13nService_autocomplete">autocomplete</a></li>
 <li><a href="#Fn_P13nService_batchChoose">batchChoose</a></li>
 <li><a href="#Fn_P13nService_choose">choose</a></li>
+<li><a href="#Fn_P13nService_updateChoice">updateChoice</a></li>
 </ul>
 </td>
 <td><a href="#Struct_AutocompleteHit">AutocompleteHit</a><br/>
@@ -25,6 +26,8 @@
 <a href="#Struct_ChoiceInquiry">ChoiceInquiry</a><br/>
 <a href="#Struct_ChoiceRequest">ChoiceRequest</a><br/>
 <a href="#Struct_ChoiceResponse">ChoiceResponse</a><br/>
+<a href="#Struct_ChoiceUpdateRequest">ChoiceUpdateRequest</a><br/>
+<a href="#Struct_ChoiceUpdateResponse">ChoiceUpdateResponse</a><br/>
 <a href="#Struct_ContextItem">ContextItem</a><br/>
 <a href="#Enum_DateRangeGap">DateRangeGap</a><br/>
 <a href="#Struct_FacetRequest">FacetRequest</a><br/>
@@ -305,6 +308,7 @@ page</dd>
 <tr><td>5</td><td>excludeVariantIds</td><td><code>set&lt;<code>string</code>&gt;</code></td><td></td><td>default</td><td></td></tr>
 <tr><td>6</td><td>scope</td><td><code>string</code></td><td></td><td>default</td><td><code>"system_rec"</code></td></tr>
 <tr><td>70</td><td>withRelaxation</td><td><code>bool</code></td><td></td><td>default</td><td><code>false</code></td></tr>
+<tr><td>80</td><td>withSemanticFiltering</td><td><code>bool</code></td><td></td><td>default</td><td><code>false</code></td></tr>
 </table><br/><dl>
 <dt>choiceId</dt>
 <dd>personalization choice identificator</dd>
@@ -436,6 +440,7 @@ groupBy!=null </dd>
 <tr><td>3</td><td>searchResult</td><td><code><a href="p13n.html#Struct_SearchResult">SearchResult</a></code></td><td></td><td>default</td><td></td></tr>
 <tr><td>4</td><td>searchResultTitle</td><td><code>string</code></td><td></td><td>default</td><td></td></tr>
 <tr><td>50</td><td>searchRelaxation</td><td><code><a href="p13n.html#Struct_SearchRelaxation">SearchRelaxation</a></code></td><td></td><td>default</td><td></td></tr>
+<tr><td>60</td><td>semanticFilteringResults</td><td><code>list&lt;<code><a href="p13n.html#Struct_SearchResult">SearchResult</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
 </table><br/><dl>
 <dt>variantId</dt>
 <dd>id of the personalized variant</dd>
@@ -529,7 +534,26 @@ inner list corresponds to list of ChoiceInquiries from BatchChoiceRequest</dd>
 <table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
 <tr><td>11</td><td>hits</td><td><code>list&lt;<code><a href="p13n.html#Struct_AutocompleteHit">AutocompleteHit</a></code>&gt;</code></td><td></td><td>default</td><td></td></tr>
 <tr><td>21</td><td>prefixSearchResult</td><td><code><a href="p13n.html#Struct_SearchResult">SearchResult</a></code></td><td></td><td>default</td><td></td></tr>
-</table><br/></div><div class="definition"><h3 id="Struct_P13nServiceException">Exception: P13nServiceException</h3>
+</table><br/></div><div class="definition"><h3 id="Struct_ChoiceUpdateRequest">Struct: ChoiceUpdateRequest</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>11</td><td>userRecord</td><td><code><a href="p13n.html#Struct_UserRecord">UserRecord</a></code></td><td>user record identifying the client
+</td><td>default</td><td></td></tr>
+<tr><td>21</td><td>choiceId</td><td><code>string</code></td><td>Identifier of the choice to be changed. If it is not given, a new choice will be created
+</td><td>default</td><td></td></tr>
+<tr><td>31</td><td>variantIds</td><td><code>map&lt;<code>string</code>, <code>i32</code>&gt;</code></td><td>Map containing variant identifier and corresponding positive integer weight.
+If for a choice there is no learned rule which can be applied, weights of
+variants will be used for variants random distribution.
+Higher weight makes corresponding variant more probable.
+</td><td>default</td><td></td></tr>
+</table><br/>Request object for changing the choice, that is changing possible variants
+or their random distribution
+<br/></div><div class="definition"><h3 id="Struct_ChoiceUpdateResponse">Struct: ChoiceUpdateResponse</h3>
+<table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
+<tr><td>11</td><td>choiceId</td><td><code>string</code></td><td>Identifier of the changed choice. If no id is given in corresponding
+ChoiceUpdateRequest, new choice (and new id) will be created and retuned.
+</td><td>default</td><td></td></tr>
+</table><br/>Server response for one ChoiceUpdateRequest
+<br/></div><div class="definition"><h3 id="Struct_P13nServiceException">Exception: P13nServiceException</h3>
 <table class="table-bordered table-striped table-condensed"><thead><th>Key</th><th>Field</th><th>Type</th><th>Description</th><th>Requiredness</th><th>Default value</th></thead>
 <tr><td>1</td><td>message</td><td><code>string</code></td><td></td><td>required</td><td></td></tr>
 </table><br/></div><hr/><h2 id="Services">Services</h2>
@@ -573,4 +597,8 @@ inner list corresponds to list of ChoiceInquiries from BatchChoiceRequest</dd>
 <dt>@throws P13nServiceException</dt>
 <dd>an exception containing an error message</dd>
 </dl>
+<br/></div><div class="definition"><h4 id="Fn_P13nService_updateChoice">Function: P13nService.updateChoice</h4>
+<pre><code><a href="p13n.html#Struct_ChoiceUpdateResponse">ChoiceUpdateResponse</a></code> updateChoice(<code><a href="p13n.html#Struct_ChoiceUpdateRequest">ChoiceUpdateRequest</a></code> choiceUpdateRequest)
+    throws <code><a href="p13n.html#Struct_P13nServiceException">P13nServiceException</a></code>
+</pre>Updating a choice or creating a new choice if choiceId is not given in choiceUpdateRequest.
 <br/></div></div></body></html>
