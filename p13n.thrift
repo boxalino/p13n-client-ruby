@@ -142,6 +142,10 @@ struct FacetValue {
  * <dd>whether selectedValues should be considered in AND logic, meaning filter
  * out those that don't contain ALL selected values - default is OR - include
  * those contianing any of selectedValue</dd>
+ *
+ * <dt>boundsOnly</dt>
+ * <dd>only affects numeric range facets. will always return one FacetValue with rangeFromInclusive and rangeToExclusive
+ * set according to the actual minimum and maximum value</dd>
  * </dl>
  */
 struct FacetRequest {
@@ -154,7 +158,8 @@ struct FacetRequest {
   7: FacetSortOrder sortOrder,
   8: bool sortAscending,
   90: list<FacetValue> selectedValues,
-  100: bool andSelectedValues = false
+  100: bool andSelectedValues = false,
+  110: bool boundsOnly = false
 }
 
 /**
@@ -213,6 +218,9 @@ struct SortField {
  *
  * <dt>groupItemsSortAscending</dt>
  * <dd>whether to sort items within the group ascending</dd>
+ 
+ * <dt>hitsGroupsAsHits</dt>
+ * <dd>if true, will return hitsGroups as hits in the response</dd>
  * </dl>
  */
 struct SimpleSearchQuery {
@@ -231,6 +239,7 @@ struct SimpleSearchQuery {
  40: i32 groupItemsCount = 1,
  50: string groupItemsSort = "score",
  60: bool groupItemsSortAscending = false
+ 70: bool hitsGroupsAsHits = false
 }
 
 /**
@@ -277,7 +286,10 @@ struct ContextItem {
  * strategy is tried</dd>
  *
  * <dt>excludeVariantIds</dt>
- * <dd>set of variantIds to be excluded from result</dd>
+ * <dd>set of variantIds to be excluded from result, has no effect if null or empty</dd>
+ *
+ * <dt>includeVariantIds</dt>
+ * <dd>set of variantIds to be included in the result, has no effect if null or empty</dd>
  *
  * <dt>scope</dt>
  * <dd>choice source to be used</dd>
@@ -294,7 +306,8 @@ struct ChoiceInquiry {
   5: set<string> excludeVariantIds,
   6: string scope = "system_rec",
   70: bool withRelaxation = false,
-  80: bool withSemanticFiltering = false
+  80: bool withSemanticFiltering = false,
+  90: set<string> includeVariantIds
 }
 
 /**
@@ -309,6 +322,8 @@ struct RequestContext {
  */
 struct UserRecord {
   1: string username
+  10: string apiKey
+  20: string apiSecret
 }
 
 /**
@@ -468,6 +483,11 @@ struct ProfilePropertyValue {
   4: i32 confidence
 }
 
+struct ProfileContext {
+  1: string profileId,
+  2: RequestContext requestContext
+}
+
 /**
  * <dl>
  * <dt>choiceInquiry</dt>
@@ -477,6 +497,12 @@ struct ProfilePropertyValue {
  * <dt>choiceInquiries</dt>
  * <dd>list of ChoiceInquiries to be executed sequentially.</dd>
  * <dd>Note that list items can depend of items before in list</dd>
+ 
+ * <dt>requestContext</dt>
+ * <dd><b>deprecated</b> - use profileContexts instead.</dd>
+ *
+ * <dt>profileIds</dt>
+ * <dd><b>deprecated</b> - use profileContexts instead.</dd>
  * </dl>
  */
 struct BatchChoiceRequest {
@@ -484,7 +510,8 @@ struct BatchChoiceRequest {
   2: ChoiceInquiry choiceInquiry,
   3: RequestContext requestContext,
   4: list<string> profileIds,
-  5: list<ChoiceInquiry> choiceInquiries
+  5: list<ChoiceInquiry> choiceInquiries,
+  6: list<ProfileContext> profileContexts
 }
 
 /**
@@ -529,12 +556,40 @@ struct AutocompleteRequest {
     61: set<string> excludeVariantIds,
     71: AutocompleteQuery autocompleteQuery,
     81: string searchChoiceId,
-    91: SimpleSearchQuery searchQuery
+    91: SimpleSearchQuery searchQuery,
+    101: set<string> includeVariantIds,
+    110: list<PropertyQuery> propertyQueries
+}
+
+struct PropertyQuery {
+    11: string name,
+    21: i32 hitCount,
+    31: bool evaluateTotal
+}
+
+struct PropertyResult {
+    11: list<PropertyHit> hits,
+    21: string name
+}
+
+struct PropertyHit {
+    11: string value,
+    21: string label,
+    31: i64 totalHitCount
 }
 
 struct AutocompleteResponse {
     11: list<AutocompleteHit> hits,
-    21: SearchResult prefixSearchResult
+    21: SearchResult prefixSearchResult,
+    31: list<PropertyResult> propertyResults
+}
+
+struct AutocompleteRequestBundle {
+    11: list<AutocompleteRequest> requests
+}
+
+struct AutocompleteResponseBundle {
+    11: list<AutocompleteResponse> responses
 }
 
 /**
@@ -616,6 +671,8 @@ service P13nService {
  * </dl>
  */
   AutocompleteResponse autocomplete(AutocompleteRequest request) throws (1: P13nServiceException p13nServiceException)
+  
+  AutocompleteResponseBundle autocompleteAll(AutocompleteRequestBundle bundle) throws (1: P13nServiceException p13nServiceException)
   
 /**
  * Updating a choice or creating a new choice if choiceId is not given in choiceUpdateRequest.
